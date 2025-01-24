@@ -1,0 +1,2846 @@
+file 129211 1734904219                                          
+version 3
+run Applications-0-20241222-18:42:16-390542
+attr configname Applications
+attr datetime 20241222-18:42:16
+attr datetimef 20241222-184216
+attr experiment Applications
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network TestQoS2
+attr processid 390542
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../../inet4.5/images
+config *.Actuator1.numApps 1
+config *.PLC1.numApps 4
+config *.PLC1.hasOutgoingStreams true
+config *.PLC1.hasIncomingStreams true
+config *.*.hasIncomingStreams true
+config *.PLC1.app[0].typename UdpSourceApp
+config *.PLC1.app[0].io.destAddress "\"Actuator1\""
+config *.PLC1.app[0].io.destPort 2000
+config *.PLC1.app[0].source.packetLength 256B
+config *.PLC1.app[0].source.productionInterval 10ms
+config *.Actuator1.app[0].typename UdpSinkApp
+config *.Actuator1.app[0].io.localPort 2000
+config *.PLC1.app[1].typename UdpSinkApp
+config *.PLC1.app[1].io.localPort 2001
+config *.PLC1.app[1].display-name PositionMonitoring
+config *.PLC1.app[2].typename UdpSinkApp
+config *.PLC1.app[2].io.localPort 2002
+config *.PLC1.app[2].display-name ActuatorFeedback
+config *.PLC1.app[3].typename UdpSinkApp
+config *.PLC1.app[3].io.localPort 2005
+config *.PLC1.app[3].display-name QualityControl
+config *.PLC1.bridging.streamIdentifier.identifier.mapping "[{stream: \"PLC10\", packetFilter: expr(udp.destPort == 2000)}]"
+config *.PLC1.bridging.streamCoder.encoder.mapping "[{stream: \"PLC10\", pcp: 6}]"
+config network TestQoS2
+config sim-time-limit 100s
+config *.visualizer.typename IntegratedMultiCanvasVisualizer
+config **.TSNAppsTableFile "xmldoc(\"config/app.xml\")"
+
+vector 0 TestQoS2.switch5GC.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 1 TestQoS2.switch5GC.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 2 TestQoS2.switch5GC.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 3 TestQoS2.switch5GC.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 4 TestQoS2.switch5GC.eth[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 5 TestQoS2.switch5GC.eth[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 6 TestQoS2.switch5GC.eth[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 7 TestQoS2.switch5GC.eth[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 8 TestQoS2.switch5GC.eth[2].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 9 TestQoS2.switch5GC.eth[2].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 10 TestQoS2.switch5GC.eth[2].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 11 TestQoS2.switch5GC.eth[2].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 12 TestQoS2.switch5GC.eth[3].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 13 TestQoS2.switch5GC.eth[3].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 14 TestQoS2.switch5GC.eth[3].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 15 TestQoS2.switch5GC.eth[3].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 16 TestQoS2.switch5GC.eth[4].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 17 TestQoS2.switch5GC.eth[4].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 18 TestQoS2.switch5GC.eth[4].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 19 TestQoS2.switch5GC.eth[4].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 20 TestQoS2.switch5GC.eth[5].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 21 TestQoS2.switch5GC.eth[5].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 22 TestQoS2.switch5GC.eth[5].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 23 TestQoS2.switch5GC.eth[5].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 24 TestQoS2.switch5GC.eth[6].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 25 TestQoS2.switch5GC.eth[6].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 26 TestQoS2.switch5GC.eth[6].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 27 TestQoS2.switch5GC.eth[6].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 28 TestQoS2.PLC1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 29 TestQoS2.PLC1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 30 TestQoS2.PLC1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 31 TestQoS2.PLC1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 32 TestQoS2.PLC1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 33 TestQoS2.PLC1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 34 TestQoS2.PLC1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 35 TestQoS2.PLC2.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 36 TestQoS2.PLC2.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 37 TestQoS2.PLC2.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 38 TestQoS2.PLC2.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 39 TestQoS2.PLC2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 40 TestQoS2.PLC2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 41 TestQoS2.PLC2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 42 TestQoS2.PLC3.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 43 TestQoS2.PLC3.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 44 TestQoS2.PLC3.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 45 TestQoS2.PLC3.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 46 TestQoS2.PLC3.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 47 TestQoS2.PLC3.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 48 TestQoS2.PLC3.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 49 TestQoS2.SafetyController.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 50 TestQoS2.SafetyController.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 51 TestQoS2.SafetyController.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 52 TestQoS2.SafetyController.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 53 TestQoS2.SafetyController.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 54 TestQoS2.SafetyController.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 55 TestQoS2.SafetyController.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 56 TestQoS2.AGVControlCenter.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 57 TestQoS2.AGVControlCenter.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 58 TestQoS2.AGVControlCenter.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 59 TestQoS2.AGVControlCenter.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 60 TestQoS2.AGVControlCenter.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 61 TestQoS2.AGVControlCenter.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 62 TestQoS2.AGVControlCenter.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 63 TestQoS2.PredictiveMaintenance.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 64 TestQoS2.PredictiveMaintenance.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 65 TestQoS2.PredictiveMaintenance.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 66 TestQoS2.PredictiveMaintenance.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 67 TestQoS2.PredictiveMaintenance.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 68 TestQoS2.PredictiveMaintenance.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 69 TestQoS2.PredictiveMaintenance.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 70 TestQoS2.switchCell1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 71 TestQoS2.switchCell1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 72 TestQoS2.switchCell1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 73 TestQoS2.switchCell1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 74 TestQoS2.switchCell1.eth[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 75 TestQoS2.switchCell1.eth[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 76 TestQoS2.switchCell1.eth[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 77 TestQoS2.switchCell1.eth[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 78 TestQoS2.switchCell1.eth[2].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 79 TestQoS2.switchCell1.eth[2].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 80 TestQoS2.switchCell1.eth[2].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 81 TestQoS2.switchCell1.eth[2].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 82 TestQoS2.switchCell1.eth[3].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 83 TestQoS2.switchCell1.eth[3].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 84 TestQoS2.switchCell1.eth[3].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 85 TestQoS2.switchCell1.eth[3].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 86 TestQoS2.switchCell1.eth[4].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 87 TestQoS2.switchCell1.eth[4].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 88 TestQoS2.switchCell1.eth[4].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 89 TestQoS2.switchCell1.eth[4].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 90 TestQoS2.switchCell1.eth[5].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 91 TestQoS2.switchCell1.eth[5].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 92 TestQoS2.switchCell1.eth[5].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 93 TestQoS2.switchCell1.eth[5].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 94 TestQoS2.SensorPosition1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 95 TestQoS2.SensorPosition1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 96 TestQoS2.SensorPosition1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 97 TestQoS2.SensorPosition1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 98 TestQoS2.SensorPosition1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 99 TestQoS2.SensorPosition1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 100 TestQoS2.SensorPosition1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 101 TestQoS2.Actuator1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 102 TestQoS2.Actuator1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 103 TestQoS2.Actuator1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 104 TestQoS2.Actuator1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 105 TestQoS2.Actuator1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 106 TestQoS2.Actuator1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 107 TestQoS2.Actuator1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 108 TestQoS2.VibrationSensor.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 109 TestQoS2.VibrationSensor.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 110 TestQoS2.VibrationSensor.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 111 TestQoS2.VibrationSensor.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 112 TestQoS2.VibrationSensor.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 113 TestQoS2.VibrationSensor.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 114 TestQoS2.VibrationSensor.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 115 TestQoS2.Camera1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 116 TestQoS2.Camera1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 117 TestQoS2.Camera1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 118 TestQoS2.Camera1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 119 TestQoS2.Camera1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 120 TestQoS2.Camera1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 121 TestQoS2.Camera1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 122 TestQoS2.QualitySystem.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 123 TestQoS2.QualitySystem.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 124 TestQoS2.QualitySystem.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 125 TestQoS2.QualitySystem.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 126 TestQoS2.QualitySystem.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 127 TestQoS2.QualitySystem.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 128 TestQoS2.QualitySystem.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 129 TestQoS2.switchCell2.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 130 TestQoS2.switchCell2.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 131 TestQoS2.switchCell2.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 132 TestQoS2.switchCell2.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 133 TestQoS2.switchCell2.eth[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 134 TestQoS2.switchCell2.eth[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 135 TestQoS2.switchCell2.eth[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 136 TestQoS2.switchCell2.eth[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 137 TestQoS2.RobotSafetyModule.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 138 TestQoS2.RobotSafetyModule.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 139 TestQoS2.RobotSafetyModule.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 140 TestQoS2.RobotSafetyModule.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 141 TestQoS2.RobotSafetyModule.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 142 TestQoS2.RobotSafetyModule.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 143 TestQoS2.RobotSafetyModule.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 144 TestQoS2.switchCell3.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 145 TestQoS2.switchCell3.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 146 TestQoS2.switchCell3.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 147 TestQoS2.switchCell3.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 148 TestQoS2.switchCell3.eth[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 149 TestQoS2.switchCell3.eth[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 150 TestQoS2.switchCell3.eth[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 151 TestQoS2.switchCell3.eth[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 152 TestQoS2.switchCell3.eth[2].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 153 TestQoS2.switchCell3.eth[2].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 154 TestQoS2.switchCell3.eth[2].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 155 TestQoS2.switchCell3.eth[2].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 156 TestQoS2.switchCell3.eth[3].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 157 TestQoS2.switchCell3.eth[3].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 158 TestQoS2.switchCell3.eth[3].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 159 TestQoS2.switchCell3.eth[3].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 160 TestQoS2.AGVRobot.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 161 TestQoS2.AGVRobot.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 162 TestQoS2.AGVRobot.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 163 TestQoS2.AGVRobot.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 164 TestQoS2.AGVRobot.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 165 TestQoS2.AGVRobot.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 166 TestQoS2.AGVRobot.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 167 TestQoS2.GasSensor1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 168 TestQoS2.GasSensor1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 169 TestQoS2.GasSensor1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 170 TestQoS2.GasSensor1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 171 TestQoS2.GasSensor1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 172 TestQoS2.GasSensor1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 173 TestQoS2.GasSensor1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 174 TestQoS2.FanController2.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 175 TestQoS2.FanController2.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 176 TestQoS2.FanController2.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 177 TestQoS2.FanController2.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 178 TestQoS2.FanController2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 179 TestQoS2.FanController2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 180 TestQoS2.FanController2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 181 TestQoS2.switchCell4.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 182 TestQoS2.switchCell4.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 183 TestQoS2.switchCell4.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 184 TestQoS2.switchCell4.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 185 TestQoS2.switchCell4.eth[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 186 TestQoS2.switchCell4.eth[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 187 TestQoS2.switchCell4.eth[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 188 TestQoS2.switchCell4.eth[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 189 TestQoS2.switchCell4.eth[2].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 190 TestQoS2.switchCell4.eth[2].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 191 TestQoS2.switchCell4.eth[2].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 192 TestQoS2.switchCell4.eth[2].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 193 TestQoS2.switchCell4.eth[3].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 194 TestQoS2.switchCell4.eth[3].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 195 TestQoS2.switchCell4.eth[3].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 196 TestQoS2.switchCell4.eth[3].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 197 TestQoS2.switchCell4.eth[4].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 198 TestQoS2.switchCell4.eth[4].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 199 TestQoS2.switchCell4.eth[4].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 200 TestQoS2.switchCell4.eth[4].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 201 TestQoS2.TemperatureSensor1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 202 TestQoS2.TemperatureSensor1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 203 TestQoS2.TemperatureSensor1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 204 TestQoS2.TemperatureSensor1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 205 TestQoS2.TemperatureSensor1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 206 TestQoS2.TemperatureSensor1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 207 TestQoS2.TemperatureSensor1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 208 TestQoS2.HumiditySensor1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 209 TestQoS2.HumiditySensor1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 210 TestQoS2.HumiditySensor1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 211 TestQoS2.HumiditySensor1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 212 TestQoS2.HumiditySensor1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 213 TestQoS2.HumiditySensor1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 214 TestQoS2.HumiditySensor1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 215 TestQoS2.FanController.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 216 TestQoS2.FanController.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 217 TestQoS2.FanController.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 218 TestQoS2.FanController.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 219 TestQoS2.FanController.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 220 TestQoS2.FanController.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 221 TestQoS2.FanController.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 222 TestQoS2.VibrationSensor2.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 223 TestQoS2.VibrationSensor2.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 224 TestQoS2.VibrationSensor2.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 225 TestQoS2.VibrationSensor2.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 226 TestQoS2.VibrationSensor2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 227 TestQoS2.VibrationSensor2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 228 TestQoS2.VibrationSensor2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 229 TestQoS2.FG.dstt[0].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 230 TestQoS2.FG.dstt[0].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 231 TestQoS2.FG.dstt[0].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 232 TestQoS2.FG.dstt[0].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 233 TestQoS2.FG.dstt[0].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 234 TestQoS2.FG.dstt[0].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 235 TestQoS2.FG.dstt[0].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 236 TestQoS2.FG.dstt[0].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 237 TestQoS2.FG.dstt[0].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 238 TestQoS2.FG.dstt[0].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 239 TestQoS2.FG.dstt[0].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 240 TestQoS2.FG.dstt[0].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 241 TestQoS2.FG.dstt[0].tt[2].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 242 TestQoS2.FG.dstt[0].tt[2].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 243 TestQoS2.FG.dstt[0].tt[2].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 244 TestQoS2.FG.dstt[0].tt[2].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 245 TestQoS2.FG.dstt[0].tt[3].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 246 TestQoS2.FG.dstt[0].tt[3].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 247 TestQoS2.FG.dstt[0].tt[3].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 248 TestQoS2.FG.dstt[0].tt[3].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 249 TestQoS2.FG.dstt[1].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 250 TestQoS2.FG.dstt[1].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 251 TestQoS2.FG.dstt[1].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 252 TestQoS2.FG.dstt[1].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 253 TestQoS2.FG.dstt[1].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 254 TestQoS2.FG.dstt[1].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 255 TestQoS2.FG.dstt[1].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 256 TestQoS2.FG.dstt[1].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 257 TestQoS2.FG.dstt[1].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 258 TestQoS2.FG.dstt[1].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 259 TestQoS2.FG.dstt[1].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 260 TestQoS2.FG.dstt[1].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 261 TestQoS2.FG.dstt[1].tt[2].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 262 TestQoS2.FG.dstt[1].tt[2].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 263 TestQoS2.FG.dstt[1].tt[2].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 264 TestQoS2.FG.dstt[1].tt[2].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 265 TestQoS2.FG.dstt[1].tt[3].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 266 TestQoS2.FG.dstt[1].tt[3].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 267 TestQoS2.FG.dstt[1].tt[3].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 268 TestQoS2.FG.dstt[1].tt[3].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 269 TestQoS2.FG.dstt[2].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 270 TestQoS2.FG.dstt[2].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 271 TestQoS2.FG.dstt[2].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 272 TestQoS2.FG.dstt[2].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 273 TestQoS2.FG.dstt[2].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 274 TestQoS2.FG.dstt[2].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 275 TestQoS2.FG.dstt[2].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 276 TestQoS2.FG.dstt[2].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 277 TestQoS2.FG.dstt[2].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 278 TestQoS2.FG.dstt[2].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 279 TestQoS2.FG.dstt[2].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 280 TestQoS2.FG.dstt[2].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 281 TestQoS2.FG.dstt[2].tt[2].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 282 TestQoS2.FG.dstt[2].tt[2].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 283 TestQoS2.FG.dstt[2].tt[2].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 284 TestQoS2.FG.dstt[2].tt[2].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 285 TestQoS2.FG.dstt[2].tt[3].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 286 TestQoS2.FG.dstt[2].tt[3].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 287 TestQoS2.FG.dstt[2].tt[3].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 288 TestQoS2.FG.dstt[2].tt[3].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 289 TestQoS2.FG.dstt[3].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 290 TestQoS2.FG.dstt[3].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 291 TestQoS2.FG.dstt[3].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 292 TestQoS2.FG.dstt[3].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 293 TestQoS2.FG.dstt[3].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 294 TestQoS2.FG.dstt[3].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 295 TestQoS2.FG.dstt[3].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 296 TestQoS2.FG.dstt[3].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 297 TestQoS2.FG.dstt[3].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 298 TestQoS2.FG.dstt[3].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 299 TestQoS2.FG.dstt[3].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 300 TestQoS2.FG.dstt[3].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 301 TestQoS2.FG.dstt[3].tt[2].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 302 TestQoS2.FG.dstt[3].tt[2].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 303 TestQoS2.FG.dstt[3].tt[2].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 304 TestQoS2.FG.dstt[3].tt[2].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 305 TestQoS2.FG.dstt[3].tt[3].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 306 TestQoS2.FG.dstt[3].tt[3].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 307 TestQoS2.FG.dstt[3].tt[3].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 308 TestQoS2.FG.dstt[3].tt[3].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 309 TestQoS2.FG.nwtt[0].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 310 TestQoS2.FG.nwtt[0].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 311 TestQoS2.FG.nwtt[0].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 312 TestQoS2.FG.nwtt[0].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 313 TestQoS2.FG.nwtt[0].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 314 TestQoS2.FG.nwtt[0].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 315 TestQoS2.FG.nwtt[0].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 316 TestQoS2.FG.nwtt[0].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 317 TestQoS2.FG.nwtt[0].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 318 TestQoS2.FG.nwtt[0].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 319 TestQoS2.FG.nwtt[0].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 320 TestQoS2.FG.nwtt[0].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 321 TestQoS2.FG.nwtt[0].tt[2].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 322 TestQoS2.FG.nwtt[0].tt[2].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 323 TestQoS2.FG.nwtt[0].tt[2].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 324 TestQoS2.FG.nwtt[0].tt[2].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 325 TestQoS2.FG.nwtt[0].tt[3].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 326 TestQoS2.FG.nwtt[0].tt[3].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 327 TestQoS2.FG.nwtt[0].tt[3].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 328 TestQoS2.FG.nwtt[0].tt[3].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 329 TestQoS2.PLC1.app[0].source packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+vector 330 TestQoS2.PLC1.app[0].io packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 331 TestQoS2.PLC1.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 332 TestQoS2.PLC1.bridging.streamIdentifier.identifier incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 333 TestQoS2.PLC1.bridging.streamIdentifier.identifier outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 334 TestQoS2.PLC1.bridging.streamCoder.encoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 335 TestQoS2.PLC1.bridging.streamCoder.encoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 336 TestQoS2.PLC1.ieee8021q.qTagHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 337 TestQoS2.PLC1.ieee8021q.qTagHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 338 TestQoS2.PLC1.ethernet.macHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 339 TestQoS2.PLC1.ethernet.macHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 340 TestQoS2.PLC1.ethernet.paddingInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 341 TestQoS2.PLC1.ethernet.paddingInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 342 TestQoS2.PLC1.ethernet.fcsInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 343 TestQoS2.PLC1.ethernet.fcsInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 344 TestQoS2.PLC1.eth[0].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 345 TestQoS2.PLC1.eth[0].macLayer.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 346 TestQoS2.PLC1.eth[0].macLayer.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 347 TestQoS2.PLC1.eth[0].macLayer.server incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "incoming packet lengths"
+attr unit b
+vector 348 TestQoS2.PLC1.eth[0].macLayer.server outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "outgoing packet lengths"
+attr unit b
+vector 349 TestQoS2.PLC1.eth[0].macLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 350 TestQoS2.PLC1.eth[0].macLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 351 TestQoS2.PLC1.eth[0].phyLayer.phyHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 352 TestQoS2.PLC1.eth[0].phyLayer.phyHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 353 TestQoS2.PLC1.eth[0].phyLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 354 TestQoS2.PLC1.eth[0].phyLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+0	109694 40 0 0 0 0 5 0 0 0 0
+1	109734 40 0 0 0 0 5 0 0 0 0
+2	109774 16 0 0 0 0 2 0 0 0 0
+3	109790 16 0 0 0 0 2 0 0 0 0
+4	109806 40 0 0 0 0 5 0 0 0 0
+5	109846 40 0 0 0 0 5 0 0 0 0
+6	109886 16 0 0 0 0 2 0 0 0 0
+7	109902 16 0 0 0 0 2 0 0 0 0
+8	109918 40 0 0 0 0 5 0 0 0 0
+9	109958 40 0 0 0 0 5 0 0 0 0
+10	109998 18 0 0 0 0 2 0 0 0 0
+11	110016 18 0 0 0 0 2 0 0 0 0
+12	110034 45 0 0 0 0 5 0 0 0 0
+13	110079 45 0 0 0 0 5 0 0 0 0
+14	110124 18 0 0 0 0 2 0 0 0 0
+15	110142 18 0 0 0 0 2 0 0 0 0
+16	110160 45 0 0 0 0 5 0 0 0 0
+17	110205 45 0 0 0 0 5 0 0 0 0
+18	110250 18 0 0 0 0 2 0 0 0 0
+19	110268 18 0 0 0 0 2 0 0 0 0
+20	110286 45 0 0 0 0 5 0 0 0 0
+21	110331 45 0 0 0 0 5 0 0 0 0
+22	110376 18 0 0 0 0 2 0 0 0 0
+23	110394 18 0 0 0 0 2 0 0 0 0
+24	110412 45 0 0 0 0 5 0 0 0 0
+25	110457 45 0 0 0 0 5 0 0 0 0
+26	110502 18 0 0 0 0 2 0 0 0 0
+27	110520 18 0 0 0 0 2 0 0 0 0
+28	110538 65 0 79 0 0 7 0 1 1 1
+29	110603 68 0 79 0 0 7 0 2448 2448 5992704
+30	110671 18 0 0 0 0 2 0 0 0 0
+31	110689 28 0 79 0 0 3 0 1 1 1
+32	110717 9 0 0 0 0 1 0 0 0 0
+33	110726 9 0 0 0 0 1 0 0 0 0
+34	110735 9 0 0 0 0 1 0 0 0 0
+35	110744 45 0 0 0 0 5 0 0 0 0
+36	110789 45 0 0 0 0 5 0 0 0 0
+37	110834 18 0 0 0 0 2 0 0 0 0
+38	110852 18 0 0 0 0 2 0 0 0 0
+39	110870 9 0 0 0 0 1 0 0 0 0
+40	110879 9 0 0 0 0 1 0 0 0 0
+41	110888 9 0 0 0 0 1 0 0 0 0
+42	110897 45 0 0 0 0 5 0 0 0 0
+43	110942 45 0 0 0 0 5 0 0 0 0
+44	110987 18 0 0 0 0 2 0 0 0 0
+45	111005 18 0 0 0 0 2 0 0 0 0
+46	111023 9 0 0 0 0 1 0 0 0 0
+47	111032 9 0 0 0 0 1 0 0 0 0
+48	111041 9 0 0 0 0 1 0 0 0 0
+49	111050 45 0 0 0 0 5 0 0 0 0
+50	111095 45 0 0 0 0 5 0 0 0 0
+51	111140 18 0 0 0 0 2 0 0 0 0
+52	111158 18 0 0 0 0 2 0 0 0 0
+53	111176 9 0 0 0 0 1 0 0 0 0
+54	111185 9 0 0 0 0 1 0 0 0 0
+55	111194 9 0 0 0 0 1 0 0 0 0
+56	111203 45 0 0 0 0 5 0 0 0 0
+57	111248 45 0 0 0 0 5 0 0 0 0
+58	111293 18 0 0 0 0 2 0 0 0 0
+59	111311 18 0 0 0 0 2 0 0 0 0
+60	111329 9 0 0 0 0 1 0 0 0 0
+61	111338 9 0 0 0 0 1 0 0 0 0
+62	111347 9 0 0 0 0 1 0 0 0 0
+63	111356 45 0 0 0 0 5 0 0 0 0
+64	111401 45 0 0 0 0 5 0 0 0 0
+65	111446 18 0 0 0 0 2 0 0 0 0
+66	111464 18 0 0 0 0 2 0 0 0 0
+67	111482 9 0 0 0 0 1 0 0 0 0
+68	111491 9 0 0 0 0 1 0 0 0 0
+69	111500 9 0 0 0 0 1 0 0 0 0
+70	111509 45 0 0 0 0 5 0 0 0 0
+71	111554 45 0 0 0 0 5 0 0 0 0
+72	111599 18 0 0 0 0 2 0 0 0 0
+73	111617 18 0 0 0 0 2 0 0 0 0
+74	111635 45 0 0 0 0 5 0 0 0 0
+75	111680 45 0 0 0 0 5 0 0 0 0
+76	111725 18 0 0 0 0 2 0 0 0 0
+77	111743 18 0 0 0 0 2 0 0 0 0
+78	111761 45 0 0 0 0 5 0 0 0 0
+79	111806 45 0 0 0 0 5 0 0 0 0
+80	111851 18 0 0 0 0 2 0 0 0 0
+81	111869 18 0 0 0 0 2 0 0 0 0
+82	111887 45 0 0 0 0 5 0 0 0 0
+83	111932 45 0 0 0 0 5 0 0 0 0
+84	111977 18 0 0 0 0 2 0 0 0 0
+85	111995 18 0 0 0 0 2 0 0 0 0
+86	112013 45 0 0 0 0 5 0 0 0 0
+87	112058 45 0 0 0 0 5 0 0 0 0
+88	112103 18 0 0 0 0 2 0 0 0 0
+89	112121 18 0 0 0 0 2 0 0 0 0
+90	112139 45 0 0 0 0 5 0 0 0 0
+91	112184 45 0 0 0 0 5 0 0 0 0
+92	112229 18 0 0 0 0 2 0 0 0 0
+93	112247 18 0 0 0 0 2 0 0 0 0
+94	112265 45 0 0 0 0 5 0 0 0 0
+95	112310 45 0 0 0 0 5 0 0 0 0
+96	112355 18 0 0 0 0 2 0 0 0 0
+97	112373 18 0 0 0 0 2 0 0 0 0
+98	112391 9 0 0 0 0 1 0 0 0 0
+99	112400 9 0 0 0 0 1 0 0 0 0
+100	112409 10 0 0 0 0 1 0 0 0 0
+101	112419 50 0 0 0 0 5 0 0 0 0
+102	112469 50 0 0 0 0 5 0 0 0 0
+103	112519 20 0 0 0 0 2 0 0 0 0
+104	112539 20 0 0 0 0 2 0 0 0 0
+105	112559 10 0 0 0 0 1 0 0 0 0
+106	112569 10 0 0 0 0 1 0 0 0 0
+107	112579 10 0 0 0 0 1 0 0 0 0
+108	112589 50 0 0 0 0 5 0 0 0 0
+109	112639 50 0 0 0 0 5 0 0 0 0
+110	112689 20 0 0 0 0 2 0 0 0 0
+111	112709 20 0 0 0 0 2 0 0 0 0
+112	112729 10 0 0 0 0 1 0 0 0 0
+113	112739 10 0 0 0 0 1 0 0 0 0
+114	112749 10 0 0 0 0 1 0 0 0 0
+115	112759 50 0 0 0 0 5 0 0 0 0
+116	112809 50 0 0 0 0 5 0 0 0 0
+117	112859 20 0 0 0 0 2 0 0 0 0
+118	112879 20 0 0 0 0 2 0 0 0 0
+119	112899 10 0 0 0 0 1 0 0 0 0
+120	112909 10 0 0 0 0 1 0 0 0 0
+121	112919 10 0 0 0 0 1 0 0 0 0
+122	112929 50 0 0 0 0 5 0 0 0 0
+123	112979 50 0 0 0 0 5 0 0 0 0
+124	113029 20 0 0 0 0 2 0 0 0 0
+125	113049 20 0 0 0 0 2 0 0 0 0
+126	113069 10 0 0 0 0 1 0 0 0 0
+127	113079 10 0 0 0 0 1 0 0 0 0
+128	113089 10 0 0 0 0 1 0 0 0 0
+129	113099 50 0 0 0 0 5 0 0 0 0
+130	113149 50 0 0 0 0 5 0 0 0 0
+131	113199 20 0 0 0 0 2 0 0 0 0
+132	113219 20 0 0 0 0 2 0 0 0 0
+133	113239 50 0 0 0 0 5 0 0 0 0
+134	113289 50 0 0 0 0 5 0 0 0 0
+135	113339 20 0 0 0 0 2 0 0 0 0
+136	113359 20 0 0 0 0 2 0 0 0 0
+137	113379 50 0 0 0 0 5 0 0 0 0
+138	113429 50 0 0 0 0 5 0 0 0 0
+139	113479 20 0 0 0 0 2 0 0 0 0
+140	113499 20 0 0 0 0 2 0 0 0 0
+141	113519 10 0 0 0 0 1 0 0 0 0
+142	113529 10 0 0 0 0 1 0 0 0 0
+143	113539 10 0 0 0 0 1 0 0 0 0
+144	113549 50 0 0 0 0 5 0 0 0 0
+145	113599 50 0 0 0 0 5 0 0 0 0
+146	113649 20 0 0 0 0 2 0 0 0 0
+147	113669 20 0 0 0 0 2 0 0 0 0
+148	113689 50 0 0 0 0 5 0 0 0 0
+149	113739 50 0 0 0 0 5 0 0 0 0
+150	113789 20 0 0 0 0 2 0 0 0 0
+151	113809 20 0 0 0 0 2 0 0 0 0
+152	113829 50 0 0 0 0 5 0 0 0 0
+153	113879 50 0 0 0 0 5 0 0 0 0
+154	113929 20 0 0 0 0 2 0 0 0 0
+155	113949 20 0 0 0 0 2 0 0 0 0
+156	113969 50 0 0 0 0 5 0 0 0 0
+157	114019 50 0 0 0 0 5 0 0 0 0
+158	114069 20 0 0 0 0 2 0 0 0 0
+159	114089 20 0 0 0 0 2 0 0 0 0
+160	114109 50 0 0 0 0 5 0 0 0 0
+161	114159 50 0 0 0 0 5 0 0 0 0
+162	114209 20 0 0 0 0 2 0 0 0 0
+163	114229 20 0 0 0 0 2 0 0 0 0
+164	114249 10 0 0 0 0 1 0 0 0 0
+165	114259 10 0 0 0 0 1 0 0 0 0
+166	114269 10 0 0 0 0 1 0 0 0 0
+167	114279 50 0 0 0 0 5 0 0 0 0
+168	114329 50 0 0 0 0 5 0 0 0 0
+169	114379 20 0 0 0 0 2 0 0 0 0
+170	114399 20 0 0 0 0 2 0 0 0 0
+171	114419 10 0 0 0 0 1 0 0 0 0
+172	114429 10 0 0 0 0 1 0 0 0 0
+173	114439 10 0 0 0 0 1 0 0 0 0
+174	114449 50 0 0 0 0 5 0 0 0 0
+175	114499 50 0 0 0 0 5 0 0 0 0
+176	114549 20 0 0 0 0 2 0 0 0 0
+177	114569 20 0 0 0 0 2 0 0 0 0
+178	114589 10 0 0 0 0 1 0 0 0 0
+179	114599 10 0 0 0 0 1 0 0 0 0
+180	114609 10 0 0 0 0 1 0 0 0 0
+181	114619 50 0 0 0 0 5 0 0 0 0
+182	114669 50 0 0 0 0 5 0 0 0 0
+183	114719 20 0 0 0 0 2 0 0 0 0
+184	114739 20 0 0 0 0 2 0 0 0 0
+185	114759 50 0 0 0 0 5 0 0 0 0
+186	114809 50 0 0 0 0 5 0 0 0 0
+187	114859 20 0 0 0 0 2 0 0 0 0
+188	114879 20 0 0 0 0 2 0 0 0 0
+189	114899 50 0 0 0 0 5 0 0 0 0
+190	114949 50 0 0 0 0 5 0 0 0 0
+191	114999 20 0 0 0 0 2 0 0 0 0
+192	115019 20 0 0 0 0 2 0 0 0 0
+193	115039 50 0 0 0 0 5 0 0 0 0
+194	115089 50 0 0 0 0 5 0 0 0 0
+195	115139 20 0 0 0 0 2 0 0 0 0
+196	115159 20 0 0 0 0 2 0 0 0 0
+197	115179 50 0 0 0 0 5 0 0 0 0
+198	115229 50 0 0 0 0 5 0 0 0 0
+199	115279 20 0 0 0 0 2 0 0 0 0
+200	115299 20 0 0 0 0 2 0 0 0 0
+201	115319 50 0 0 0 0 5 0 0 0 0
+202	115369 50 0 0 0 0 5 0 0 0 0
+203	115419 20 0 0 0 0 2 0 0 0 0
+204	115439 20 0 0 0 0 2 0 0 0 0
+205	115459 10 0 0 0 0 1 0 0 0 0
+206	115469 10 0 0 0 0 1 0 0 0 0
+207	115479 10 0 0 0 0 1 0 0 0 0
+208	115489 50 0 0 0 0 5 0 0 0 0
+209	115539 50 0 0 0 0 5 0 0 0 0
+210	115589 20 0 0 0 0 2 0 0 0 0
+211	115609 20 0 0 0 0 2 0 0 0 0
+212	115629 10 0 0 0 0 1 0 0 0 0
+213	115639 10 0 0 0 0 1 0 0 0 0
+214	115649 10 0 0 0 0 1 0 0 0 0
+215	115659 50 0 0 0 0 5 0 0 0 0
+216	115709 50 0 0 0 0 5 0 0 0 0
+217	115759 20 0 0 0 0 2 0 0 0 0
+218	115779 20 0 0 0 0 2 0 0 0 0
+219	115799 10 0 0 0 0 1 0 0 0 0
+220	115809 10 0 0 0 0 1 0 0 0 0
+221	115819 10 0 0 0 0 1 0 0 0 0
+222	115829 50 0 0 0 0 5 0 0 0 0
+223	115879 50 0 0 0 0 5 0 0 0 0
+224	115929 20 0 0 0 0 2 0 0 0 0
+225	115949 20 0 0 0 0 2 0 0 0 0
+226	115969 10 0 0 0 0 1 0 0 0 0
+227	115979 10 0 0 0 0 1 0 0 0 0
+228	115989 10 0 0 0 0 1 0 0 0 0
+229	115999 50 0 0 0 0 5 0 0 0 0
+230	116049 50 0 0 0 0 5 0 0 0 0
+231	116099 20 0 0 0 0 2 0 0 0 0
+232	116119 20 0 0 0 0 2 0 0 0 0
+233	116139 50 0 0 0 0 5 0 0 0 0
+234	116189 50 0 0 0 0 5 0 0 0 0
+235	116239 20 0 0 0 0 2 0 0 0 0
+236	116259 20 0 0 0 0 2 0 0 0 0
+237	116279 50 0 0 0 0 5 0 0 0 0
+238	116329 50 0 0 0 0 5 0 0 0 0
+239	116379 20 0 0 0 0 2 0 0 0 0
+240	116399 20 0 0 0 0 2 0 0 0 0
+241	116419 50 0 0 0 0 5 0 0 0 0
+242	116469 50 0 0 0 0 5 0 0 0 0
+243	116519 20 0 0 0 0 2 0 0 0 0
+244	116539 20 0 0 0 0 2 0 0 0 0
+245	116559 50 0 0 0 0 5 0 0 0 0
+246	116609 50 0 0 0 0 5 0 0 0 0
+247	116659 20 0 0 0 0 2 0 0 0 0
+248	116679 20 0 0 0 0 2 0 0 0 0
+249	116699 50 0 0 0 0 5 0 0 0 0
+250	116749 50 0 0 0 0 5 0 0 0 0
+251	116799 20 0 0 0 0 2 0 0 0 0
+252	116819 20 0 0 0 0 2 0 0 0 0
+253	116839 50 0 0 0 0 5 0 0 0 0
+254	116889 50 0 0 0 0 5 0 0 0 0
+255	116939 20 0 0 0 0 2 0 0 0 0
+256	116959 20 0 0 0 0 2 0 0 0 0
+257	116979 50 0 0 0 0 5 0 0 0 0
+258	117029 50 0 0 0 0 5 0 0 0 0
+259	117079 20 0 0 0 0 2 0 0 0 0
+260	117099 20 0 0 0 0 2 0 0 0 0
+261	117119 50 0 0 0 0 5 0 0 0 0
+262	117169 50 0 0 0 0 5 0 0 0 0
+263	117219 20 0 0 0 0 2 0 0 0 0
+264	117239 20 0 0 0 0 2 0 0 0 0
+265	117259 50 0 0 0 0 5 0 0 0 0
+266	117309 50 0 0 0 0 5 0 0 0 0
+267	117359 20 0 0 0 0 2 0 0 0 0
+268	117379 20 0 0 0 0 2 0 0 0 0
+269	117399 50 0 0 0 0 5 0 0 0 0
+270	117449 50 0 0 0 0 5 0 0 0 0
+271	117499 20 0 0 0 0 2 0 0 0 0
+272	117519 20 0 0 0 0 2 0 0 0 0
+273	117539 50 0 0 0 0 5 0 0 0 0
+274	117589 50 0 0 0 0 5 0 0 0 0
+275	117639 20 0 0 0 0 2 0 0 0 0
+276	117659 20 0 0 0 0 2 0 0 0 0
+277	117679 50 0 0 0 0 5 0 0 0 0
+278	117729 50 0 0 0 0 5 0 0 0 0
+279	117779 20 0 0 0 0 2 0 0 0 0
+280	117799 20 0 0 0 0 2 0 0 0 0
+281	117819 50 0 0 0 0 5 0 0 0 0
+282	117869 50 0 0 0 0 5 0 0 0 0
+283	117919 20 0 0 0 0 2 0 0 0 0
+284	117939 20 0 0 0 0 2 0 0 0 0
+285	117959 50 0 0 0 0 5 0 0 0 0
+286	118009 50 0 0 0 0 5 0 0 0 0
+287	118059 20 0 0 0 0 2 0 0 0 0
+288	118079 20 0 0 0 0 2 0 0 0 0
+289	118099 50 0 0 0 0 5 0 0 0 0
+290	118149 50 0 0 0 0 5 0 0 0 0
+291	118199 20 0 0 0 0 2 0 0 0 0
+292	118219 20 0 0 0 0 2 0 0 0 0
+293	118239 50 0 0 0 0 5 0 0 0 0
+294	118289 50 0 0 0 0 5 0 0 0 0
+295	118339 20 0 0 0 0 2 0 0 0 0
+296	118359 20 0 0 0 0 2 0 0 0 0
+297	118379 50 0 0 0 0 5 0 0 0 0
+298	118429 50 0 0 0 0 5 0 0 0 0
+299	118479 20 0 0 0 0 2 0 0 0 0
+300	118499 20 0 0 0 0 2 0 0 0 0
+301	118519 50 0 0 0 0 5 0 0 0 0
+302	118569 50 0 0 0 0 5 0 0 0 0
+303	118619 20 0 0 0 0 2 0 0 0 0
+304	118639 20 0 0 0 0 2 0 0 0 0
+305	118659 50 0 0 0 0 5 0 0 0 0
+306	118709 50 0 0 0 0 5 0 0 0 0
+307	118759 20 0 0 0 0 2 0 0 0 0
+308	118779 20 0 0 0 0 2 0 0 0 0
+309	118799 50 0 0 0 0 5 0 0 0 0
+310	118849 50 0 0 0 0 5 0 0 0 0
+311	118899 20 0 0 0 0 2 0 0 0 0
+312	118919 20 0 0 0 0 2 0 0 0 0
+313	118939 50 0 0 0 0 5 0 0 0 0
+314	118989 50 0 0 0 0 5 0 0 0 0
+315	119039 20 0 0 0 0 2 0 0 0 0
+316	119059 20 0 0 0 0 2 0 0 0 0
+317	119079 50 0 0 0 0 5 0 0 0 0
+318	119129 50 0 0 0 0 5 0 0 0 0
+319	119179 20 0 0 0 0 2 0 0 0 0
+320	119199 20 0 0 0 0 2 0 0 0 0
+321	119219 50 0 0 0 0 5 0 0 0 0
+322	119269 50 0 0 0 0 5 0 0 0 0
+323	119319 20 0 0 0 0 2 0 0 0 0
+324	119339 20 0 0 0 0 2 0 0 0 0
+325	119359 50 0 0 0 0 5 0 0 0 0
+326	119409 50 0 0 0 0 5 0 0 0 0
+327	119459 20 0 0 0 0 2 0 0 0 0
+328	119479 20 0 0 0 0 2 0 0 0 0
+329	119499 13 0 0 0 0 1 2048 2048 2048 4194304
+330	119512 12 9 9 0 0 1 256 256 256 65536
+331	119524 13 76 76 0 0 1 264 264 264 69696
+332	119537 14 78 78 0 0 1 2272 2272 2272 5161984
+333	119551 14 78 78 0 0 1 2272 2272 2272 5161984
+334	119565 14 78 78 0 0 1 2272 2272 2272 5161984
+335	119579 14 78 78 0 0 1 2272 2272 2272 5161984
+336	119593 14 78 78 0 0 1 2272 2272 2272 5161984
+337	119607 14 78 78 0 0 1 2304 2304 2304 5308416
+338	119621 14 78 78 0 0 1 2304 2304 2304 5308416
+339	119635 14 78 78 0 0 1 2416 2416 2416 5837056
+340	119649 14 78 78 0 0 1 2416 2416 2416 5837056
+341	119663 14 78 78 0 0 1 2416 2416 2416 5837056
+342	119677 14 78 78 0 0 1 2416 2416 2416 5837056
+343	119691 14 78 78 0 0 1 2448 2448 2448 5992704
+344	119705 14 78 78 0 0 1 2448 2448 2448 5992704
+345	119719 11 79 79 0 0 1 0 0 0 0
+346	119730 14 79 79 0 0 1 2448 2448 2448 5992704
+347	119744 14 79 79 0 0 1 2448 2448 2448 5992704
+348	119758 14 79 79 0 0 1 2448 2448 2448 5992704
+349	119772 14 79 79 0 0 1 2448 2448 2448 5992704
+350	119786 14 79 79 0 0 1 2448 2448 2448 5992704
+351	119800 14 79 79 0 0 1 2448 2448 2448 5992704
+352	119814 14 79 79 0 0 1 2512 2512 2512 6310144
+353	119828 14 79 79 0 0 1 2512 2512 2512 6310144
+354	119842 14 79 79 0 0 1 2512 2512 2512 6310144
+vector 355 TestQoS2.PLC1.eth[0].phyLayer.transmitter transmissionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(transmissionEnded)
+attr title "transmission time"
+attr unit s
+vector 356 TestQoS2.switch5GC.eth[1].phyLayer.receiver receptionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(receptionEnded)
+attr title "reception time"
+attr unit s
+vector 357 TestQoS2.switch5GC.eth[1].phyLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 358 TestQoS2.switch5GC.eth[1].phyLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 359 TestQoS2.switch5GC.eth[1].phyLayer.phyHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 360 TestQoS2.switch5GC.eth[1].phyLayer.phyHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 361 TestQoS2.switch5GC.eth[1].macLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 362 TestQoS2.switch5GC.eth[1].macLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 363 TestQoS2.switch5GC.eth[1].macLayer.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 364 TestQoS2.switch5GC.eth[1].macLayer.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 365 TestQoS2.switch5GC.ethernet.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 366 TestQoS2.switch5GC.ethernet.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 367 TestQoS2.switch5GC.ethernet.macHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 368 TestQoS2.switch5GC.ethernet.macHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 369 TestQoS2.switch5GC.ieee8021q.qTagHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 370 TestQoS2.switch5GC.ieee8021q.qTagHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 371 TestQoS2.switch5GC.bridging.interfaceRelay.learner incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 372 TestQoS2.switch5GC.bridging.interfaceRelay.learner outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 373 TestQoS2.switch5GC.bridging.streamCoder.decoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 374 TestQoS2.switch5GC.bridging.streamCoder.decoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 375 TestQoS2.switch5GC.bridging.directionReverser.reverser incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 376 TestQoS2.switch5GC.bridging.directionReverser.reverser outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 377 TestQoS2.switch5GC.bridging.streamCoder.encoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 378 TestQoS2.switch5GC.bridging.streamCoder.encoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 379 TestQoS2.switch5GC.ieee8021q.qTagHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 380 TestQoS2.switch5GC.ieee8021q.qTagHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 381 TestQoS2.switch5GC.ethernet.macHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 382 TestQoS2.switch5GC.ethernet.macHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 383 TestQoS2.switch5GC.ethernet.paddingInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 384 TestQoS2.switch5GC.ethernet.paddingInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 385 TestQoS2.switch5GC.ethernet.fcsInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 386 TestQoS2.switch5GC.ethernet.fcsInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 387 TestQoS2.switch5GC.eth[0].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+0	128367 18 81 81 0.00025125 0.00025125 1 1 1 1 1
+1	128385 21 81 81 0.00025125 0.00025125 1 2448 2448 2448 5992704
+30	128406 18 80 80 0.0002512 0.0002512 1 1 1 1 1
+31	128424 18 80 80 0.0002512 0.0002512 1 0 0 0 0
+355	128442 27 80 80 0.0002512 0.0002512 1 0.0002512 0.0002512 0.0002512 6.310144e-08
+356	128469 28 81 81 0.00025125 0.00025125 1 0.0002512 0.0002512 0.0002512 6.310144e-08
+357	128497 23 81 81 0.00025125 0.00025125 1 2512 2512 2512 6310144
+358	128520 23 81 81 0.00025125 0.00025125 1 2512 2512 2512 6310144
+359	128543 23 81 81 0.00025125 0.00025125 1 2512 2512 2512 6310144
+360	128566 23 81 81 0.00025125 0.00025125 1 2448 2448 2448 5992704
+361	128589 23 81 81 0.00025125 0.00025125 1 2448 2448 2448 5992704
+362	128612 23 81 81 0.00025125 0.00025125 1 2448 2448 2448 5992704
+363	128635 23 81 81 0.00025125 0.00025125 1 2448 2448 2448 5992704
+364	128658 23 81 81 0.00025125 0.00025125 1 2448 2448 2448 5992704
+365	128681 23 81 81 0.00025125 0.00025125 1 2448 2448 2448 5992704
+366	128704 23 81 81 0.00025125 0.00025125 1 2416 2416 2416 5837056
+367	128727 23 81 81 0.00025125 0.00025125 1 2416 2416 2416 5837056
+368	128750 23 81 81 0.00025125 0.00025125 1 2304 2304 2304 5308416
+369	128773 23 81 81 0.00025125 0.00025125 1 2304 2304 2304 5308416
+370	128796 23 81 81 0.00025125 0.00025125 1 2272 2272 2272 5161984
+371	128819 23 81 81 0.00025125 0.00025125 1 2272 2272 2272 5161984
+372	128842 23 81 81 0.00025125 0.00025125 1 2272 2272 2272 5161984
+373	128865 23 81 81 0.00025125 0.00025125 1 2272 2272 2272 5161984
+374	128888 23 81 81 0.00025125 0.00025125 1 2272 2272 2272 5161984
+375	128911 23 81 81 0.00025125 0.00025125 1 2272 2272 2272 5161984
+376	128934 23 81 81 0.00025125 0.00025125 1 2272 2272 2272 5161984
+377	128957 23 81 81 0.00025125 0.00025125 1 2272 2272 2272 5161984
+378	128980 23 81 81 0.00025125 0.00025125 1 2272 2272 2272 5161984
+379	129003 23 81 81 0.00025125 0.00025125 1 2272 2272 2272 5161984
+380	129026 23 81 81 0.00025125 0.00025125 1 2304 2304 2304 5308416
+381	129049 23 81 81 0.00025125 0.00025125 1 2304 2304 2304 5308416
+382	129072 23 81 81 0.00025125 0.00025125 1 2416 2416 2416 5837056
+383	129095 23 81 81 0.00025125 0.00025125 1 2416 2416 2416 5837056
+384	129118 23 81 81 0.00025125 0.00025125 1 2416 2416 2416 5837056
+385	129141 23 81 81 0.00025125 0.00025125 1 2416 2416 2416 5837056
+386	129164 23 81 81 0.00025125 0.00025125 1 2448 2448 2448 5992704
+387	129187 23 81 81 0.00025125 0.00025125 1 2448 2448 2448 5992704
+

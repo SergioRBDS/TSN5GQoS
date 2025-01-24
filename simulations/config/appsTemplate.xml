@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<config>
+    <app>
+    	<!-- Mandatory -->
+    	<param name="source">Source</param>
+    	<param name="destination">Destination</param>
+    	<param name="packetLength">1500B</param>
+    	<param name="productionInterval">1ms</param>
+    	<param name="pcp">0</param>
+    	<param name="destPort">1000</param>
+    	<!-- Optional -->
+    	<param name="displayName">App0</param>
+    	<param name="intervalDistribution">normal(1ms)</param>
+    	<param name="initialProductionOffset">0s</param>
+    </app>
+    <app>
+    	<!-- Mandatory -->
+    	<param name="source">Source</param>
+    	<param name="destination">Destination</param>
+    	<param name="packetLength">1500B</param>
+    	<param name="productionInterval">1ms</param>
+    	<param name="pcp">2</param>
+    	<param name="destPort">1001</param>
+    	<!-- Optional -->    	
+    </app>
+    <app>
+    	<!-- Mandatory -->
+    	<param name="source">Source2</param>
+    	<param name="destination">Destination</param>
+    	<param name="packetLength">1500B</param>
+    	<param name="productionInterval">1ms</param>
+    	<param name="pcp">1</param>
+    	<param name="destPort">1002</param>
+    	<!-- Optional -->    	
+    </app>    
+</config>

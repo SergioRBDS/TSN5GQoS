@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <PCP>
+        <TrafficType AppName="Backgroung" pcp="0" productionInterval="100" packetLength="512" />
+        <TrafficType AppName="BestEffort" pcp="1" productionInterval="50" packetLength="1024" />
+        <TrafficType AppName="app2" pcp="2" productionInterval="30" packetLength="248" />
+        <TrafficType AppName="app3" pcp="3" productionInterval="10" packetLength="496" />
+        <TrafficType AppName="app4" pcp="4" productionInterval="20" packetLength="248" />
+        <TrafficType AppName="app5" pcp="5" productionInterval="10" packetLength="124" />
+        <TrafficType AppName="app6" pcp="6" productionInterval="5" packetLength="256" DC="1"/>
+        <TrafficType AppName="app7" pcp="7" productionInterval="10" packetLength="128" DC="1" />
+    </PCP>
+</config>

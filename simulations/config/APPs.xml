@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- PCP values associated with names -->
+    <PCP>
+        <TrafficType name="Background" source="talker" destination="listener" destPort="1000" pcp="0" productionInterval="normal(100ms, 50ms)" packetLength="512B" />
+        <TrafficType name="BestEffort" source="talker" destination="listener" destPort="1001" pcp="1" productionInterval="50ms" packetLength="1024B" />
+        <TrafficType name="ExcellentEffort" source="talker" destination="listener" destPort="1002" pcp="2" productionInterval="30ms" packetLength="248B" />
+        <TrafficType name="CriticalApplications" source="talker" destination="listener" destPort="1003" pcp="3" productionInterval="10ms" packetLength="496B" />
+        <TrafficType name="Video" source="talker" destination="listener" pcp="4" destPort="1004" productionInterval="normal(20ms, 10ms)" packetLength="248B" />
+        <TrafficType name="Voice" source="talker" destination="listener" pcp="5" destPort="1005" productionInterval="10ms" packetLength="124B" />
+        <TrafficType name="InternetworkControl" source="talker" destination="listener" destPort="1006" pcp="6" productionInterval="normal(50ms, 20ms)" packetLength="256B" />
+        <TrafficType name="NetworkControl" source="talker" destination="listener" destPort="1007" pcp="7" productionInterval="normal(100ms, 50ms)" packetLength="128B" />
+    </PCP>
+</config>

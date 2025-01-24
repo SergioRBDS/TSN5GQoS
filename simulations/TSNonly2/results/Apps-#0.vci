@@ -1,0 +1,1340 @@
+file 22900 1732734781                                           
+version 3
+run Apps-0-20241127-16:12:56-8028
+attr configname Apps
+attr datetime 20241127-16:12:56
+attr datetimef 20241127-161256
+attr experiment Apps
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network TestGptpQoS2
+attr processid 8028
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../../inet4.5/images
+config *.switch5GC.numApps 2
+config *.switch5GC.hasOutgoingStreams true
+config *.switch5GC.hasIncomingStreams true
+config *.switch5GC.app[0].typename UdpSourceApp
+config *.switch5GC.app[0].io.destAddress "\"switchCell1\""
+config *.switch5GC.app[0].io.destPort 2000
+config *.switch5GC.app[0].source.packetLength 128B
+config *.switch5GC.app[0].source.productionInterval 50ms
+config *.switch5GC.app[1].typename UdpSinkApp
+config *.switch5GC.app[1].io.localPort 2001
+config *.switchCell1.numApps 2
+config *.switchCell1.hasOutgoingStreams true
+config *.switchCell1.hasIncomingStreams true
+config *.switchCell1.app[0].typename UdpSourceApp
+config *.switchCell1.app[0].io.destAddress "\"switch5GC\""
+config *.switchCell1.app[0].io.destPort 2001
+config *.switchCell1.app[0].source.packetLength 128B
+config *.switchCell1.app[0].source.productionInterval 10ms
+config *.switchCell1.app[1].typename UdpSinkApp
+config *.switchCell1.app[1].io.localPort 2000
+config *.switch5GC.bridging.streamIdentifier.identifier.mapping "[{stream: \"PLC10\", packetFilter: expr(udp.destPort == 2000)}]"
+config *.switch5GC.bridging.streamCoder.encoder.mapping "[{stream: \"PLC10\", pcp: 6}]"
+config *.switchCell1.bridging.streamIdentifier.identifier.mapping "[{stream: \"Sensor10\", packetFilter: expr(udp.destPort == 2001)}]"
+config *.switchCell1.bridging.streamCoder.encoder.mapping "[{stream: \"Sensor10\", pcp: 6}]"
+config network TestGptpQoS2
+config sim-time-limit 10s
+config **.TSNAppsTableFile "xmldoc(\"config/app.xml\")"
+config *.histogramContainer.histograms "{Uplink: \"../../../deterministic6g_data/PD-Wireless-5G-1/s1-UL_wall.xml\", Downlink: \"../../../deterministic6g_data/PD-Wireless-5G-1/s10-DL_wall.xml\", D2D: \"../../../deterministic6g_data/PD-Wireless-5G-1/testeD2D.xml\"}"
+config *.FGS.d*.delayUplink "rngProvider(\"histogramContainer\",\"Uplink\")"
+config *.FGS.n*.delayDownlink "rngProvider(\"histogramContainer\",\"Downlink\")"
+config *.FGS.d*.delayD2D "rngProvider(\"histogramContainer\",\"D2D\")"
+config *.FGS.dstt[*].tt[1].delayLayer.delay "rngProvider(\"histogramContainer\",\"D2D\")"
+config *.**.tt[*].**.delayQfi "{1:rngProvider(\"histogramContainer\",\"D2D\"),3:rngProvider(\"histogramContainer\",\"D2D\"),4:rngProvider(\"histogramContainer\",\"D2D\"),65:rngProvider(\"histogramContainer\",\"D2D\"),67:rngProvider(\"histogramContainer\",\"D2D\"),72:rngProvider(\"histogramContainer\",\"D2D\"),86:rngProvider(\"histogramContainer\",\"D2D\"),88:rngProvider(\"histogramContainer\",\"D2D\")}"
+config *.visualizer.typename IntegratedMultiCanvasVisualizer
+config *.visualizer.infoVisualizer[*].displayInfos true
+
+vector 0 TestGptpQoS2.switch5GC.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 1 TestGptpQoS2.switch5GC.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 2 TestGptpQoS2.switch5GC.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 3 TestGptpQoS2.switch5GC.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 4 TestGptpQoS2.switch5GC.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 5 TestGptpQoS2.switch5GC.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 6 TestGptpQoS2.switch5GC.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 7 TestGptpQoS2.switchCell1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 8 TestGptpQoS2.switchCell1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 9 TestGptpQoS2.switchCell1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 10 TestGptpQoS2.switchCell1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 11 TestGptpQoS2.switchCell1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 12 TestGptpQoS2.switchCell1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 13 TestGptpQoS2.switchCell1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 14 TestGptpQoS2.switchCell2.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 15 TestGptpQoS2.switchCell2.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 16 TestGptpQoS2.switchCell2.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 17 TestGptpQoS2.switchCell2.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 18 TestGptpQoS2.switchCell2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 19 TestGptpQoS2.switchCell2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 20 TestGptpQoS2.switchCell2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 21 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 22 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 23 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 24 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 25 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 26 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 27 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 28 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 29 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 30 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 31 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 32 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 33 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 34 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 35 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 36 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 37 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 38 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 39 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 40 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 41 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 42 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 43 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 44 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 45 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 46 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 47 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 48 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 49 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 50 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 51 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 52 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 53 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 54 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 55 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 56 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 57 TestGptpQoS2.switch5GC.app[0].source packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+vector 58 TestGptpQoS2.switchCell1.app[0].source packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+0	21311 40 0 0 0 0 5 0 0 0 0
+1	21351 40 0 0 0 0 5 0 0 0 0
+2	21391 16 0 0 0 0 2 0 0 0 0
+3	21407 16 0 0 0 0 2 0 0 0 0
+4	21423 8 0 0 0 0 1 0 0 0 0
+5	21431 8 0 0 0 0 1 0 0 0 0
+6	21439 8 0 0 0 0 1 0 0 0 0
+7	21447 40 0 0 0 0 5 0 0 0 0
+8	21487 40 0 0 0 0 5 0 0 0 0
+9	21527 16 0 0 0 0 2 0 0 0 0
+10	21543 18 0 0 0 0 2 0 0 0 0
+11	21561 9 0 0 0 0 1 0 0 0 0
+12	21570 9 0 0 0 0 1 0 0 0 0
+13	21579 9 0 0 0 0 1 0 0 0 0
+14	21588 45 0 0 0 0 5 0 0 0 0
+15	21633 45 0 0 0 0 5 0 0 0 0
+16	21678 18 0 0 0 0 2 0 0 0 0
+17	21696 18 0 0 0 0 2 0 0 0 0
+18	21714 9 0 0 0 0 1 0 0 0 0
+19	21723 9 0 0 0 0 1 0 0 0 0
+20	21732 9 0 0 0 0 1 0 0 0 0
+21	21741 45 0 0 0 0 5 0 0 0 0
+22	21786 45 0 0 0 0 5 0 0 0 0
+23	21831 18 0 0 0 0 2 0 0 0 0
+24	21849 18 0 0 0 0 2 0 0 0 0
+25	21867 45 0 0 0 0 5 0 0 0 0
+26	21912 45 0 0 0 0 5 0 0 0 0
+27	21957 18 0 0 0 0 2 0 0 0 0
+28	21975 18 0 0 0 0 2 0 0 0 0
+29	21993 45 0 0 0 0 5 0 0 0 0
+30	22038 45 0 0 0 0 5 0 0 0 0
+31	22083 18 0 0 0 0 2 0 0 0 0
+32	22101 18 0 0 0 0 2 0 0 0 0
+33	22119 45 0 0 0 0 5 0 0 0 0
+34	22164 45 0 0 0 0 5 0 0 0 0
+35	22209 18 0 0 0 0 2 0 0 0 0
+36	22227 18 0 0 0 0 2 0 0 0 0
+37	22245 45 0 0 0 0 5 0 0 0 0
+38	22290 45 0 0 0 0 5 0 0 0 0
+39	22335 18 0 0 0 0 2 0 0 0 0
+40	22353 18 0 0 0 0 2 0 0 0 0
+41	22371 45 0 0 0 0 5 0 0 0 0
+42	22416 45 0 0 0 0 5 0 0 0 0
+43	22461 18 0 0 0 0 2 0 0 0 0
+44	22479 18 0 0 0 0 2 0 0 0 0
+45	22497 45 0 0 0 0 5 0 0 0 0
+46	22542 45 0 0 0 0 5 0 0 0 0
+47	22587 18 0 0 0 0 2 0 0 0 0
+48	22605 18 0 0 0 0 2 0 0 0 0
+49	22623 45 0 0 0 0 5 0 0 0 0
+50	22668 45 0 0 0 0 5 0 0 0 0
+51	22713 18 0 0 0 0 2 0 0 0 0
+52	22731 18 0 0 0 0 2 0 0 0 0
+53	22749 45 0 0 0 0 5 0 0 0 0
+54	22794 45 0 0 0 0 5 0 0 0 0
+55	22839 18 0 0 0 0 2 0 0 0 0
+56	22857 18 0 0 0 0 2 0 0 0 0
+57	22875 12 0 0 0 0 1 1024 1024 1024 1048576
+58	22887 12 0 0 0 0 1 1024 1024 1024 1048576
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             vector 225 TestGptpQoS2.switch5GC.ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 226 TestGptpQoS2.switch5GC.ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 227 TestGptpQoS2.switch5GC.ieee8021q.qTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 228 TestGptpQoS2.switch5GC.eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 229 TestGptpQoS2.switch5GC.eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 230 TestGptpQoS2.switch5GC.eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 231 TestGptpQoS2.switch5GC.eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 232 TestGptpQoS2.switch5GC.eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 233 TestGptpQoS2.switch5GC.eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 234 TestGptpQoS2.switch5GC.eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 235 TestGptpQoS2.switch5GC.eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 236 TestGptpQoS2.switch5GC.app[0].source dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 237 TestGptpQoS2.switch5GC.app[1].sink dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 238 TestGptpQoS2.switch5GC.app[1].sink droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 239 TestGptpQoS2.switchCell1.ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 240 TestGptpQoS2.switchCell1.ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 241 TestGptpQoS2.switchCell1.ieee8021q.qTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 242 TestGptpQoS2.switchCell1.eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 243 TestGptpQoS2.switchCell1.eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 244 TestGptpQoS2.switchCell1.eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 245 TestGptpQoS2.switchCell1.eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 246 TestGptpQoS2.switchCell1.eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 247 TestGptpQoS2.switchCell1.eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 248 TestGptpQoS2.switchCell1.eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 249 TestGptpQoS2.switchCell1.eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 250 TestGptpQoS2.switchCell1.app[0].source dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 251 TestGptpQoS2.switchCell1.app[1].sink dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 252 TestGptpQoS2.switchCell1.app[1].sink droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 253 TestGptpQoS2.switchCell2.ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 254 TestGptpQoS2.switchCell2.ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 255 TestGptpQoS2.switchCell2.eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 256 TestGptpQoS2.switchCell2.eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 257 TestGptpQoS2.switchCell2.eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 258 TestGptpQoS2.switchCell2.eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 259 TestGptpQoS2.switchCell2.eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 260 TestGptpQoS2.switchCell2.eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 261 TestGptpQoS2.switchCell2.eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 262 TestGptpQoS2.switchCell2.eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 263 TestGptpQoS2.FGS.dstt[0].ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 264 TestGptpQoS2.FGS.dstt[0].ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 265 TestGptpQoS2.FGS.dstt[0].ieee8021q.qTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 266 TestGptpQoS2.FGS.dstt[0].ieee8021r.rTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 267 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 268 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 269 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 270 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 271 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 272 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 273 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 274 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 275 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 276 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 277 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 278 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 279 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 280 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 281 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 282 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 283 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 284 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 285 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 286 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 287 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 288 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 289 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 290 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 291 TestGptpQoS2.FGS.dstt[1].ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 292 TestGptpQoS2.FGS.dstt[1].ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 293 TestGptpQoS2.FGS.dstt[1].ieee8021q.qTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 294 TestGptpQoS2.FGS.dstt[1].ieee8021r.rTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 295 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 296 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 297 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 298 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 299 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 300 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 301 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 302 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 303 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 304 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 305 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 306 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 307 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 308 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 309 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 310 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 311 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 312 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 313 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 314 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 315 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 316 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 317 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 318 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 319 TestGptpQoS2.FGS.nwtt[0].ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 320 TestGptpQoS2.FGS.nwtt[0].ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 321 TestGptpQoS2.FGS.nwtt[0].ieee8021q.qTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 322 TestGptpQoS2.FGS.nwtt[0].ieee8021r.rTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 323 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 324 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 325 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 326 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 327 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 328 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 329 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 330 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 331 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 332 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 333 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 334 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 335 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 336 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 337 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 338 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 339 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 340 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 341 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 342 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 343 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 344 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 345 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 346 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+225	97450 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+226	97470 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+227	97490 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+228	97510 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+229	97544 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+230	97578 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+231	97612 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+232	97646 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+233	97666 34 44 44 0.00014885 0.00014885 1 9996640.9136715 9996640.9136715 9996640.9136715 99932829556891
+234	97700 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+235	97720 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+236	97740 34 44 44 0.00014885 0.00014885 1 6879408.8008062 6879408.8008062 6879408.8008062 47326265448610
+237	97774 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+238	97794 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+239	97814 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+240	97834 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+241	97854 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+242	97874 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+243	97908 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+244	97942 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+245	97976 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+246	98010 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+247	98030 34 44 44 0.00014885 0.00014885 1 9996640.9136715 9996640.9136715 9996640.9136715 99932829556891
+248	98064 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+249	98084 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+250	98104 34 44 44 0.00014885 0.00014885 1 6879408.8008062 6879408.8008062 6879408.8008062 47326265448610
+251	98138 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+252	98158 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+253	98178 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+254	98198 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+255	98218 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+256	98238 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+257	98258 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+258	98278 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+259	98298 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+260	98318 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+261	98338 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+262	98358 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+263	98378 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+264	98398 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+265	98418 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+266	98438 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+267	98458 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+268	98478 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+269	98498 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+270	98518 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+271	98538 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+272	98558 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+273	98578 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+274	98598 34 44 44 0.00014885 0.00014885 1 9996640.9136715 9996640.9136715 9996640.9136715 99932829556891
+275	98632 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+276	98666 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+277	98700 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+278	98734 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+279	98768 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+280	98788 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+281	98808 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+282	98828 34 44 44 0.00014885 0.00014885 1 9996640.9136715 9996640.9136715 9996640.9136715 99932829556891
+283	98862 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+284	98896 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+285	98930 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+286	98964 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+287	98998 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+288	99018 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+289	99038 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+290	99058 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+291	99078 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+292	99098 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+293	99118 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+294	99138 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+295	99158 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+296	99178 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+297	99198 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+298	99218 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+299	99238 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+300	99258 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+301	99278 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+302	99298 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+303	99318 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+304	99338 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+305	99358 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+306	99378 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+307	99398 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+308	99418 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+309	99438 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+310	99458 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+311	99478 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+312	99498 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+313	99518 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+314	99538 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+315	99558 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+316	99578 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+317	99598 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+318	99618 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+319	99638 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+320	99658 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+321	99678 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+322	99698 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+323	99718 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+324	99738 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+325	99758 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+326	99778 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+327	99798 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+328	99818 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+329	99838 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+330	99858 34 44 44 0.00014885 0.00014885 1 9996640.9136715 9996640.9136715 9996640.9136715 99932829556891
+331	99892 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+332	99926 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+333	99960 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+334	99994 34 44 44 0.00014885 0.00014885 1 9566677.8636211 9566677.8636211 9566677.8636211 91521325346298
+335	100028 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+336	100048 34 44 44 0.00014885 0.00014885 1 9996640.9136715 9996640.9136715 9996640.9136715 99932829556891
+337	100082 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+338	100102 34 44 44 0.00014885 0.00014885 1 9996640.9136715 9996640.9136715 9996640.9136715 99932829556891
+339	100136 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+340	100156 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+341	100176 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+342	100196 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+343	100216 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+344	100236 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+345	100256 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+346	100276 20 44 44 0.00014885 0.00014885 1 0 0 0 0
+

@@ -1,0 +1,338 @@
+<config>
+	<cell>
+	    <app>
+	        <param name="source">PLC1</param>
+	        <param name="destination">Actuator1</param>
+	        <param name="packetLength">256B</param>
+	        <param name="productionInterval">10ms</param>
+	        <param name="pcp">6</param>
+	        <param name="vlan">30</param>
+	        <param name="destPort">2000</param>
+	        <param name="displayName">ProcessControl</param>
+	        <param name="deadline">15ms</param>
+	    </app>
+        <app>
+	        <param name="source">PLC2</param>
+	        <param name="destination">FanController</param>
+	        <param name="packetLength">64B</param>
+	        <param name="productionInterval">1ms</param>
+	        <param name="pcp">4</param>
+	        <param name="vlan">54</param>
+	        <param name="destPort">2022</param>
+	        <param name="displayName">FanControlTemp</param>
+	        <param name="latency">300ms</param>
+	    </app>
+        <app>
+	        <param name="source">QualitySystem</param>
+	        <param name="destination">PLC1</param>
+	        <param name="packetLength">256B</param>
+	        <param name="productionInterval">500ms</param>
+	        <param name="pcp">5</param>
+	        <param name="vlan">30</param>
+	        <param name="destPort">2005</param>
+	        <param name="displayName">QualityControl</param>
+	        <param name="deadline">600ms</param>
+	    </app>
+	    <app>
+		    <param name="source">SafetyController</param>
+		    <param name="destination">RobotSafetyModule</param>
+		    <param name="packetLength">64B</param>
+		    <param name="productionInterval">5ms</param>
+		    <param name="pcp">6</param>
+		    <param name="vlan">30</param>
+		    <param name="destPort">2004</param>
+		    <param name="displayName">SafetyFeedback</param>
+		    <param name="deadline">10ms</param>
+		</app>
+		<app>
+		    <param name="source">AGVControlCenter</param>
+		    <param name="destination">AGVRobot</param>
+		    <param name="packetLength">128B</param>
+		    <param name="productionInterval">200ms</param>
+		    <param name="pcp">4</param>
+		    <param name="vlan">30</param>
+		    <param name="destPort">3007</param>
+		    <param name="displayName">AGVCommand</param>
+		    <param name="latency">200ms</param>
+		</app>
+	</cell>
+	<cell>
+	    <app>
+	        <param name="source">SensorPosition1</param>
+	        <param name="destination">PLC1</param>
+	        <param name="packetLength">128B</param>
+	        <param name="productionInterval">100ms</param>
+	        <param name="pcp">6</param>
+	        <param name="vlan">30</param>
+	        <param name="destPort">2001</param>
+	        <param name="displayName">PositionMonitoring</param>
+	        <param name="deadline">120ms</param>
+	    </app>
+	    <app>
+		    <param name="source">Actuator1</param>
+		    <param name="destination">PLC1</param>
+		    <param name="packetLength">128B</param>
+		    <param name="productionInterval">10ms</param>
+		    <param name="pcp">5</param>
+		    <param name="vlan">30</param>
+		    <param name="destPort">2002</param>
+		    <param name="displayName">ActuatorFeedback</param>
+		    <param name="deadline">15ms</param>
+		</app>
+	</cell>
+	<cell>
+	    <app>
+	        <param name="source">Camera1</param>
+	        <param name="destination">QualitySystem</param>
+	        <param name="packetLength">1500B</param>
+	        <param name="productionInterval">50ms</param>
+	        <param name="pcp">5</param>
+	        <param name="vlan">30</param>
+	        <param name="destPort">2002</param>
+	        <param name="displayName">QualitySupervision</param>
+	        <param name="deadline">100ms</param>
+	    </app>
+    </cell>
+    <app>
+        <param name="source">RobotSafetyModule</param>
+        <param name="destination">SafetyController</param>
+        <param name="packetLength">64B</param>
+        <param name="productionInterval">5ms</param>
+        <param name="pcp">6</param>
+        <param name="vlan">30</param>
+        <param name="destPort">2003</param>
+        <param name="displayName">SafetyControl</param>
+        <param name="deadline">10ms</param>
+    </app>
+    <app>
+        <param name="source">VibrationSensor</param>
+        <param name="destination">PredictiveMaintenance</param>
+        <param name="packetLength">32B</param>
+        <param name="productionInterval">10ms</param>
+        <param name="pcp">4</param>
+        <param name="vlan">30</param>
+        <param name="destPort">2004</param>
+        <param name="displayName">VibrationTelemetry</param>
+        <param name="latency">50ms</param>    </app>
+    <app>
+        <param name="source">VibrationSensor2</param>
+        <param name="destination">PredictiveMaintenance</param>
+        <param name="packetLength">32B</param>
+        <param name="productionInterval">10ms</param>
+        <param name="pcp">4</param>
+        <param name="vlan">58</param>
+        <param name="destPort">2025</param>
+        <param name="displayName">VibrationTelemetry2</param>
+        <param name="latency">50ms</param>
+    </app>
+    <app>
+        <param name="source">AGVRobot</param>
+        <param name="destination">AGVControlCenter</param>
+        <param name="packetLength">256B</param>
+        <param name="productionInterval">200ms</param>
+        <param name="pcp">4</param>
+        <param name="vlan">30</param>
+        <param name="destPort">2006</param>
+        <param name="displayName">AGVLogistics</param>
+        <param name="latency">200ms</param>
+    </app>
+
+    <app>
+        <param name="source">TemperatureSensor1</param>
+        <param name="destination">PLC2</param>
+        <param name="packetLength">256B</param>
+        <param name="productionInterval">300ms</param>
+        <param name="pcp">4</param>
+        <param name="vlan">53</param>
+        <param name="destPort">2020</param>
+        <param name="displayName">TempMonitoring2</param>
+        <param name="latencia">500ms</param>
+    </app>
+    <app>
+        <param name="source">HumiditySensor1</param>
+        <param name="destination">PLC2</param>
+        <param name="packetLength">128B</param>
+        <param name="productionInterval">500ms</param>
+        <param name="pcp">4</param>
+        <param name="vlan">54</param>
+        <param name="destPort">2021</param>
+        <param name="displayName">HumidityControl2</param>
+        <param name="latency">1000ms</param>
+    </app>
+
+    <app>
+        <param name="source">GasSensor1</param>
+        <param name="destination">PLC3</param>
+        <param name="packetLength">256B</param>
+        <param name="productionInterval">300ms</param>
+        <param name="pcp">4</param>
+        <param name="vlan">59</param>
+        <param name="destPort">2026</param>
+        <param name="displayName">GasMonitoring3</param>
+        <param name="latency">400ms</param>
+    </app>
+    <app>
+        <param name="source">PLC3</param>
+        <param name="destination">FanController2</param>
+        <param name="packetLength">256B</param>
+        <param name="productionInterval">300ms</param>
+        <param name="pcp">5</param>
+        <param name="vlan">59</param>
+        <param name="destPort">2026</param>
+        <param name="displayName">FanControlGas</param>
+        <param name="deadline">300ms</param>
+    </app>
+    <app>
+        <param name="source">Laptop1</param>
+        <param name="destination">FileServer</param>
+        <param name="packetLength">1024B</param>
+        <param name="productionInterval">5s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">10</param>
+        <param name="destPort">3003</param>
+        <param name="displayName">DeviceFileTransfer</param>
+    </app>
+    <app>
+        <param name="source">PLC1</param>
+        <param name="destination">Database</param>
+        <param name="packetLength">256B</param>
+        <param name="productionInterval">1s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">10</param>
+        <param name="destPort">3005</param>
+        <param name="displayName">DataLogging</param>
+    </app>
+    <app>
+        <param name="source">PLC2</param>
+        <param name="destination">Database</param>
+        <param name="packetLength">256B</param>
+        <param name="productionInterval">1s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">11</param>
+        <param name="destPort">3005</param>
+        <param name="displayName">DataLogging</param>
+    </app>
+    <app>
+        <param name="source">PLC3</param>
+        <param name="destination">Database</param>
+        <param name="packetLength">256B</param>
+        <param name="productionInterval">1s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">12</param>
+        <param name="destPort">3005</param>
+        <param name="displayName">DataLogging</param>
+    </app>
+    <app>
+        <param name="source">Camera1</param>
+        <param name="destination">StorageServer</param>
+        <param name="packetLength">2048B</param>
+        <param name="productionInterval">10s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">25</param>
+        <param name="destPort">3014</param>
+        <param name="displayName">ImageUpload</param>
+    </app>
+    <app>
+        <param name="source">SensorHub</param>
+        <param name="destination">AnalyticsNode</param>
+        <param name="packetLength">256B</param>
+        <param name="productionInterval">3s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">12</param>
+        <param name="destPort">3015</param>
+        <param name="displayName">DataAggregation</param>
+    </app>
+    <app>
+        <param name="source">ClientDevice</param>
+        <param name="destination">ComputeNode</param>
+        <param name="packetLength">512B</param>
+        <param name="productionInterval">4s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">8</param>
+        <param name="destPort">3016</param>
+        <param name="displayName">StatusUpdate</param>
+    </app>
+    <app>
+        <param name="source">NodeD</param>
+        <param name="destination">BackupServer</param>
+        <param name="packetLength">1500B</param>
+        <param name="productionInterval">25s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">18</param>
+        <param name="destPort">3017</param>
+        <param name="displayName">RegularBackup</param>
+    </app>
+    <app>
+        <param name="source">Tablet1</param>
+        <param name="destination">ContentServer</param>
+        <param name="packetLength">1024B</param>
+        <param name="productionInterval">20s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">28</param>
+        <param name="destPort">3018</param>
+        <param name="displayName">ContentSync</param>
+    </app>
+    <app>
+        <param name="source">DesktopPC</param>
+        <param name="destination">LocalServer</param>
+        <param name="packetLength">128B</param>
+        <param name="productionInterval">2s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">14</param>
+        <param name="destPort">3019</param>
+        <param name="displayName">LowPriorityTask</param>
+    </app>
+    <app>
+        <param name="source">POS1</param>
+        <param name="destination">Database</param>
+        <param name="packetLength">512B</param>
+        <param name="productionInterval">8s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">22</param>
+        <param name="destPort">3020</param>
+        <param name="displayName">SalesUpdate</param>
+    </app>
+    <app>
+        <param name="source">WeatherStation</param>
+        <param name="destination">MonitoringServer</param>
+        <param name="packetLength">256B</param>
+        <param name="productionInterval">12s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">21</param>
+        <param name="destPort">3021</param>
+        <param name="displayName">WeatherData</param>
+    </app>
+    <app>
+        <param name="source">Router1</param>
+        <param name="destination">InternetGateway</param>
+        <param name="packetLength">512B</param>
+        <param name="productionInterval">30s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">50</param>
+        <param name="destPort">3022</param>
+        <param name="displayName">LogUpload</param>
+    </app>
+    <app>
+        <param name="source">SmartTV</param>
+        <param name="destination">MediaServer</param>
+        <param name="packetLength">1024B</param>
+        <param name="productionInterval">6s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">33</param>
+        <param name="destPort">3023</param>
+        <param name="displayName">MediaRequest</param>
+    </app>
+    <app>
+        <param name="source">FitnessTracker</param>
+        <param name="destination">HealthServer</param>
+        <param name="packetLength">128B</param>
+        <param name="productionInterval">15s</param>
+        <param name="pcp">0</param>
+        <param name="vlan">27</param>
+        <param name="destPort">3024</param>
+        <param name="displayName">HealthData</param>
+    </app>
+</config>
+
+    
+    

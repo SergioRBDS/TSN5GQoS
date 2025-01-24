@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <GBR>
+        <TrafficType FiveQI="1" priority="0" PDB="100" PER="2" AvgW="2000"/>
+        <TrafficType FiveQI="2" priority="0" PDB="150" PER="3" AvgW="2000"/>
+        <TrafficType FiveQI="3" priority="0" PDB="50" PER="3" AvgW="2000"/>
+        <TrafficType FiveQI="4" priority="0" PDB="300" PER="6" AvgW="2000"/>
+        <TrafficType FiveQI="65" priority="0" PDB="75" PER="2" AvgW="2000"/>
+        <TrafficType FiveQI="66" priority="0" PDB="100" PER="2" AvgW="2000"/>
+        <TrafficType FiveQI="67" priority="0" PDB="100" PER="3" AvgW="2000"/>
+        <TrafficType FiveQI="71" priority="0" PDB="150" PER="6" AvgW="2000"/>
+        <TrafficType FiveQI="72" priority="0" PDB="300" PER="4" AvgW="2000"/>
+        <TrafficType FiveQI="73" priority="0" PDB="300" PER="8" AvgW="2000"/>
+        <TrafficType FiveQI="74" priority="0" PDB="500" PER="8" AvgW="2000"/>
+        <TrafficType FiveQI="76" priority="0" PDB="500" PER="4" AvgW="2000"/>
+    </GBR>
+    <NonGBR>
+        <TrafficType FiveQI="5" priority="10" PDB="100" PER="6"/>
+        <TrafficType FiveQI="6" priority="60" PDB="300" PER="6"/>
+        <TrafficType FiveQI="7" priority="70" PDB="100" PER="3"/>
+        <TrafficType FiveQI="8" priority="80" PDB="300" PER="6"/>
+        <TrafficType FiveQI="9" priority="90" PDB="300" PER="6"/>
+        <TrafficType FiveQI="69" priority="5" PDB="60" PER="6"/>
+        <TrafficType FiveQI="70" priority="55" PDB="200" PER="6"/>
+        <TrafficType FiveQI="79" priority="65" PDB="50" PER="2"/>
+        <TrafficType FiveQI="80" priority="68" PDB="10" PER="6"/>
+    </NonGBR>
+    <DCGBR>
+        <TrafficType FiveQI="82" priority="19"  PDB="10" PER="4" MDBV="255" AvgW="2000"/>
+        <TrafficType FiveQI="83" priority="22" PDB="10" PER="4" MDBV="1354" AvgW="2000"/>
+        <TrafficType FiveQI="84" priority="24"  PDB="30" PER="5" MDBV="1354" AvgW="2000"/>
+        <TrafficType FiveQI="85" priority="21"  PDB="5" PER="5" MDBV="255" AvgW="2000"/>
+        <TrafficType FiveQI="86" priority="18"  PDB="5" PER="4" MDBV="1354" AvgW="2000"/>
+        <TrafficType FiveQI="87" priority="25"  PDB="15" PER="4" MDBV="17000" AvgW="2000"/>
+        <TrafficType FiveQI="88" priority="25"  PDB="5" PER="3" MDBV="500" AvgW="2000"/>
+        <TrafficType FiveQI="89" priority="25"  PDB="10" PER="3" MDBV="1125" AvgW="2000"/>
+        <TrafficType FiveQI="90" priority="25" PDB="20" PER="4" MDBV="63000" AvgW="2000"/>
+    </DCGBR>
+</config>

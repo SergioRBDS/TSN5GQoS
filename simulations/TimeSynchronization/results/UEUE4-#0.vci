@@ -1,0 +1,3806 @@
+file 11611638 1736121913                                        
+version 3
+run UEUE4-0-20250105-21:05:09-126204
+attr configname UEUE4
+attr datetime 20250105-21:05:09
+attr datetimef 20250105-210509
+attr experiment UEUE4
+attr inifile omnetppTest.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network TimeSyncUEUE
+attr processid 126204
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../../inet4.5-2/images
+config extends UE-UE
+config *.FGS.**.clock.typename IdealClock
+config *.TsnSwitchDomain1.clock.oscillator.typename RandomDriftOscillator
+config **.clock.oscillator.typename ConstantDriftOscillator
+config *.TsnSwitchDomain1.clock.oscillator.driftRate -100ppm
+config *.TsnSwitchDomain1.clock.oscillator.changeInterval 12.5ms
+config *.TsnSwitchDomain1.clock.oscillator.driftRateChange "uniform(-10ppm, 10ppm)"
+config *.*.clock.oscillator.driftRate 00ppm
+config network TimeSyncUEUE
+config *.TsnSwitchDomain1.gptp.gptpNodeType "\"MASTER_NODE\""
+config *.TsnSwitchDomain1.gptp.masterPorts "[\"eth0\"]"
+config *.TsnSwitchDomain1.gptp.slavePort "\"\""
+config *.TsnSwitchDataNetwork.gptp.slavePort "\"eth0\""
+config *.TsnSwitchDataNetwork.gptp.masterPorts []
+config *.TsnSwitchDomain2.gptp.slavePort "\"eth0\""
+config *.TsnSwitchDomain2.gptp.masterPorts []
+config *.FGS.dstt[0].gptp.domain[*].masterPorts "[\"tt1\"]"
+config *.FGS.dstt[0].gptp.domain[*].slavePort "\"eth0\""
+config *.FGS.dstt[1].gptp.domain[*].masterPorts "[\"eth0\"]"
+config *.FGS.dstt[1].gptp.domain[*].slavePort "\"tt1\""
+config *.FGS.nwtt[*].gptp.domain[*].masterPorts "[\"eth0\"]"
+config *.FGS.nwtt[*].gptp.domain[*].slavePort "\"tt0\""
+config **.referenceClock "\"TsnSwitchDomain1.clock\""
+config *.TsnSwitchDomain1.clock.displayStringTextFormat "\"time: %T\""
+config *.TsnSwitchDataNetwork.clock.displayStringTextFormat "\"diff: %d\""
+config *.TsnSwitchDomain2.clock.displayStringTextFormat "\"diff: %d\""
+config network TimeSyncUEUE
+config sim-time-limit 100s
+config *.histogramContainer.histograms "{s1UL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s1-UL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts3UL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s3-UL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts4UL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s4-UL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts6UL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s6-UL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts7UL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s7-UL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts8UL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s8-UL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts9UL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s9-UL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts10DL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s10-DL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts19DL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s19-DL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts20UL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s20-UL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts22UL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s22-UL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts23DL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s23-DL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts24UL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s24-UL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts25DL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s25-DL_wall.xml\",\n\t\t\t\t\t\t\t\t\ts26UL: \"../../../deterministic6g_data/PD-Wireless-5G-1/s26-UL_wall.xml\"}"
+config *.FGS.d*.delayUplink "rngProvider(\"histogramContainer\",\"s1UL\")"
+config *.FGS.n*.delayDownlink "rngProvider(\"histogramContainer\",\"s10DL\")"
+config *.FGS.d*.delayD2D "rngProvider(\"histogramContainer\",\"s1UL\")+rngProvider(\"histogramContainer\",\"s10DL\")"
+config *.**.hasTimeSynchronization true
+config *.visualizer.typename IntegratedMultiCanvasVisualizer
+config *.visualizer.infoVisualizer[*].displayInfos true
+config *.visualizer.dataLinkVisualizer[0].displayLinks true
+config *.visualizer.dataLinkVisualizer[0].activityLevel "\"protocol\""
+config *.visualizer.dataLinkVisualizer[0].packetFilter "\"GptpSync\""
+config *.visualizer.dataLinkVisualizer[0].lineColor "\"blue2\""
+config *.visualizer.numInfoVisualizers 3
+config *.visualizer.infoVisualizer[0].modules "\"*.TsnSwitchDataNetwork.clock\""
+config *.visualizer.infoVisualizer[1].modules "\"*.TsnSwitchDomain1.clock\""
+config *.visualizer.infoVisualizer[1].placementHint "\"topLeft\""
+config *.visualizer.infoVisualizer[2].modules "\"*.TsnSwitchDomain2*.clock\""
+config *.visualizer.infoVisualizer[2].placementHint "\"topRight\""
+
+vector 0 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 1 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 2 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 3 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 4 TimeSyncUEUE.TsnSwitchDomain1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 5 TimeSyncUEUE.TsnSwitchDomain1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 6 TimeSyncUEUE.TsnSwitchDomain1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 7 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 8 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 9 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 10 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 11 TimeSyncUEUE.TsnSwitchDomain2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 12 TimeSyncUEUE.TsnSwitchDomain2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 13 TimeSyncUEUE.TsnSwitchDomain2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 14 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 15 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 16 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 17 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 18 TimeSyncUEUE.TsnSwitchDataNetwork.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 19 TimeSyncUEUE.TsnSwitchDataNetwork.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 20 TimeSyncUEUE.TsnSwitchDataNetwork.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 21 TimeSyncUEUE.FGS.dstt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 22 TimeSyncUEUE.FGS.dstt[0].eth[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 23 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 24 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 25 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 26 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 27 TimeSyncUEUE.FGS.dstt[0].tt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 28 TimeSyncUEUE.FGS.dstt[0].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 29 TimeSyncUEUE.FGS.dstt[0].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 30 TimeSyncUEUE.FGS.dstt[0].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 31 TimeSyncUEUE.FGS.dstt[0].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 32 TimeSyncUEUE.FGS.dstt[0].tt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 33 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 34 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 35 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 36 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 37 TimeSyncUEUE.FGS.dstt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 38 TimeSyncUEUE.FGS.dstt[1].eth[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 39 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 40 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 41 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 42 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 43 TimeSyncUEUE.FGS.dstt[1].tt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 44 TimeSyncUEUE.FGS.dstt[1].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 45 TimeSyncUEUE.FGS.dstt[1].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 46 TimeSyncUEUE.FGS.dstt[1].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 47 TimeSyncUEUE.FGS.dstt[1].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 48 TimeSyncUEUE.FGS.dstt[1].tt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 49 TimeSyncUEUE.FGS.dstt[1].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 50 TimeSyncUEUE.FGS.dstt[1].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 51 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 52 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 53 TimeSyncUEUE.FGS.nwtt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 54 TimeSyncUEUE.FGS.nwtt[0].eth[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 55 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 56 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 57 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 58 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 59 TimeSyncUEUE.FGS.nwtt[0].tt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 60 TimeSyncUEUE.FGS.nwtt[0].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 61 TimeSyncUEUE.FGS.nwtt[0].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 62 TimeSyncUEUE.FGS.nwtt[0].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 63 TimeSyncUEUE.FGS.nwtt[0].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 64 TimeSyncUEUE.FGS.nwtt[0].tt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 65 TimeSyncUEUE.FGS.nwtt[0].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 66 TimeSyncUEUE.FGS.nwtt[0].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 67 TimeSyncUEUE.FGS.nwtt[0].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 68 TimeSyncUEUE.FGS.nwtt[0].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 69 TimeSyncUEUE.TsnSwitchDomain1.clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 70 TimeSyncUEUE.TsnSwitchDomain2.clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 71 TimeSyncUEUE.TsnSwitchDataNetwork.clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 72 TimeSyncUEUE.TsnSwitchDomain2.ethernet.macHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 73 TimeSyncUEUE.TsnSwitchDomain2.ethernet.macHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 74 TimeSyncUEUE.TsnSwitchDomain2.ethernet.paddingInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 75 TimeSyncUEUE.TsnSwitchDomain2.ethernet.paddingInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 76 TimeSyncUEUE.TsnSwitchDomain2.ethernet.fcsInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 77 TimeSyncUEUE.TsnSwitchDomain2.ethernet.fcsInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 78 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 79 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.macHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 80 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.macHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 81 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.paddingInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 82 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.paddingInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 83 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.fcsInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 84 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.fcsInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 85 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 86 TimeSyncUEUE.FGS.dstt[0].bridging.streamCoder.encoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 87 TimeSyncUEUE.FGS.dstt[0].bridging.streamCoder.encoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 88 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 89 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 90 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.server incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "incoming packet lengths"
+attr unit b
+vector 91 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.server outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "outgoing packet lengths"
+attr unit b
+vector 92 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 93 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 94 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.phyHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 95 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.phyHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 96 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 97 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 98 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 99 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 100 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.server incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "incoming packet lengths"
+attr unit b
+vector 101 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.server outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "outgoing packet lengths"
+attr unit b
+vector 102 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 103 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 104 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.phyHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 105 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.phyHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 106 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 107 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 108 TimeSyncUEUE.FGS.dstt[0].ethernet.macHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 109 TimeSyncUEUE.FGS.dstt[0].ethernet.macHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 110 TimeSyncUEUE.FGS.dstt[0].ethernet.paddingInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 111 TimeSyncUEUE.FGS.dstt[0].ethernet.paddingInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 112 TimeSyncUEUE.FGS.dstt[0].ethernet.fcsInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 113 TimeSyncUEUE.FGS.dstt[0].ethernet.fcsInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 114 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 115 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 116 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 117 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.server incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "incoming packet lengths"
+attr unit b
+vector 118 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.server outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "outgoing packet lengths"
+attr unit b
+vector 119 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 120 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 121 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.phyHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 122 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.phyHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 123 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 124 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 125 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.transmitter transmissionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(transmissionEnded)
+attr title "transmission time"
+attr unit s
+vector 126 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.transmitter transmissionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(transmissionEnded)
+attr title "transmission time"
+attr unit s
+vector 127 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.transmitter transmissionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(transmissionEnded)
+attr title "transmission time"
+attr unit s
+vector 128 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.receiver receptionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(receptionEnded)
+attr title "reception time"
+attr unit s
+vector 129 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 130 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 131 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.phyHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 132 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.phyHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 133 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 134 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 135 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 136 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 137 TimeSyncUEUE.FGS.dstt[1].ethernet.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 138 TimeSyncUEUE.FGS.dstt[1].ethernet.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 139 TimeSyncUEUE.FGS.dstt[1].ethernet.macHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 140 TimeSyncUEUE.FGS.dstt[1].ethernet.macHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 141 TimeSyncUEUE.FGS.dstt[1].bridging.interfaceRelay.learner incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 142 TimeSyncUEUE.FGS.dstt[1].bridging.interfaceRelay.learner outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 143 TimeSyncUEUE.FGS.dstt[1].bridging.streamCoder.decoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 144 TimeSyncUEUE.FGS.dstt[1].bridging.streamCoder.decoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 145 TimeSyncUEUE.FGS.dstt[1].gptp.classifier packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+vector 146 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.receiver receptionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(receptionEnded)
+attr title "reception time"
+attr unit s
+vector 147 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 148 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 149 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.phyHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 150 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.phyHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 151 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 152 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 153 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 154 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 155 TimeSyncUEUE.FGS.nwtt[0].ethernet.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 156 TimeSyncUEUE.FGS.nwtt[0].ethernet.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 157 TimeSyncUEUE.FGS.nwtt[0].ethernet.macHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 158 TimeSyncUEUE.FGS.nwtt[0].ethernet.macHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 159 TimeSyncUEUE.FGS.nwtt[0].bridging.interfaceRelay.learner incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 160 TimeSyncUEUE.FGS.nwtt[0].bridging.interfaceRelay.learner outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 161 TimeSyncUEUE.FGS.nwtt[0].bridging.streamCoder.decoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 162 TimeSyncUEUE.FGS.nwtt[0].bridging.streamCoder.decoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 163 TimeSyncUEUE.FGS.nwtt[0].gptp.classifier packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+vector 164 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.receiver receptionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(receptionEnded)
+attr title "reception time"
+attr unit s
+vector 165 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 166 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 167 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.phyHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 168 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.phyHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 169 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 170 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 171 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 172 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 173 TimeSyncUEUE.TsnSwitchDomain1.ethernet.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 174 TimeSyncUEUE.TsnSwitchDomain1.ethernet.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 175 TimeSyncUEUE.TsnSwitchDomain1.ethernet.macHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 176 TimeSyncUEUE.TsnSwitchDomain1.ethernet.macHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 177 TimeSyncUEUE.FGS.dstt[1].bridging.streamCoder.encoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 178 TimeSyncUEUE.FGS.dstt[1].bridging.streamCoder.encoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 179 TimeSyncUEUE.FGS.nwtt[0].bridging.streamCoder.encoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 180 TimeSyncUEUE.FGS.nwtt[0].bridging.streamCoder.encoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 181 TimeSyncUEUE.TsnSwitchDomain1.ethernet.macHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 182 TimeSyncUEUE.TsnSwitchDomain1.ethernet.macHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 183 TimeSyncUEUE.TsnSwitchDomain1.ethernet.paddingInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 184 TimeSyncUEUE.TsnSwitchDomain1.ethernet.paddingInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 185 TimeSyncUEUE.TsnSwitchDomain1.ethernet.fcsInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 186 TimeSyncUEUE.TsnSwitchDomain1.ethernet.fcsInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 187 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 188 TimeSyncUEUE.FGS.dstt[1].ethernet.macHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 189 TimeSyncUEUE.FGS.dstt[1].ethernet.macHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 190 TimeSyncUEUE.FGS.dstt[1].ethernet.paddingInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 191 TimeSyncUEUE.FGS.dstt[1].ethernet.paddingInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 192 TimeSyncUEUE.FGS.dstt[1].ethernet.fcsInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 193 TimeSyncUEUE.FGS.dstt[1].ethernet.fcsInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 194 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 195 TimeSyncUEUE.FGS.nwtt[0].ethernet.macHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 196 TimeSyncUEUE.FGS.nwtt[0].ethernet.macHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 197 TimeSyncUEUE.FGS.nwtt[0].ethernet.paddingInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 198 TimeSyncUEUE.FGS.nwtt[0].ethernet.paddingInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 199 TimeSyncUEUE.FGS.nwtt[0].ethernet.fcsInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 200 TimeSyncUEUE.FGS.nwtt[0].ethernet.fcsInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 201 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 202 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 203 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 204 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.server incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "incoming packet lengths"
+attr unit b
+vector 205 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.server outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "outgoing packet lengths"
+attr unit b
+vector 206 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 207 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 208 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.phyHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 209 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.phyHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 210 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 211 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 212 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 213 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 214 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.server incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "incoming packet lengths"
+attr unit b
+vector 215 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.server outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "outgoing packet lengths"
+attr unit b
+vector 216 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 217 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 218 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.phyHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 219 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.phyHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 220 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 221 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 222 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 223 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 224 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.server incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "incoming packet lengths"
+attr unit b
+vector 225 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.server outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "outgoing packet lengths"
+attr unit b
+vector 226 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 227 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 228 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.phyHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 229 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.phyHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 230 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 231 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 232 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.transmitter transmissionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(transmissionEnded)
+attr title "transmission time"
+attr unit s
+vector 233 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.transmitter transmissionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(transmissionEnded)
+attr title "transmission time"
+attr unit s
+vector 234 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.transmitter transmissionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(transmissionEnded)
+attr title "transmission time"
+attr unit s
+vector 235 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.receiver receptionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(receptionEnded)
+attr title "reception time"
+attr unit s
+vector 236 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 237 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 238 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.phyHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 239 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.phyHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 240 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 241 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 242 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 243 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 244 TimeSyncUEUE.FGS.dstt[0].ethernet.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 245 TimeSyncUEUE.FGS.dstt[0].ethernet.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 246 TimeSyncUEUE.FGS.dstt[0].ethernet.macHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 247 TimeSyncUEUE.FGS.dstt[0].ethernet.macHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 248 TimeSyncUEUE.FGS.dstt[0].bridging.interfaceRelay.learner incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 249 TimeSyncUEUE.FGS.dstt[0].bridging.interfaceRelay.learner outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 250 TimeSyncUEUE.FGS.dstt[0].bridging.streamCoder.decoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 251 TimeSyncUEUE.FGS.dstt[0].bridging.streamCoder.decoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 252 TimeSyncUEUE.FGS.dstt[0].gptp.classifier packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+vector 253 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.receiver receptionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(receptionEnded)
+attr title "reception time"
+attr unit s
+vector 254 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 255 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 256 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.phyHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 257 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.phyHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 258 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 259 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 260 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 261 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 262 TimeSyncUEUE.TsnSwitchDomain2.ethernet.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 263 TimeSyncUEUE.TsnSwitchDomain2.ethernet.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 264 TimeSyncUEUE.TsnSwitchDomain2.ethernet.macHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 265 TimeSyncUEUE.TsnSwitchDomain2.ethernet.macHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 266 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.receiver receptionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(receptionEnded)
+attr title "reception time"
+attr unit s
+vector 267 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 268 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 269 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.phyHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 270 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.phyHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 271 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 272 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 273 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 274 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 275 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 276 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 277 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.macHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 278 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.macHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 279 TimeSyncUEUE.FGS.dstt[0].gptp.domain[0] peerDelay:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 280 TimeSyncUEUE.TsnSwitchDomain2.gptp peerDelay:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 281 TimeSyncUEUE.TsnSwitchDataNetwork.gptp peerDelay:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 282 TimeSyncUEUE.TsnSwitchDomain1.clock.oscillator driftRateChanged:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr title "Oscillator drift rate"
+attr unit ppm
+vector 283 TimeSyncUEUE.TsnSwitchDomain1.gptp localTime:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+vector 284 TimeSyncUEUE.TsnSwitchDomain1.gptp timeDifference:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+vector 285 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 286 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 287 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 288 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.server incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "incoming packet lengths"
+attr unit b
+vector 289 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.server outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "outgoing packet lengths"
+attr unit b
+vector 290 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 291 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 292 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.phyHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 293 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.phyHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 294 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 295 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 296 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.receiver receptionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(receptionEnded)
+attr title "reception time"
+attr unit s
+vector 297 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 298 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 299 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.phyHeaderChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 300 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.phyHeaderChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 301 TimeSyncUEUE.FGS.dstt[1].tt[1].macLayer.inboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 302 TimeSyncUEUE.FGS.dstt[1].tt[1].macLayer.inboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 303 TimeSyncUEUE.FGS.dstt[1].tt[1].macLayer.fcsChecker incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 304 TimeSyncUEUE.FGS.dstt[1].tt[1].macLayer.fcsChecker outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 305 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.transmitter transmissionTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetDuration(transmissionEnded)
+attr title "transmission time"
+attr unit s
+vector 306 TimeSyncUEUE.FGS.dstt[0].gptp.domain[0] rateRatio:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 307 TimeSyncUEUE.FGS.dstt[0].gptp.domain[0] sequenceID:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 308 TimeSyncUEUE.FGS.dstt[1].gptp.domain[0] rateRatio:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 309 TimeSyncUEUE.FGS.dstt[1].gptp.domain[0] sequenceID:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 310 TimeSyncUEUE.TsnSwitchDomain2.gptp timeDifference:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+vector 311 TimeSyncUEUE.TsnSwitchDomain2.gptp rateRatio:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 312 TimeSyncUEUE.TsnSwitchDomain2.gptp localTime:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+vector 313 TimeSyncUEUE.TsnSwitchDomain2.gptp sequenceID:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 314 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.transmitter utilization:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "100 * utilization(count(transmissionStarted) - count(transmissionEnded))"
+attr title utilization
+attr unit %
+vector 315 TimeSyncUEUE.TsnSwitchDomain1.ethernet.macHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 316 TimeSyncUEUE.TsnSwitchDomain1.ethernet.macHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 317 TimeSyncUEUE.TsnSwitchDomain1.ethernet.paddingInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 318 TimeSyncUEUE.TsnSwitchDomain1.ethernet.paddingInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 319 TimeSyncUEUE.TsnSwitchDomain1.ethernet.fcsInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 320 TimeSyncUEUE.TsnSwitchDomain1.ethernet.fcsInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 321 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 322 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 323 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 324 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 325 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 326 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 327 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.phyHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 328 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.phyHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 329 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 330 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 331 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 332 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 333 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 334 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 335 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.phyHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 336 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.phyHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 337 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 338 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 339 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 340 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 341 TimeSyncUEUE.FGS.dstt[0].ethernet.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 342 TimeSyncUEUE.FGS.dstt[0].ethernet.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 343 TimeSyncUEUE.FGS.dstt[0].ethernet.macHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 344 TimeSyncUEUE.FGS.dstt[0].ethernet.macHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 345 TimeSyncUEUE.FGS.dstt[0].bridging.interfaceRelay.learner incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 346 TimeSyncUEUE.FGS.dstt[0].bridging.interfaceRelay.learner outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 347 TimeSyncUEUE.FGS.dstt[0].bridging.streamCoder.decoder incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 348 TimeSyncUEUE.FGS.dstt[0].bridging.streamCoder.decoder outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 349 TimeSyncUEUE.FGS.dstt[0].gptp.classifier dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 350 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.transmitter utilization:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "100 * utilization(count(transmissionStarted) - count(transmissionEnded))"
+attr title utilization
+attr unit %
+vector 351 TimeSyncUEUE.FGS.dstt[1].bridging.streamCoder.encoder incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 352 TimeSyncUEUE.FGS.dstt[1].bridging.streamCoder.encoder outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 353 TimeSyncUEUE.FGS.dstt[1].ethernet.macHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 354 TimeSyncUEUE.FGS.dstt[1].ethernet.macHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 355 TimeSyncUEUE.FGS.dstt[1].ethernet.paddingInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 356 TimeSyncUEUE.FGS.dstt[1].ethernet.paddingInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 357 TimeSyncUEUE.FGS.dstt[1].ethernet.fcsInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 358 TimeSyncUEUE.FGS.dstt[1].ethernet.fcsInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 359 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 360 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 361 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 362 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 363 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 364 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 365 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.phyHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 366 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.phyHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 367 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 368 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 369 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 370 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 371 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 372 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 373 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.phyHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 374 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.phyHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 375 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 376 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 377 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 378 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 379 TimeSyncUEUE.TsnSwitchDomain2.ethernet.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 380 TimeSyncUEUE.TsnSwitchDomain2.ethernet.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 381 TimeSyncUEUE.TsnSwitchDomain2.ethernet.macHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 382 TimeSyncUEUE.TsnSwitchDomain2.ethernet.macHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 383 TimeSyncUEUE.FGS.dstt[0].bridging.streamCoder.encoder incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 384 TimeSyncUEUE.FGS.dstt[0].bridging.streamCoder.encoder outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 385 TimeSyncUEUE.FGS.dstt[0].ethernet.macHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 386 TimeSyncUEUE.FGS.dstt[0].ethernet.macHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 387 TimeSyncUEUE.FGS.dstt[0].ethernet.paddingInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 388 TimeSyncUEUE.FGS.dstt[0].ethernet.paddingInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 389 TimeSyncUEUE.FGS.dstt[0].ethernet.fcsInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 390 TimeSyncUEUE.FGS.dstt[0].ethernet.fcsInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 391 TimeSyncUEUE.FGS.dstt[1].ethernet.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 392 TimeSyncUEUE.FGS.dstt[1].ethernet.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 393 TimeSyncUEUE.FGS.dstt[1].ethernet.macHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 394 TimeSyncUEUE.FGS.dstt[1].ethernet.macHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 395 TimeSyncUEUE.FGS.dstt[1].bridging.interfaceRelay.learner incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 396 TimeSyncUEUE.FGS.dstt[1].bridging.interfaceRelay.learner outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 397 TimeSyncUEUE.FGS.dstt[1].bridging.streamCoder.decoder incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 398 TimeSyncUEUE.FGS.dstt[1].bridging.streamCoder.decoder outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 399 TimeSyncUEUE.FGS.dstt[1].gptp.classifier dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 400 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.transmitter utilization:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "100 * utilization(count(transmissionStarted) - count(transmissionEnded))"
+attr title utilization
+attr unit %
+vector 401 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 402 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 403 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 404 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 405 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 406 TimeSyncUEUE.FGS.dstt[0].tt[1].macLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 407 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.phyHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 408 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.phyHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 409 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 410 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 411 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 412 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 413 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 414 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.phyHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 415 TimeSyncUEUE.FGS.dstt[1].tt[1].phyLayer.phyHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 416 TimeSyncUEUE.FGS.dstt[1].tt[1].macLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 417 TimeSyncUEUE.FGS.dstt[1].tt[1].macLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 418 TimeSyncUEUE.FGS.dstt[1].tt[1].macLayer.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 419 TimeSyncUEUE.FGS.dstt[1].tt[1].macLayer.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 420 TimeSyncUEUE.FGS.dstt[0].tt[1].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 421 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.transmitter utilization:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "100 * utilization(count(transmissionStarted) - count(transmissionEnded))"
+attr title utilization
+attr unit %
+vector 422 TimeSyncUEUE.FGS.nwtt[0].bridging.streamCoder.encoder incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 423 TimeSyncUEUE.FGS.nwtt[0].bridging.streamCoder.encoder outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 424 TimeSyncUEUE.FGS.nwtt[0].ethernet.macHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 425 TimeSyncUEUE.FGS.nwtt[0].ethernet.macHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 426 TimeSyncUEUE.FGS.nwtt[0].ethernet.paddingInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 427 TimeSyncUEUE.FGS.nwtt[0].ethernet.paddingInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 428 TimeSyncUEUE.FGS.nwtt[0].ethernet.fcsInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 429 TimeSyncUEUE.FGS.nwtt[0].ethernet.fcsInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 430 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 431 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 432 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 433 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 434 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 435 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 436 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.phyHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 437 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.phyHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 438 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 439 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 440 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 441 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 442 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 443 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 444 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.phyHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 445 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.phyHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 446 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 447 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 448 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 449 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 450 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 451 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 452 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.macHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 453 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.macHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 454 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.transmitter utilization:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "100 * utilization(count(transmissionStarted) - count(transmissionEnded))"
+attr title utilization
+attr unit %
+vector 455 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.transmitter utilization:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "100 * utilization(count(transmissionStarted) - count(transmissionEnded))"
+attr title utilization
+attr unit %
+vector 456 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.transmitter utilization:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "100 * utilization(count(transmissionStarted) - count(transmissionEnded))"
+attr title utilization
+attr unit %
+vector 457 TimeSyncUEUE.TsnSwitchDomain2.ethernet.macHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 458 TimeSyncUEUE.TsnSwitchDomain2.ethernet.macHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 459 TimeSyncUEUE.TsnSwitchDomain2.ethernet.paddingInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 460 TimeSyncUEUE.TsnSwitchDomain2.ethernet.paddingInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 461 TimeSyncUEUE.TsnSwitchDomain2.ethernet.fcsInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 462 TimeSyncUEUE.TsnSwitchDomain2.ethernet.fcsInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 463 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 464 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 465 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 466 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 467 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 468 TimeSyncUEUE.TsnSwitchDomain2.eth[0].macLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 469 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.phyHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 470 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.phyHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 471 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 472 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 473 TimeSyncUEUE.TsnSwitchDomain2.eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 474 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 475 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 476 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 477 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.phyHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 478 TimeSyncUEUE.FGS.dstt[1].eth[0].phyLayer.phyHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 479 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 480 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 481 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 482 TimeSyncUEUE.FGS.dstt[1].eth[0].macLayer.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 483 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.macHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 484 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.macHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 485 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.paddingInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 486 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.paddingInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 487 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.fcsInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 488 TimeSyncUEUE.TsnSwitchDataNetwork.ethernet.fcsInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 489 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 490 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 491 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 492 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 493 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 494 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].macLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 495 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.phyHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 496 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.phyHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 497 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 498 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 499 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 500 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 501 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 502 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 503 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 504 TimeSyncUEUE.FGS.dstt[0].eth[0].macLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 505 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.phyHeaderInserter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 506 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.phyHeaderInserter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 507 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.outboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 508 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.outboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 509 TimeSyncUEUE.TsnSwitchDataNetwork.eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 510 TimeSyncUEUE.FGS.dstt[0].eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 511 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 512 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 513 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 514 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.phyHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 515 TimeSyncUEUE.FGS.nwtt[0].eth[0].phyLayer.phyHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 516 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 517 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 518 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 519 TimeSyncUEUE.FGS.nwtt[0].eth[0].macLayer.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 520 TimeSyncUEUE.FGS.nwtt[0].ethernet.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 521 TimeSyncUEUE.FGS.nwtt[0].ethernet.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 522 TimeSyncUEUE.FGS.nwtt[0].ethernet.macHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 523 TimeSyncUEUE.FGS.nwtt[0].ethernet.macHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 524 TimeSyncUEUE.FGS.nwtt[0].bridging.interfaceRelay.learner incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 525 TimeSyncUEUE.FGS.nwtt[0].bridging.interfaceRelay.learner outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 526 TimeSyncUEUE.FGS.nwtt[0].bridging.streamCoder.decoder incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 527 TimeSyncUEUE.FGS.nwtt[0].bridging.streamCoder.decoder outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 528 TimeSyncUEUE.FGS.nwtt[0].gptp.classifier dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 529 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 530 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 531 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 532 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.phyHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 533 TimeSyncUEUE.TsnSwitchDomain1.eth[0].phyLayer.phyHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 534 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.inboundEmitter incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 535 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.inboundEmitter outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 536 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 537 TimeSyncUEUE.TsnSwitchDomain1.eth[0].macLayer.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 538 TimeSyncUEUE.TsnSwitchDomain1.ethernet.fcsChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 539 TimeSyncUEUE.TsnSwitchDomain1.ethernet.fcsChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+vector 540 TimeSyncUEUE.TsnSwitchDomain1.ethernet.macHeaderChecker incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming data rate"
+attr unit bps
+vector 541 TimeSyncUEUE.TsnSwitchDomain1.ethernet.macHeaderChecker outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source "throughput(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing data rate"
+attr unit bps
+0	144275 92122 0 52979 0 99.983636042859 3605 0 1 1800 1800
+1	236397 95722 0 52979 0 99.983636042859 3605 0 752 1126400 728473600
+2	332119 92100 0 53000 0 99.983727242859 3602 0 1 1800 1800
+3	424219 92099 0 52995 0 99.983717642859 3602 0 1 1800 1800
+4	516318 8 0 0 0 0 1 0 0 0 0
+5	516326 8 0 0 0 0 1 0 0 0 0
+6	516334 8 0 0 0 0 1 0 0 0 0
+7	516342 5136 0 52969 0 99.983579335058 207 0 1 101 101
+8	521478 5338 0 52969 0 99.983579335058 207 0 576 58176 33509376
+9	526816 5142 0 52987 0 99.983652935058 204 0 1 101 101
+10	531958 5330 0 52980 0 99.983643335058 204 0 1 101 101
+11	537288 9 0 0 0 0 1 0 0 0 0
+12	537297 9 0 0 0 0 1 0 0 0 0
+13	537306 9 0 0 0 0 1 0 0 0 0
+14	537315 2811 0 53029 0 100 207 0 1 101 101
+15	540126 3013 0 53029 0 100 207 0 576 58176 33509376
+16	543139 4254 0 52515 0 99.0000736 202 0 1 100 100
+17	547393 3469 0 53029 0 100 203 0 1 101 101
+18	550862 9 0 0 0 0 1 0 0 0 0
+19	550871 9 0 0 0 0 1 0 0 0 0
+20	550880 9 0 0 0 0 1 0 0 0 0
+21	550889 52 0 53032 0 100 4 0 100 200 20000
+22	550941 52 0 53032 0 100 4 0 100 200 20000
+23	550993 2811 0 53031 0 100 207 0 1 101 101
+24	553804 3013 0 53031 0 100 207 0 576 58176 33509376
+25	556817 4254 0 52516 0 99.0000736 202 0 1 100 100
+26	561071 3469 0 53031 0 100 203 0 1 101 101
+27	564540 52 0 53032 0 100 4 0 100 200 20000
+28	564592 45 0 0 0 0 5 0 0 0 0
+29	564637 45 0 0 0 0 5 0 0 0 0
+30	564682 18 0 0 0 0 2 0 0 0 0
+31	564700 18 0 0 0 0 2 0 0 0 0
+32	564718 52 0 53032 0 100 4 0 100 200 20000
+33	564770 85129 0 53017 0 99.995472655825 3205 0 1 1600 1600
+34	649899 88329 0 53017 0 99.995472655825 3205 0 752 1011200 662118400
+35	738228 18 0 0 0 0 2 0 0 0 0
+36	738246 85044 0 53010 0 99.995472655825 3200 0 1 1599 1599
+37	823290 52 0 53032 0 100 4 0 100 200 20000
+38	823342 52 0 53032 0 100 4 0 100 200 20000
+39	823394 95741 0 53018 0 99.995472655825 3607 0 1 1801 1801
+40	919135 99343 0 53018 0 99.995472655825 3607 0 752 1126800 728571648
+41	1018478 95715 0 53022 0 99.995539855825 3604 0 1 1801 1801
+42	1114193 95714 0 53019 0 99.995530255825 3604 0 1 1801 1801
+43	1209907 52 0 53032 0 100 4 0 100 200 20000
+44	1209959 45 0 0 0 0 5 0 0 0 0
+45	1210004 45 0 0 0 0 5 0 0 0 0
+46	1210049 18 0 0 0 0 2 0 0 0 0
+47	1210067 18 0 0 0 0 2 0 0 0 0
+48	1210085 52 0 53032 0 100 4 0 100 200 20000
+49	1210137 45 0 0 0 0 5 0 0 0 0
+50	1210182 45 0 0 0 0 5 0 0 0 0
+51	1210227 18 0 0 0 0 2 0 0 0 0
+52	1210245 18 0 0 0 0 2 0 0 0 0
+53	1210263 52 0 53032 0 100 4 0 100 200 20000
+54	1210315 52 0 53032 0 100 4 0 100 200 20000
+55	1210367 9117 0 52531 0 99.00014565 405 0 1 200 200
+56	1219484 9517 0 52531 0 99.00014565 405 0 576 115200 66355200
+57	1229001 9090 0 52540 0 99.00021925 402 0 1 200 200
+58	1238091 9090 0 52534 0 99.00020965 402 0 1 200 200
+59	1247181 52 0 53032 0 100 4 0 100 200 20000
+60	1247233 45 0 0 0 0 5 0 0 0 0
+61	1247278 45 0 0 0 0 5 0 0 0 0
+62	1247323 18 0 0 0 0 2 0 0 0 0
+63	1247341 18 0 0 0 0 2 0 0 0 0
+64	1247359 52 0 53032 0 100 4 0 100 200 20000
+65	1247411 45 0 0 0 0 5 0 0 0 0
+66	1247456 45 0 0 0 0 5 0 0 0 0
+67	1247501 18 0 0 0 0 2 0 0 0 0
+68	1247519 18 0 0 0 0 2 0 0 0 0
+69	1247537 252672 0 53032 0 100 8002 0 100.01642780366 400238.50233024 26693513.881577
+70	1500209 64564 0 53032 0 100 1600 0 100.016428918 80038.184615985 5337168.3088176
+71	1564773 26 0 53032 0 100 2 0 100 100 10000
+72	1564799 2851 16 52968 0 99.983579335058 101 432 432 43632 18849024
+73	1567650 2851 16 52968 0 99.983579335058 101 544 544 54944 29889536
+74	1570501 2851 16 52968 0 99.983579335058 101 544 544 54944 29889536
+75	1573352 2851 16 52968 0 99.983579335058 101 544 544 54944 29889536
+76	1576203 2851 16 52968 0 99.983579335058 101 544 544 54944 29889536
+77	1579054 2851 16 52968 0 99.983579335058 101 576 576 58176 33509376
+78	1581905 2851 16 52968 0 99.983579335058 101 576 576 58176 33509376
+79	1584756 1585 17 53027 0 100 101 432 432 43632 18849024
+80	1586341 1585 17 53027 0 100 101 544 544 54944 29889536
+81	1587926 1585 17 53027 0 100 101 544 544 54944 29889536
+82	1589511 1585 17 53027 0 100 101 544 544 54944 29889536
+83	1591096 1585 17 53027 0 100 101 544 544 54944 29889536
+84	1592681 1585 17 53027 0 100 101 576 576 58176 33509376
+85	1594266 1585 17 53027 0 100 101 576 576 58176 33509376
+86	1595851 47327 18 53028 0 100 1701 352 608 811632 413703424
+87	1643178 47327 18 53028 0 100 1701 352 608 811632 413703424
+88	1690505 2649 19 52969 0 99.983579335058 101 0 0 0 0
+89	1693154 2851 19 52969 0 99.983579335058 101 576 576 58176 33509376
+90	1696005 2851 19 52969 0 99.983579335058 101 576 576 58176 33509376
+91	1698856 2851 19 52969 0 99.983579335058 101 576 576 58176 33509376
+92	1701707 2851 19 52969 0 99.983579335058 101 576 576 58176 33509376
+93	1704558 2851 19 52969 0 99.983579335058 101 576 576 58176 33509376
+94	1707409 2851 19 52969 0 99.983579335058 101 576 576 58176 33509376
+95	1710260 2851 19 52969 0 99.983579335058 101 640 640 64640 41369600
+96	1713111 2851 19 52969 0 99.983579335058 101 640 640 64640 41369600
+97	1715962 2851 19 52969 0 99.983579335058 101 640 640 64640 41369600
+98	1718813 1383 20 53029 0 100 101 0 0 0 0
+99	1720196 1585 20 53029 0 100 101 576 576 58176 33509376
+100	1721781 1686 20 53029 0 100 101 576 576 58176 33509376
+101	1723467 1686 20 53029 0 100 101 576 576 58176 33509376
+102	1725153 1686 20 53029 0 100 101 576 576 58176 33509376
+103	1726839 1686 20 53029 0 100 101 576 576 58176 33509376
+104	1728525 1686 20 53029 0 100 101 576 576 58176 33509376
+105	1730211 1686 20 53029 0 100 101 640 640 64640 41369600
+106	1731897 1686 20 53029 0 100 101 640 640 64640 41369600
+107	1733583 1686 20 53029 0 100 101 640 640 64640 41369600
+108	1735269 49028 21 53030 0 100 1701 352 608 811632 413703424
+109	1784297 49028 21 53030 0 100 1701 464 720 1002144 616846336
+110	1833325 49028 21 53030 0 100 1701 464 720 1002144 616846336
+111	1882353 49028 21 53030 0 100 1701 480 720 1014944 628929536
+112	1931381 49028 21 53030 0 100 1701 480 720 1014944 628929536
+113	1980409 49028 21 53030 0 100 1701 512 752 1069376 695627776
+114	2029437 1686 21 53030 0 100 101 576 576 58176 33509376
+115	2031123 1484 22 53031 0 100 101 0 0 0 0
+116	2032607 1686 22 53031 0 100 101 576 576 58176 33509376
+117	2034293 1686 22 53031 0 100 101 576 576 58176 33509376
+118	2035979 1686 22 53031 0 100 101 576 576 58176 33509376
+119	2037665 1686 22 53031 0 100 101 576 576 58176 33509376
+120	2039351 1686 22 53031 0 100 101 576 576 58176 33509376
+121	2041037 1686 22 53031 0 100 101 576 576 58176 33509376
+122	2042723 1686 22 53031 0 100 101 640 640 64640 41369600
+123	2044409 1686 22 53031 0 100 101 640 640 64640 41369600
+124	2046095 1686 22 53031 0 100 101 640 640 64640 41369600
+125	2047781 3370 23 52980 0.000064 99.983643335058 101 6.4e-05 6.4e-05 0.006464 4.13696e-07
+126	2051151 2768 24 52502 0.000064 99.000064 100 6.4e-05 6.4e-05 0.0064 4.096e-07
+127	2053919 2768 25 52503 0.000064 99.000064 100 6.4e-05 6.4e-05 0.0064 4.096e-07
+128	2056687 3374 26 52981 0.00006405 99.983643385058 101 6.4e-05 6.4e-05 0.006464 4.13696e-07
+129	2060061 2970 26 52981 0.00006405 99.983643385058 101 640 640 64640 41369600
+130	2063031 2970 26 52981 0.00006405 99.983643385058 101 640 640 64640 41369600
+131	2066001 2970 26 52981 0.00006405 99.983643385058 101 640 640 64640 41369600
+132	2068971 2970 26 52981 0.00006405 99.983643385058 101 576 576 58176 33509376
+133	2071941 2970 26 52981 0.00006405 99.983643385058 101 576 576 58176 33509376
+134	2074911 2970 26 52981 0.00006405 99.983643385058 101 576 576 58176 33509376
+135	2077881 2970 26 52981 0.00006405 99.983643385058 101 576 576 58176 33509376
+136	2080851 2970 26 52981 0.00006405 99.983643385058 101 576 576 58176 33509376
+137	2083821 50280 26 53009 0.00006405 99.995472655825 1700 512 752 1068624 695062272
+138	2134101 50280 26 53009 0.00006405 99.995472655825 1700 480 720 1014224 628411136
+139	2184381 50280 26 53009 0.00006405 99.995472655825 1700 480 720 1014224 628411136
+140	2234661 50280 26 53009 0.00006405 99.995472655825 1700 368 608 823824 422549760
+141	2284941 50280 26 53009 0.00006405 99.995472655825 1700 368 608 823824 422549760
+142	2335221 50280 26 53009 0.00006405 99.995472655825 1700 368 608 823824 422549760
+143	2385501 50280 26 53009 0.00006405 99.995472655825 1700 368 608 823824 422549760
+144	2435781 50280 26 53009 0.00006405 99.995472655825 1700 368 608 823824 422549760
+145	2486061 50280 26 53009 0.00006405 99.995472655825 1700 368 608 823824 422549760
+146	2536341 2968 27 52504 0.00006405 99.00006405 100 6.4e-05 6.4e-05 0.0064 4.096e-07
+147	2539309 2568 27 52504 0.00006405 99.00006405 100 640 640 64000 40960000
+148	2541877 2568 27 52504 0.00006405 99.00006405 100 640 640 64000 40960000
+149	2544445 2568 27 52504 0.00006405 99.00006405 100 640 640 64000 40960000
+150	2547013 2568 27 52504 0.00006405 99.00006405 100 576 576 57600 33177600
+151	2549581 2568 27 52504 0.00006405 99.00006405 100 576 576 57600 33177600
+152	2552149 2568 27 52504 0.00006405 99.00006405 100 576 576 57600 33177600
+153	2554717 2568 27 52504 0.00006405 99.00006405 100 576 576 57600 33177600
+154	2557285 2568 27 52504 0.00006405 99.00006405 100 576 576 57600 33177600
+155	2559853 2568 27 52504 0.00006405 99.00006405 100 576 576 57600 33177600
+156	2562421 2568 27 52504 0.00006405 99.00006405 100 544 544 54400 29593600
+157	2564989 2568 27 52504 0.00006405 99.00006405 100 544 544 54400 29593600
+158	2567557 2568 27 52504 0.00006405 99.00006405 100 432 432 43200 18662400
+159	2570125 2568 27 52504 0.00006405 99.00006405 100 432 432 43200 18662400
+160	2572693 2568 27 52504 0.00006405 99.00006405 100 432 432 43200 18662400
+161	2575261 2568 27 52504 0.00006405 99.00006405 100 432 432 43200 18662400
+162	2577829 2568 27 52504 0.00006405 99.00006405 100 432 432 43200 18662400
+163	2580397 2568 27 52504 0.00006405 99.00006405 100 432 432 43200 18662400
+164	2582965 2968 28 52505 0.00006405 99.00006405 100 6.4e-05 6.4e-05 0.0064 4.096e-07
+165	2585933 2568 28 52505 0.00006405 99.00006405 100 640 640 64000 40960000
+166	2588501 2568 28 52505 0.00006405 99.00006405 100 640 640 64000 40960000
+167	2591069 2568 28 52505 0.00006405 99.00006405 100 640 640 64000 40960000
+168	2593637 2568 28 52505 0.00006405 99.00006405 100 576 576 57600 33177600
+169	2596205 2568 28 52505 0.00006405 99.00006405 100 576 576 57600 33177600
+170	2598773 2568 28 52505 0.00006405 99.00006405 100 576 576 57600 33177600
+171	2601341 2568 28 52505 0.00006405 99.00006405 100 576 576 57600 33177600
+172	2603909 2568 28 52505 0.00006405 99.00006405 100 576 576 57600 33177600
+173	2606477 2568 28 52505 0.00006405 99.00006405 100 576 576 57600 33177600
+174	2609045 2568 28 52505 0.00006405 99.00006405 100 544 544 54400 29593600
+175	2611613 2568 28 52505 0.00006405 99.00006405 100 544 544 54400 29593600
+176	2614181 2568 28 52505 0.00006405 99.00006405 100 432 432 43200 18662400
+177	2616749 53251 35 53014 0.00007205 99.995472655825 1801 352 608 854656 432182784
+178	2670000 53251 35 53014 0.00007205 99.995472655825 1801 352 608 854656 432182784
+179	2723251 5136 36 52520 0.00007205 99.00013605 200 432 432 86400 37324800
+180	2728387 5136 36 52520 0.00007205 99.00013605 200 432 432 86400 37324800
+181	2733523 53241 37 52971 0.00007205 99.983626442859 1800 352 608 854400 432179200
+182	2786764 53241 37 52971 0.00007205 99.983626442859 1800 464 720 1056000 646144000
+183	2840005 53241 37 52971 0.00007205 99.983626442859 1800 464 720 1056000 646144000
+184	2893246 53241 37 52971 0.00007205 99.983626442859 1800 480 720 1068800 658227200
+185	2946487 53241 37 52971 0.00007205 99.983626442859 1800 480 720 1068800 658227200
+186	2999728 53241 37 52971 0.00007205 99.983626442859 1800 512 752 1126400 728473600
+187	3052969 53241 37 52971 0.00007205 99.983626442859 1800 512 752 1126400 728473600
+188	3106210 53251 38 53016 0.00007205 99.995472655825 1801 352 608 854656 432182784
+189	3159461 53251 38 53016 0.00007205 99.995472655825 1801 464 720 1056368 646217472
+190	3212712 53251 38 53016 0.00007205 99.995472655825 1801 464 720 1056368 646217472
+191	3265963 53251 38 53016 0.00007205 99.995472655825 1801 480 720 1069168 658300672
+192	3319214 53251 38 53016 0.00007205 99.995472655825 1801 480 720 1069168 658300672
+193	3372465 53251 38 53016 0.00007205 99.995472655825 1801 512 752 1126800 728571648
+194	3425716 53251 38 53016 0.00007205 99.995472655825 1801 512 752 1126800 728571648
+195	3478967 5136 39 52521 0.00007205 99.00013605 200 432 432 86400 37324800
+196	3484103 5136 39 52521 0.00007205 99.00013605 200 544 544 108800 59187200
+197	3489239 5136 39 52521 0.00007205 99.00013605 200 544 544 108800 59187200
+198	3494375 5136 39 52521 0.00007205 99.00013605 200 544 544 108800 59187200
+199	3499511 5136 39 52521 0.00007205 99.00013605 200 544 544 108800 59187200
+200	3504647 5136 39 52521 0.00007205 99.00013605 200 576 576 115200 66355200
+201	3509783 5136 39 52521 0.00007205 99.00013605 200 576 576 115200 66355200
+202	3514919 55053 40 52979 0.00007205 99.983636042859 1800 0 1.5581536e-05 0.0086555815360001 8.3186784264119e-08
+203	3569972 53241 40 52979 0.00007205 99.983636042859 1800 512 752 1126400 728473600
+204	3623213 53241 40 52979 0.00007205 99.983636042859 1800 512 752 1126400 728473600
+205	3676454 53241 40 52979 0.00007205 99.983636042859 1800 512 752 1126400 728473600
+206	3729695 53241 40 52979 0.00007205 99.983636042859 1800 512 752 1126400 728473600
+207	3782936 53241 40 52979 0.00007205 99.983636042859 1800 512 752 1126400 728473600
+208	3836177 53241 40 52979 0.00007205 99.983636042859 1800 512 752 1126400 728473600
+209	3889418 53241 40 52979 0.00007205 99.983636042859 1800 576 816 1241600 880025600
+210	3942659 53241 40 52979 0.00007205 99.983636042859 1800 576 816 1241600 880025600
+211	3995900 53241 40 52979 0.00007205 99.983636042859 1800 576 816 1241600 880025600
+212	4049141 50255 41 53018 0.00007205 99.995472655825 1801 0 9.6e-06 0.0009696 9.30816e-09
+213	4099396 53251 41 53018 0.00007205 99.995472655825 1801 512 752 1126800 728571648
+214	4152647 53251 41 53018 0.00007205 99.995472655825 1801 512 752 1126800 728571648
+215	4205898 53251 41 53018 0.00007205 99.995472655825 1801 512 752 1126800 728571648
+216	4259149 53251 41 53018 0.00007205 99.995472655825 1801 512 752 1126800 728571648
+217	4312400 53251 41 53018 0.00007205 99.995472655825 1801 512 752 1126800 728571648
+218	4365651 53251 41 53018 0.00007205 99.995472655825 1801 512 752 1126800 728571648
+219	4418902 53251 41 53018 0.00007205 99.995472655825 1801 576 816 1242064 880178944
+220	4472153 53251 41 53018 0.00007205 99.995472655825 1801 576 816 1242064 880178944
+221	4525404 53251 41 53018 0.00007205 99.995472655825 1801 576 816 1242064 880178944
+222	4578655 5336 42 52531 0.00007205 99.00014565 200 0 9.6e-06 0.00096 9.216e-09
+223	4583991 5136 42 52531 0.00007205 99.00014565 200 576 576 115200 66355200
+224	4589127 5136 42 52531 0.00007205 99.00014565 200 576 576 115200 66355200
+225	4594263 5136 42 52531 0.00007205 99.00014565 200 576 576 115200 66355200
+226	4599399 5136 42 52531 0.00007205 99.00014565 200 576 576 115200 66355200
+227	4604535 5136 42 52531 0.00007205 99.00014565 200 576 576 115200 66355200
+228	4609671 5136 42 52531 0.00007205 99.00014565 200 576 576 115200 66355200
+229	4614807 5136 42 52531 0.00007205 99.00014565 200 640 640 128000 81920000
+230	4619943 5136 42 52531 0.00007205 99.00014565 200 640 640 128000 81920000
+231	4625079 5136 42 52531 0.00007205 99.00014565 200 640 640 128000 81920000
+232	4630215 62042 49 52995 0.00013605 99.983717642859 1800 5.76e-05 8.16e-05 0.12416 8.8002559999999e-06
+233	4692257 62054 50 53019 0.00013605 99.995530255825 1801 5.76e-05 8.16e-05 0.1242064 8.8017894399999e-06
+234	4754311 5936 51 52534 0.00013605 99.00020965 200 6.4e-05 6.4e-05 0.0128 8.192e-07
+235	4760247 62040 60 52996 0.0001361 99.983717692859 1800 5.76e-05 8.16e-05 0.12416 8.8002559999999e-06
+236	4822287 53240 60 52996 0.0001361 99.983717692859 1800 576 816 1241600 880025600
+237	4875527 53240 60 52996 0.0001361 99.983717692859 1800 576 816 1241600 880025600
+238	4928767 53240 60 52996 0.0001361 99.983717692859 1800 576 816 1241600 880025600
+239	4982007 53240 60 52996 0.0001361 99.983717692859 1800 512 752 1126400 728473600
+240	5035247 53240 60 52996 0.0001361 99.983717692859 1800 512 752 1126400 728473600
+241	5088487 53240 60 52996 0.0001361 99.983717692859 1800 512 752 1126400 728473600
+242	5141727 53240 60 52996 0.0001361 99.983717692859 1800 512 752 1126400 728473600
+243	5194967 53240 60 52996 0.0001361 99.983717692859 1800 512 752 1126400 728473600
+244	5248207 53240 60 52996 0.0001361 99.983717692859 1800 512 752 1126400 728473600
+245	5301447 53240 60 52996 0.0001361 99.983717692859 1800 480 720 1068800 658227200
+246	5354687 53240 60 52996 0.0001361 99.983717692859 1800 480 720 1068800 658227200
+247	5407927 53240 60 52996 0.0001361 99.983717692859 1800 368 608 867200 441395200
+248	5461167 53240 60 52996 0.0001361 99.983717692859 1800 368 608 867200 441395200
+249	5514407 53240 60 52996 0.0001361 99.983717692859 1800 368 608 867200 441395200
+250	5567647 53240 60 52996 0.0001361 99.983717692859 1800 368 608 867200 441395200
+251	5620887 53240 60 52996 0.0001361 99.983717692859 1800 368 608 867200 441395200
+252	5674127 53240 60 52996 0.0001361 99.983717692859 1800 368 608 867200 441395200
+253	5727367 62050 61 53020 0.0001361 99.995530305825 1801 5.76e-05 8.16e-05 0.1242064 8.8017894399999e-06
+254	5789417 53247 61 53020 0.0001361 99.995530305825 1801 576 816 1242064 880178944
+255	5842664 53247 61 53020 0.0001361 99.995530305825 1801 576 816 1242064 880178944
+256	5895911 53247 61 53020 0.0001361 99.995530305825 1801 576 816 1242064 880178944
+257	5949158 53247 61 53020 0.0001361 99.995530305825 1801 512 752 1126800 728571648
+258	6002405 53247 61 53020 0.0001361 99.995530305825 1801 512 752 1126800 728571648
+259	6055652 53247 61 53020 0.0001361 99.995530305825 1801 512 752 1126800 728571648
+260	6108899 53247 61 53020 0.0001361 99.995530305825 1801 512 752 1126800 728571648
+261	6162146 53247 61 53020 0.0001361 99.995530305825 1801 512 752 1126800 728571648
+262	6215393 53247 61 53020 0.0001361 99.995530305825 1801 512 752 1126800 728571648
+263	6268640 53247 61 53020 0.0001361 99.995530305825 1801 480 720 1069168 658300672
+264	6321887 53247 61 53020 0.0001361 99.995530305825 1801 480 720 1069168 658300672
+265	6375134 53247 61 53020 0.0001361 99.995530305825 1801 368 608 867456 441398784
+266	6428381 5736 62 52536 0.0001361 99.0002097 200 6.4e-05 6.4e-05 0.0128 8.192e-07
+267	6434117 4936 62 52536 0.0001361 99.0002097 200 640 640 128000 81920000
+268	6439053 4936 62 52536 0.0001361 99.0002097 200 640 640 128000 81920000
+269	6443989 4936 62 52536 0.0001361 99.0002097 200 640 640 128000 81920000
+270	6448925 4936 62 52536 0.0001361 99.0002097 200 576 576 115200 66355200
+271	6453861 4936 62 52536 0.0001361 99.0002097 200 576 576 115200 66355200
+272	6458797 4936 62 52536 0.0001361 99.0002097 200 576 576 115200 66355200
+273	6463733 4936 62 52536 0.0001361 99.0002097 200 576 576 115200 66355200
+274	6468669 4936 62 52536 0.0001361 99.0002097 200 576 576 115200 66355200
+275	6473605 4936 62 52536 0.0001361 99.0002097 200 576 576 115200 66355200
+276	6478541 4936 62 52536 0.0001361 99.0002097 200 544 544 108800 59187200
+277	6483477 4936 62 52536 0.0001361 99.0002097 200 544 544 108800 59187200
+278	6488413 4936 62 52536 0.0001361 99.0002097 200 432 432 86400 37324800
+279	6493349 3628 78 52539 0.0002097 99.000209701674 100 4.7915e-08 5.1455e-08 5.002415e-06 2.50271609971e-13
+280	6496977 3660 79 53004 0.0002097 99.983789035058 101 4.8153e-08 5.1659e-08 5.054971e-06 2.53041197229e-13
+281	6500637 2668 80 52537 0.0002097 99.0002097 100 5e-08 5e-08 5e-06 2.5e-13
+282	6503305 262604 87 53026 0.0125 100 8000 -323.01832551602 517.38459143322 1314013.9761361 492337247.99741
+283	6765909 25186 96 52964 0.124998136958 99.983568842859 800 0.125 100 40050 2671668.75
+284	6791095 32361 96 52964 0.124998136958 99.983568842859 800 1.863042e-06 0.018531114828 8.854901407694 0.13467922346871
+285	6823456 47342 106 53015 0.125055786958 99.995472655825 1600 512 752 1011200 662118400
+286	6870798 44142 107 53017 0.125055786958 99.995472655825 1600 0 0 0 0
+287	6914940 47342 107 53017 0.125055786958 99.995472655825 1600 512 752 1011200 662118400
+288	6962282 47342 107 53017 0.125055786958 99.995472655825 1600 512 752 1011200 662118400
+289	7009624 47342 107 53017 0.125055786958 99.995472655825 1600 512 752 1011200 662118400
+290	7056966 47342 107 53017 0.125055786958 99.995472655825 1600 512 752 1011200 662118400
+291	7104308 47342 107 53017 0.125055786958 99.995472655825 1600 512 752 1011200 662118400
+292	7151650 47310 115 53008 0.135975970574 99.995472655825 1599 512 752 1010448 661552896
+293	7198960 47310 115 53008 0.135975970574 99.995472655825 1599 576 816 1112784 797439744
+294	7246270 47310 115 53008 0.135975970574 99.995472655825 1599 576 816 1112784 797439744
+295	7293580 47310 115 53008 0.135975970574 99.995472655825 1599 576 816 1112784 797439744
+296	7340890 44112 116 53009 0.135975970574 99.995472655825 1599 0 0 0 0
+297	7385002 47310 116 53009 0.135975970574 99.995472655825 1599 576 816 1112784 797439744
+298	7432312 47310 116 53009 0.135975970574 99.995472655825 1599 576 816 1112784 797439744
+299	7479622 47310 116 53009 0.135975970574 99.995472655825 1599 576 816 1112784 797439744
+300	7526932 47310 116 53009 0.135975970574 99.995472655825 1599 512 752 1010448 661552896
+301	7574242 47310 116 53009 0.135975970574 99.995472655825 1599 512 752 1010448 661552896
+302	7621552 47310 116 53009 0.135975970574 99.995472655825 1599 512 752 1010448 661552896
+303	7668862 47310 116 53009 0.135975970574 99.995472655825 1599 512 752 1010448 661552896
+304	7716172 47310 116 53009 0.135975970574 99.995472655825 1599 512 752 1010448 661552896
+305	7763482 44112 117 53010 0.135975970574 99.995472655825 1599 0 0 0 0
+306	7807594 33291 117 53010 0.135975970574 99.995472655825 800 0.99968919790809 1.0005079616172 800.13148341913 800.26301603184
+307	7840885 23566 117 53010 0.135975970574 99.995472655825 800 0 799 319600 170346800
+308	7864451 33236 135 52946 0.14667415171 99.885954580356 799 0.99968919790809 1.0005079616172 799.13169388079 799.26343691086
+309	7897687 23524 135 52946 0.14667415171 99.885954580356 799 0 798 318801 169708399
+310	7921211 64631 142 52953 0.14675580171 99.886036230356 1598 0 0.018534361278 17.683236905634 0.26892467398556
+311	7985842 33528 142 52953 0.14675580171 99.886036230356 799 0.99994575885721 1.0000486947626 798.99979695358 798.99959411443
+312	8019370 33069 142 52953 0.14675580171 99.886036230356 799 0.146757666591 99.902488297752 39969.084081903 2663582.5068151
+313	8052439 23524 142 52953 0.14675580171 99.886036230356 799 0 798 318801 169708399
+314	8075963 30462 2920 52966 5.499515413272 99.899515413272 945 0 0.189372787 117.2096 16.177020425378
+315	8106425 28842 2921 52965 5.499515413272 99.899515413272 945 -501.83869646167 9600 8059658.1613035 76598114242.077
+316	8135267 29691 2921 52965 5.499515413272 99.899515413272 945 -620.35660723197 11840 9961299.6433928 116967706442.32
+317	8164958 29691 2921 52965 5.499515413272 99.899515413272 945 -620.35660723197 11840 9961299.6433928 116967706442.32
+318	8194649 29691 2921 52965 5.499515413272 99.899515413272 945 -627.80630448039 12000 10082092.193696 119847587740.76
+319	8224340 29691 2921 52965 5.499515413272 99.899515413272 945 -627.80630448039 12000 10082092.193696 119847587740.76
+320	8254031 29691 2921 52965 5.499515413272 99.899515413272 945 -661.66856470048 12640 10625418.331435 133101263405.29
+321	8283722 29739 2921 53032 5.499515413272 100 947 -661.66856470048 12640 10638058.331435 133261033005.29
+322	8313461 29739 2929 53032 5.499525013272 100 947 -661.66863191726 12640 10638058.331368 133261033005.38
+323	8343200 29739 2929 53032 5.499525013272 100 947 -661.66863191726 12640 10638058.331368 133261033005.38
+324	8372939 29739 2929 53032 5.499525013272 100 947 -661.66863191726 12640 10638058.331368 133261033005.38
+325	8402678 29691 2929 52966 5.499525013272 99.899525013272 945 -661.66863191726 12640 10625418.331368 133101263405.38
+326	8432369 29691 2929 52966 5.499525013272 99.899525013272 945 -661.66863191726 12640 10625418.331368 133101263405.38
+327	8462060 29691 2929 52966 5.499525013272 99.899525013272 945 -661.66863191726 12640 10625418.331368 133101263405.38
+328	8491751 29691 2929 52966 5.499525013272 99.899525013272 945 -729.39315923735 13920 11712070.606841 161695124014.38
+329	8521442 29691 2929 52966 5.499525013272 99.899525013272 945 -729.39315923735 13920 11712070.606841 161695124014.38
+330	8551133 29691 2929 52966 5.499525013272 99.899525013272 945 -729.39315923735 13920 11712070.606841 161695124014.38
+331	8580824 29739 2930 53032 5.499606613272 100 947 -729.39378905994 13920 11725990.606211 161888890415.3
+332	8610563 29739 2931 53032 5.499606663272 100 947 -729.39378944586 13920 11725990.606211 161888890415.3
+333	8640302 29691 2931 52973 5.499606663272 99.899606663272 945 -729.39378944586 13920 11712070.606211 161695124015.3
+334	8669993 29691 2931 52973 5.499606663272 99.899606663272 945 -729.39378944586 13920 11712070.606211 161695124015.3
+335	8699684 29691 2931 52973 5.499606663272 99.899606663272 945 -729.39378944586 13920 11712070.606211 161695124015.3
+336	8729375 29691 2931 52973 5.499606663272 99.899606663272 945 -661.66920361059 12640 10625418.330796 133101263406.14
+337	8759066 29691 2931 52973 5.499606663272 99.899606663272 945 -661.66920361059 12640 10625418.330796 133101263406.14
+338	8788757 29691 2931 52973 5.499606663272 99.899606663272 945 -661.66920361059 12640 10625418.330796 133101263406.14
+339	8818448 29691 2931 52973 5.499606663272 99.899606663272 945 -661.66920361059 12640 10625418.330796 133101263406.14
+340	8848139 29691 2931 52973 5.499606663272 99.899606663272 945 -661.66920361059 12640 10625418.330796 133101263406.14
+341	8877830 29691 2931 52973 5.499606663272 99.899606663272 945 -661.66920361059 12640 10625418.330796 133101263406.14
+342	8907521 29691 2931 52973 5.499606663272 99.899606663272 945 -627.80691069295 12000 10082092.193089 119847587741.52
+343	8937212 29691 2931 52973 5.499606663272 99.899606663272 945 -627.80691069295 12000 10082092.193089 119847587741.52
+344	8966903 28842 2931 52973 5.499606663272 99.899606663272 945 -509.28888548123 9760 8180450.7111145 78936809775.169
+345	8995745 28842 2931 52973 5.499606663272 99.899606663272 945 -509.28888548123 9760 8180450.7111145 78936809775.169
+346	9024587 28842 2931 52973 5.499606663272 99.899606663272 945 -509.28888548123 9760 8180450.7111145 78936809775.169
+347	9053429 28842 2931 52973 5.499606663272 99.899606663272 945 -509.28888548123 9760 8180450.7111145 78936809775.169
+348	9082271 28842 2931 52973 5.499606663272 99.899606663272 945 -509.28888548123 9760 8180450.7111145 78936809775.169
+349	9111113 28889 2931 53032 5.499606663272 100 947 -509.28888548123 9760 8190210.7111145 79032067375.169
+350	9140002 30488 2947 52986 5.511204491008 99.911204491008 945 0 0.2672 117.2096 17.838080246712
+351	9170490 28014 2958 52984 5.52112819701 99.92112819701 945 -501.95349600374 18240 8059658.046504 86502651957.312
+352	9198504 28014 2958 52984 5.52112819701 99.92112819701 945 -501.95349600374 18240 8059658.046504 86502651957.312
+353	9226518 28014 2959 52985 5.52112819701 99.92112819701 945 -501.95349600374 18240 8059658.046504 86502651957.312
+354	9254532 28587 2959 52985 5.52112819701 99.92112819701 945 -620.49851867669 22720 9961299.5014813 132400564218.41
+355	9283119 28587 2959 52985 5.52112819701 99.92112819701 945 -620.49851867669 22720 9961299.5014813 132400564218.41
+356	9311706 28587 2959 52985 5.52112819701 99.92112819701 945 -627.94992010184 22880 10082092.05008 135375011921.1
+357	9340293 28587 2959 52985 5.52112819701 99.92112819701 945 -627.94992010184 22880 10082092.05008 135375011921.1
+358	9368880 28587 2959 52985 5.52112819701 99.92112819701 945 -661.81992657983 24160 10625418.180073 150446594805.62
+359	9397467 28617 2959 53032 5.52112819701 100 946 -661.81992657983 24160 10646515.707161 150891700454.81
+360	9426084 28617 2960 53032 5.52112819701 100 946 -661.81992657983 24160 10646515.707161 150891700454.81
+361	9454701 28617 2960 53032 5.52112819701 100 946 -661.81992657983 24160 10646515.707161 150891700454.81
+362	9483318 28617 2960 53032 5.52112819701 100 946 -661.81992657983 24160 10646515.707161 150891700454.81
+363	9511935 28587 2960 52986 5.52112819701 99.92112819701 945 -661.81992657983 24160 10625418.180073 150446594805.62
+364	9540522 28587 2960 52986 5.52112819701 99.92112819701 945 -661.81992657983 24160 10625418.180073 150446594805.62
+365	9569109 28587 2960 52986 5.52112819701 99.92112819701 945 -661.81992657983 24160 10625418.180073 150446594805.62
+366	9597696 28586 2960 52986 5.52112819701 99.92112819701 945 -729.5599395358 26720 11712070.44006 182982241057.71
+367	9626282 28586 2960 52986 5.52112819701 99.92112819701 945 -729.5599395358 26720 11712070.44006 182982241057.71
+368	9654868 28586 2960 52986 5.52112819701 99.92112819701 945 -729.5599395358 26720 11712070.44006 182982241057.71
+369	9683454 28617 2961 53032 5.52120979701 100 946 -729.56056964644 26720 11735626.667611 183537136944.7
+370	9712071 28617 2962 53032 5.52120984701 100 946 -729.56057003254 26720 11735626.682559 183537137648.98
+371	9740688 28587 2962 52993 5.52120984701 99.92120984701 945 -729.56057003254 26720 11712070.43943 182982241058.63
+372	9769275 28587 2962 52993 5.52120984701 99.92120984701 945 -729.56057003254 26720 11712070.43943 182982241058.63
+373	9797862 28587 2962 52993 5.52120984701 99.92120984701 945 -729.56057003254 26720 11712070.43943 182982241058.63
+374	9826449 28587 2962 52993 5.52120984701 99.92120984701 945 -661.82049853462 24160 10625418.179501 150446594806.37
+375	9855036 28587 2962 52993 5.52120984701 99.92120984701 945 -661.82049853462 24160 10625418.179501 150446594806.37
+376	9883623 28587 2962 52993 5.52120984701 99.92120984701 945 -661.82049853462 24160 10625418.179501 150446594806.37
+377	9912210 28587 2962 52993 5.52120984701 99.92120984701 945 -661.82049853462 24160 10625418.179501 150446594806.37
+378	9940797 28587 2962 52993 5.52120984701 99.92120984701 945 -661.82049853462 24160 10625418.179501 150446594806.37
+379	9969384 28587 2962 52993 5.52120984701 99.92120984701 945 -661.82049853462 24160 10625418.179501 150446594806.37
+380	9997971 28587 2962 52993 5.52120984701 99.92120984701 945 -627.95046278567 22880 10082092.049537 135375011921.78
+381	10026558 28587 2962 52993 5.52120984701 99.92120984701 945 -627.95046278567 22880 10082092.049537 135375011921.78
+382	10055145 28014 2962 52993 5.52120984701 99.92120984701 945 -509.40533766432 18400 8180450.5946623 88904733093.798
+383	10083159 28902 3111 53012 5.887254610272 99.987254610272 942 -506.96640292897 13920 7628293.0335971 72608564214.934
+384	10112061 28902 3111 53012 5.887254610272 99.987254610272 942 -506.96640292897 13920 7628293.0335971 72608564214.934
+385	10140963 28902 3114 53015 5.887254610272 99.987254610272 942 -506.96640292897 13920 7628293.0335971 72608564214.934
+386	10169865 29501 3114 53015 5.887254610272 99.987254610272 942 -625.97260079961 17280 9419054.0273992 110407892641.7
+387	10199366 29501 3114 53015 5.887254610272 99.987254610272 942 -625.97260079961 17280 9419054.0273992 110407892641.7
+388	10228867 29501 3114 53015 5.887254610272 99.987254610272 942 -633.96301694236 17440 9539526.0369831 113099256309.11
+389	10258368 29501 3114 53015 5.887254610272 99.987254610272 942 -633.96301694236 17440 9539526.0369831 113099256309.11
+390	10287869 29501 3114 53015 5.887254610272 99.987254610272 942 -667.96478776254 18400 10051172.035212 125501066976.96
+391	10317370 29545 3125 52981 5.897316772696 99.897316772696 941 -668.03621155151 18400 10046051.963788 120482033472.38
+392	10346915 29545 3125 52981 5.897316772696 99.897316772696 941 -634.03080500778 17440 9534725.969195 108537336395.06
+393	10376460 29545 3125 52981 5.897316772696 99.897316772696 941 -634.03080500778 17440 9534725.969195 108537336395.06
+394	10406005 28866 3125 52981 5.897316772696 99.897316772696 941 -515.01188210474 14080 7745084.9881179 71656406037.239
+395	10434871 28866 3125 52981 5.897316772696 99.897316772696 941 -515.01188210474 14080 7745084.9881179 71656406037.239
+396	10463737 28866 3125 52981 5.897316772696 99.897316772696 941 -515.01188210474 14080 7745084.9881179 71656406037.239
+397	10492603 28866 3125 52981 5.897316772696 99.897316772696 941 -515.01188210474 14080 7745084.9881179 71656406037.239
+398	10521469 28866 3125 52981 5.897316772696 99.897316772696 941 -515.01188210474 14080 7745084.9881179 71656406037.239
+399	10550335 28913 3125 53032 5.897316772696 100 943 -515.01188210474 14080 7753084.9881179 71720406037.239
+400	10579248 26100 3354 53008 6.260308929547 99.960308929547 938 0 0 0 0
+401	10605348 29344 3359 53032 6.260308929547 100 939 -674.20747047801 31845.953902825 9498531.7464323 112827560135.69
+402	10634692 29344 3361 53032 6.260308929547 100 939 -674.20747047801 31845.953902825 9498531.7464323 112827560135.69
+403	10664036 29344 3361 53032 6.260308929547 100 939 -674.20747047801 31845.953902825 9498531.7464323 112827560135.69
+404	10693380 29344 3361 53032 6.260308929547 100 939 -674.20747047801 31845.953902825 9498531.7464323 112827560135.69
+405	10722724 29314 3361 52977 6.260308929547 99.960308929547 938 -674.20747047801 12640 9466685.7925295 111813395355.71
+406	10752038 29314 3361 52977 6.260308929547 99.960308929547 938 -674.20747047801 12640 9466685.7925295 111813395355.71
+407	10781352 29362 3370 53008 6.277690570969 99.977690570969 938 -674.33250828989 12640 9466685.6674917 109965280324.33
+408	10810714 29362 3370 53008 6.277690570969 99.977690570969 938 -742.61934457241 13920 10425337.380655 133287181883.49
+409	10840076 29362 3370 53008 6.277690570969 99.977690570969 938 -742.61934457241 13920 10425337.380655 133287181883.49
+410	10869438 29362 3370 53008 6.277690570969 99.977690570969 938 -742.61934457241 13920 10425337.380655 133287181883.49
+411	10898800 29392 3371 53032 6.277690570969 100 939 -742.61934457241 25818.679590572 10451156.060246 133953786099.29
+412	10928192 29362 3371 53009 6.277690570969 99.977690570969 938 -742.61934457241 13920 10425337.380655 133287181883.49
+413	10957554 29362 3371 53009 6.277690570969 99.977690570969 938 -742.61934457241 13920 10425337.380655 133287181883.49
+414	10986916 29362 3371 53009 6.277690570969 99.977690570969 938 -742.61934457241 13920 10425337.380655 133287181883.49
+415	11016278 29362 3371 53009 6.277690570969 99.977690570969 938 -674.33250828989 12640 9466685.6674917 109965280324.33
+416	11045640 29362 3371 53009 6.277690570969 99.977690570969 938 -674.33250828989 12640 9466685.6674917 109965280324.33
+417	11075002 29362 3371 53009 6.277690570969 99.977690570969 938 -674.33250828989 12640 9466685.6674917 109965280324.33
+418	11104364 29362 3371 53009 6.277690570969 99.977690570969 938 -674.33250828989 12640 9466685.6674917 109965280324.33
+419	11133726 29362 3371 53009 6.277690570969 99.977690570969 938 -674.33250828989 12640 9466685.6674917 109965280324.33
+420	11163088 29392 3372 53032 6.277690570969 100 939 -742.61934457241 25818.679590572 10451156.060246 133953786099.29
+421	11192480 12424 26022 52519 49.00013605 99.00013605 501 0 0.064 6.4 0.4096
+422	11204904 12336 26023 52520 49.00013605 99.00013605 501 -847.06108318942 4320 426832.93891681 1848295112.4787
+423	11217240 12336 26023 52520 49.00013605 99.00013605 501 -847.06108318942 4320 426832.93891681 1848295112.4787
+424	11229576 12336 26024 52521 49.00013605 99.00013605 501 -847.06108318942 4320 426832.93891681 1848295112.4787
+425	11241912 12336 26024 52521 49.00013605 99.00013605 501 -1066.6695121645 5440 537493.33048784 2930904183.8482
+426	11254248 12336 26024 52521 49.00013605 99.00013605 501 -1066.6695121645 5440 537493.33048784 2930904183.8482
+427	11266584 12336 26024 52521 49.00013605 99.00013605 501 -1066.6695121645 5440 537493.33048784 2930904183.8482
+428	11278920 12336 26024 52521 49.00013605 99.00013605 501 -1066.6695121645 5440 537493.33048784 2930904183.8482
+429	11291256 12336 26024 52521 49.00013605 99.00013605 501 -1129.4147775859 5760 569110.58522241 3285857977.7398
+430	11303592 12571 26024 53032 49.00013605 100 511 -1129.4147775859 5760 574870.58522241 3319035577.7398
+431	11316163 12571 26033 53032 49.00014565 100 511 -1129.4149901822 5760 574870.58500982 3319035578.22
+432	11328734 12571 26033 53032 49.00014565 100 511 -1129.4149901822 5760 574870.58500982 3319035578.22
+433	11341305 12571 26033 53032 49.00014565 100 511 -1129.4149901822 5760 574870.58500982 3319035578.22
+434	11353876 12336 26033 52531 49.00014565 99.00014565 501 -1129.4149901822 5760 569110.58500982 3285857978.22
+435	11366212 12336 26033 52531 49.00014565 99.00014565 501 -1129.4149901822 5760 569110.58500982 3285857978.22
+436	11378548 12336 26033 52531 49.00014565 99.00014565 501 -1129.4149901822 5760 569110.58500982 3285857978.22
+437	11390884 12336 26033 52531 49.00014565 99.00014565 501 -1254.9055446469 6400 632345.09445535 4056614787.926
+438	11403220 12336 26033 52531 49.00014565 99.00014565 501 -1254.9055446469 6400 632345.09445535 4056614787.926
+439	11415556 12336 26033 52531 49.00014565 99.00014565 501 -1254.9055446469 6400 632345.09445535 4056614787.926
+440	11427892 12571 26035 53032 49.00020965 100 511 -1254.9071194368 6400 638745.09288056 4097574791.8784
+441	11440463 12061 26038 53032 49.0002097 100 511 -1254.9071206671 6400 638745.09287933 4097574791.8815
+442	11452524 11835 26038 52536 49.0002097 99.0002097 501 -1254.9071206671 6400 632345.09287933 4056614791.8815
+443	11464359 11835 26038 52536 49.0002097 99.0002097 501 -1254.9071206671 6400 632345.09287933 4056614791.8815
+444	11476194 11835 26038 52536 49.0002097 99.0002097 501 -1254.9071206671 6400 632345.09287933 4056614791.8815
+445	11488029 11835 26038 52536 49.0002097 99.0002097 501 -1129.4164086004 5760 569110.5835914 3285857981.424
+446	11499864 11835 26038 52536 49.0002097 99.0002097 501 -1129.4164086004 5760 569110.5835914 3285857981.424
+447	11511699 11835 26038 52536 49.0002097 99.0002097 501 -1129.4164086004 5760 569110.5835914 3285857981.424
+448	11523534 11835 26038 52536 49.0002097 99.0002097 501 -1129.4164086004 5760 569110.5835914 3285857981.424
+449	11535369 11835 26038 52536 49.0002097 99.0002097 501 -1129.4164086004 5760 569110.5835914 3285857981.424
+450	11547204 11835 26038 52536 49.0002097 99.0002097 501 -1129.4164086004 5760 569110.5835914 3285857981.424
+451	11559039 11835 26038 52536 49.0002097 99.0002097 501 -1066.6710525671 5440 537493.32894743 2930904187.1344
+452	11570874 11835 26038 52536 49.0002097 99.0002097 501 -1066.6710525671 5440 537493.32894743 2930904187.1344
+453	11582709 11835 26038 52536 49.0002097 99.0002097 501 -847.06230645031 4320 426832.93769355 1848295114.551
+454	11594544 592 51907 52969 97.983082016109 99.983082016109 21 0 0.064 0.064 0.004096
+455	11595136 444 51972 53029 98.000064 99.900064 20 0 0.064 0.064 0.004096
+456	11595580 444 51973 53031 98.000064 99.900064 20 0 0.064 0.064 0.004096
+457	11596024 312 52435 52968 98.98336074974 99.98336074974 11 -42492.949184238 0 -42492.949184238 1805650730.3742
+458	11596336 312 52435 52968 98.98336074974 99.98336074974 11 -53509.639713485 0 -53509.639713485 2863281542.267
+459	11596648 312 52435 52968 98.98336074974 99.98336074974 11 -53509.639713485 0 -53509.639713485 2863281542.267
+460	11596960 312 52435 52968 98.98336074974 99.98336074974 11 -53509.639713485 0 -53509.639713485 2863281542.267
+461	11597272 312 52435 52968 98.98336074974 99.98336074974 11 -53509.639713485 0 -53509.639713485 2863281542.267
+462	11597584 312 52435 52968 98.98336074974 99.98336074974 11 -56657.265578984 0 -56657.265578984 3210045742.8875
+463	11597896 342 52435 53032 98.98336074974 100 12 -56657.265578984 34616.944333404 -22040.32124558 4408378577.8695
+464	11598238 342 52436 53032 98.98336074974 100 12 -56657.265578984 34616.944333404 -22040.32124558 4408378577.8695
+465	11598580 342 52436 53032 98.98336074974 100 12 -56657.265578984 34616.944333404 -22040.32124558 4408378577.8695
+466	11598922 342 52436 53032 98.98336074974 100 12 -56657.265578984 34616.944333404 -22040.32124558 4408378577.8695
+467	11599264 312 52436 52969 98.98336074974 99.98336074974 11 -56657.265578984 0 -56657.265578984 3210045742.8875
+468	11599576 312 52436 52969 98.98336074974 99.98336074974 11 -56657.265578984 0 -56657.265578984 3210045742.8875
+469	11599888 312 52436 52969 98.98336074974 99.98336074974 11 -56657.265578984 0 -56657.265578984 3210045742.8875
+470	11600200 312 52436 52969 98.98336074974 99.98336074974 11 -62952.517309982 0 -62952.517309982 3963019435.6636
+471	11600512 312 52436 52969 98.98336074974 99.98336074974 11 -62952.517309982 0 -62952.517309982 3963019435.6636
+472	11600824 312 52436 52969 98.98336074974 99.98336074974 11 -62952.517309982 0 -62952.517309982 3963019435.6636
+473	11601136 342 52440 53032 98.98342474974 100 12 -62956.480578916 38611.785038593 -24344.695540323 5454388390.7499
+474	11601478 342 52441 53032 98.98342479974 100 12 -62956.483675415 38611.901513159 -24344.582162256 5454397775.2346
+475	11601820 312 52441 52981 98.98342479974 99.98342479974 11 -62956.483675415 0 -62956.483675415 3963518836.7727
+476	11602132 312 52441 52981 98.98342479974 99.98342479974 11 -62956.483675415 0 -62956.483675415 3963518836.7727
+477	11602444 312 52441 52981 98.98342479974 99.98342479974 11 -62956.483675415 0 -62956.483675415 3963518836.7727
+478	11602756 312 52441 52981 98.98342479974 99.98342479974 11 -56660.835307873 0 -56660.835307873 3210450257.7859
+479	11603068 312 52441 52981 98.98342479974 99.98342479974 11 -56660.835307873 0 -56660.835307873 3210450257.7859
+480	11603380 312 52441 52981 98.98342479974 99.98342479974 11 -56660.835307873 0 -56660.835307873 3210450257.7859
+481	11603692 312 52441 52981 98.98342479974 99.98342479974 11 -56660.835307873 0 -56660.835307873 3210450257.7859
+482	11604004 312 52441 52981 98.98342479974 99.98342479974 11 -56660.835307873 0 -56660.835307873 3210450257.7859
+483	11604316 189 52497 53027 99 100 11 -43200 0 -43200 1866240000
+484	11604505 189 52497 53027 99 100 11 -54400 0 -54400 2959360000
+485	11604694 189 52497 53027 99 100 11 -54400 0 -54400 2959360000
+486	11604883 189 52497 53027 99 100 11 -54400 0 -54400 2959360000
+487	11605072 189 52497 53027 99 100 11 -54400 0 -54400 2959360000
+488	11605261 189 52497 53027 99 100 11 -57600 0 -57600 3317760000
+489	11605450 189 52497 53027 99 100 11 -57600 0 -57600 3317760000
+490	11605639 189 52499 53029 99 100 11 -57600 0 -57600 3317760000
+491	11605828 189 52499 53029 99 100 11 -57600 0 -57600 3317760000
+492	11606017 189 52499 53029 99 100 11 -57600 0 -57600 3317760000
+493	11606206 189 52499 53029 99 100 11 -57600 0 -57600 3317760000
+494	11606395 189 52499 53029 99 100 11 -57600 0 -57600 3317760000
+495	11606584 189 52499 53029 99 100 11 -57600 0 -57600 3317760000
+496	11606773 189 52499 53029 99 100 11 -64000 0 -64000 4096000000
+497	11606962 189 52499 53029 99 100 11 -64000 0 -64000 4096000000
+498	11607151 189 52499 53029 99 100 11 -64000 0 -64000 4096000000
+499	11607340 189 52500 53030 99 100 11 -57600 0 -57600 3317760000
+500	11607529 189 52501 53031 99 100 11 -57600 0 -57600 3317760000
+501	11607718 189 52501 53031 99 100 11 -57600 0 -57600 3317760000
+502	11607907 189 52501 53031 99 100 11 -57600 0 -57600 3317760000
+503	11608096 189 52501 53031 99 100 11 -57600 0 -57600 3317760000
+504	11608285 189 52501 53031 99 100 11 -57600 0 -57600 3317760000
+505	11608474 189 52501 53031 99 100 11 -57600 0 -57600 3317760000
+506	11608663 189 52501 53031 99 100 11 -64000 0 -64000 4096000000
+507	11608852 189 52501 53031 99 100 11 -64000 0 -64000 4096000000
+508	11609041 189 52501 53031 99 100 11 -64000 0 -64000 4096000000
+509	11609230 251 52502 53032 99.000064 100 11 -64004.096262161 0 -64004.096262161 4096524338.3359
+510	11609481 251 52503 53032 99.000064 100 11 -64004.096262161 0 -64004.096262161 4096524338.3359
+511	11609732 271 52504 53032 99.00006405 100 11 -64004.099462571 0 -64004.099462571 4096524748.0146
+512	11610003 39 52504 52504 99.00006405 99.00006405 1 -64004.099462571 -64004.099462571 -64004.099462571 4096524748.0146
+513	11610042 39 52504 52504 99.00006405 99.00006405 1 -64004.099462571 -64004.099462571 -64004.099462571 4096524748.0146
+514	11610081 39 52504 52504 99.00006405 99.00006405 1 -64004.099462571 -64004.099462571 -64004.099462571 4096524748.0146
+515	11610120 39 52504 52504 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+516	11610159 39 52504 52504 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+517	11610198 39 52504 52504 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+518	11610237 39 52504 52504 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+519	11610276 39 52504 52504 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+520	11610315 39 52504 52504 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+521	11610354 39 52504 52504 99.00006405 99.00006405 1 -54403.484543185 -54403.484543185 -54403.484543185 2959739130.4406
+522	11610393 39 52504 52504 99.00006405 99.00006405 1 -54403.484543185 -54403.484543185 -54403.484543185 2959739130.4406
+523	11610432 39 52504 52504 99.00006405 99.00006405 1 -43202.767137235 -43202.767137235 -43202.767137235 1866479088.3142
+524	11610471 39 52504 52504 99.00006405 99.00006405 1 -43202.767137235 -43202.767137235 -43202.767137235 1866479088.3142
+525	11610510 39 52504 52504 99.00006405 99.00006405 1 -43202.767137235 -43202.767137235 -43202.767137235 1866479088.3142
+526	11610549 39 52504 52504 99.00006405 99.00006405 1 -43202.767137235 -43202.767137235 -43202.767137235 1866479088.3142
+527	11610588 39 52504 52504 99.00006405 99.00006405 1 -43202.767137235 -43202.767137235 -43202.767137235 1866479088.3142
+528	11610627 271 52504 53032 99.00006405 100 11 -43202.767137235 0 -43202.767137235 1866479088.3142
+529	11610898 271 52505 53032 99.00006405 100 11 -64004.099462571 0 -64004.099462571 4096524748.0146
+530	11611169 39 52505 52505 99.00006405 99.00006405 1 -64004.099462571 -64004.099462571 -64004.099462571 4096524748.0146
+531	11611208 39 52505 52505 99.00006405 99.00006405 1 -64004.099462571 -64004.099462571 -64004.099462571 4096524748.0146
+532	11611247 39 52505 52505 99.00006405 99.00006405 1 -64004.099462571 -64004.099462571 -64004.099462571 4096524748.0146
+533	11611286 39 52505 52505 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+534	11611325 39 52505 52505 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+535	11611364 39 52505 52505 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+536	11611403 39 52505 52505 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+537	11611442 39 52505 52505 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+538	11611481 39 52505 52505 99.00006405 99.00006405 1 -57603.689516314 -57603.689516314 -57603.689516314 3318185045.8918
+539	11611520 39 52505 52505 99.00006405 99.00006405 1 -54403.484543185 -54403.484543185 -54403.484543185 2959739130.4406
+540	11611559 39 52505 52505 99.00006405 99.00006405 1 -54403.484543185 -54403.484543185 -54403.484543185 2959739130.4406
+541	11611598 39 52505 52505 99.00006405 99.00006405 1 -43202.767137235 -43202.767137235 -43202.767137235 1866479088.3142
+

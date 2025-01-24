@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='utf-8'?>
+<config>
+	<cell>
+	    <app>
+	        <param name="source">PLC1</param>
+	        <param name="destination">Actuator1</param>
+	        <param name="packetLength">128B</param>
+	        <param name="productionInterval">50ms</param>
+	        <param name="pcp">6</param>
+	        <param name="vlan">30</param>
+	        <param name="destPort">2000</param>
+	        <param name="displayName">ProcessControl</param>
+	        <param name="deadline">15ms</param>
+	    </app>
+	    <app>
+	        <param name="source">PLC2</param>
+	        <param name="destination">FanController</param>
+	        <param name="packetLength">256B</param>
+	        <param name="productionInterval">10ms</param>
+	        <param name="pcp">4</param>
+	        <param name="vlan">54</param>
+	        <param name="destPort">2022</param>
+	        <param name="displayName">FanControlTemp</param>
+	        <param name="latency">300ms</param>
+	    </app>
+	</cell>
+	<cell>
+	    <app>
+	        <param name="source">SensorPosition1</param>
+	        <param name="destination">PLC1</param>
+	        <param name="packetLength">128B</param>
+	        <param name="productionInterval">10ms</param>
+	        <param name="pcp">6</param>
+	        <param name="vlan">30</param>
+	        <param name="destPort">2001</param>
+	        <param name="displayName">PositionMonitoring</param>
+	        <param name="deadline">120ms</param>
+	    </app>
+	    <app>
+		    <param name="source">Actuator1</param>
+		    <param name="destination">PLC1</param>
+		    <param name="packetLength">128B</param>
+		    <param name="productionInterval">50ms</param>
+		    <param name="pcp">4</param>
+		    <param name="vlan">30</param>
+		    <param name="destPort">2002</param>
+		    <param name="displayName">ActuatorFeedback</param>
+		    <param name="deadline">15ms</param>
+		</app>
+		<app>
+	        <param name="source">VibrationSensor</param>
+	        <param name="destination">PredictiveMaintenance</param>
+	        <param name="packetLength">64B</param>
+	        <param name="productionInterval">10ms</param>
+	        <param name="pcp">3</param>
+	        <param name="vlan">30</param>
+	        <param name="destPort">2004</param>
+	        <param name="displayName">VibrationTelemetry</param>
+	        <param name="latency">50ms</param>
+		</app>
+    </cell>
+	<cell>
+	    <app>
+	        <param name="source">TemperatureSensor1</param>
+	        <param name="destination">PLC2</param>
+	        <param name="packetLength">256B</param>
+	        <param name="productionInterval">100ms</param>
+	        <param name="pcp">4</param>
+	        <param name="vlan">53</param>
+	        <param name="destPort">2020</param>
+	        <param name="displayName">TempMonitoring2</param>
+	        <param name="latency">500ms</param>
+	    </app>
+	    <app>
+	        <param name="source">HumiditySensor1</param>
+	        <param name="destination">PLC2</param>
+	        <param name="packetLength">128B</param>
+	        <param name="productionInterval">500ms</param>
+	        <param name="pcp">3</param>
+	        <param name="vlan">54</param>
+	        <param name="destPort">2021</param>
+	        <param name="displayName">HumidityControl2</param>
+	        <param name="latency">1000ms</param>
+	    </app>
+	    <app>
+	        <param name="source">FanController</param>
+	        <param name="destination">PLC2</param>
+	        <param name="packetLength">256B</param>
+	        <param name="productionInterval">10ms</param>
+	        <param name="pcp">3</param>
+	        <param name="vlan">54</param>
+	        <param name="destPort">2022</param>
+	        <param name="displayName">FanFeedBack</param>
+	        <param name="latency">500ms</param>
+	    </app>
+        <app>
+	        <param name="source">VibrationSensor2</param>
+	        <param name="destination">PredictiveMaintenance</param>
+	        <param name="packetLength">64B</param>
+	        <param name="productionInterval">10ms</param>
+	        <param name="pcp">3</param>
+	        <param name="vlan">58</param>
+	        <param name="destPort">2025</param>
+	        <param name="displayName">VibrationTelemetry2</param>
+	        <param name="latency">50ms</param>
+	    </app>
+	</cell>    
+
+</config>
+
+    
+    

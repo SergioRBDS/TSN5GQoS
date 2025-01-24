@@ -1,0 +1,4 @@
+/out/
+/results/
+simulations/UseCase3/results/*.vec
+

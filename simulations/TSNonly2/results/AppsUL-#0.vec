@@ -1,0 +1,2182 @@
+version 3
+run AppsUL-0-20241222-18:29:24-389162
+attr configname AppsUL
+attr datetime 20241222-18:29:24
+attr datetimef 20241222-182924
+attr experiment AppsUL
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network TestGptpQoS2
+attr processid 389162
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../../inet4.5/images
+config extends "UL, Apps"
+config *.**.hasTimeSynchronization true
+config *.switchCell2.gptp.gptpNodeType "\"MASTER_NODE\""
+config *.switchCell2.gptp.masterPorts "[\"eth0\"]"
+config *.switchCell2.gptp.slavePort "\"\""
+config *.switch5GC.gptp.slavePort "\"eth0\""
+config *.switch5GC.gptp.masterPorts []
+config *.switchCell1.gptp.slavePort "\"eth0\""
+config *.switchCell1.gptp.masterPorts []
+config *.FGS.nwtt[*].gptp.domain[*].masterPorts "[\"eth0\"]"
+config *.FGS.nwtt[*].gptp.domain[*].slavePort "\"tt1\""
+config *.FGS.dstt[0].gptp.domain[*].masterPorts "[\"eth0\"]"
+config *.FGS.dstt[0].gptp.domain[*].slavePort "\"tt1\""
+config *.FGS.dstt[1].gptp.domain[*].masterPorts "[\"tt0\",\"tt1\"]"
+config *.FGS.dstt[1].gptp.domain[*].slavePort "\"eth0\""
+config **.referenceClock "\"switchCell2.clock\""
+config *.visualizer.dataLinkVisualizer[0].displayLinks true
+config *.visualizer.dataLinkVisualizer[0].activityLevel "\"protocol\""
+config *.visualizer.dataLinkVisualizer[0].packetFilter "\"GptpSync\""
+config *.visualizer.dataLinkVisualizer[0].lineColor "\"blue2\""
+config *.visualizer.numInfoVisualizers 3
+config *.visualizer.infoVisualizer[0].modules "\"*.switch5GC.clock\""
+config *.visualizer.infoVisualizer[1].modules "\"*.switchCell1.clock\""
+config *.visualizer.infoVisualizer[1].placementHint "\"topLeft\""
+config *.visualizer.infoVisualizer[2].modules "\"*.switchCell2*.clock\""
+config *.visualizer.infoVisualizer[2].placementHint "\"topRight\""
+config *.switchCell2.clock.displayStringTextFormat "\"time: %T\""
+config *.switch5GC.clock.displayStringTextFormat "\"diff: %d\""
+config *.switchCell1.clock.displayStringTextFormat "\"diff: %d\""
+config *.FGS.**.clock.typename IdealClock
+config **.clock.oscillator.typename ConstantDriftOscillator
+config *.switchCell2.clock.oscillator.driftRate 10ppm
+config **.oscillator.driftRate 100ppm
+config *.switch5GC.numApps 2
+config *.switch5GC.hasOutgoingStreams true
+config *.switch5GC.hasIncomingStreams true
+config *.switch5GC.app[0].typename UdpSourceApp
+config *.switch5GC.app[0].io.destAddress "\"switchCell1\""
+config *.switch5GC.app[0].io.destPort 2000
+config *.switch5GC.app[0].source.packetLength 128B
+config *.switch5GC.app[0].source.productionInterval 50ms
+config *.switch5GC.app[0].source.initialProductionOffset 0ms
+config *.switch5GC.app[1].typename UdpSinkApp
+config *.switch5GC.app[1].io.localPort 2001
+config *.switchCell1.numApps 2
+config *.switchCell1.hasOutgoingStreams true
+config *.switchCell1.hasIncomingStreams true
+config *.switchCell1.app[0].typename UdpSourceApp
+config *.switchCell1.app[0].io.destAddress "\"switch5GC\""
+config *.switchCell1.app[0].io.destPort 2001
+config *.switchCell1.app[0].source.packetLength 128B
+config *.switchCell1.app[0].source.productionInterval 10ms
+config *.switchCell1.app[0].source.initialProductionOffset 0ms
+config *.switchCell1.app[1].typename UdpSinkApp
+config *.switchCell1.app[1].io.localPort 2000
+config *.switchCell2.numApps 2
+config *.switchCell2.hasOutgoingStreams true
+config *.switchCell2.hasIncomingStreams true
+config *.switchCell2.app[0].typename UdpSourceApp
+config *.switchCell2.app[0].io.destAddress "\"switch5GC\""
+config *.switchCell2.app[0].io.destPort 2001
+config *.switchCell2.app[0].source.packetLength 128B
+config *.switchCell2.app[0].source.productionInterval 1000s
+config *.switchCell2.app[0].source.initialProductionOffset 1000s
+config *.switchCell2.app[1].typename UdpSinkApp
+config *.switchCell2.app[1].io.localPort 2000
+config *.switch5GC.bridging.streamIdentifier.identifier.mapping "[{stream: \"PLC10\", packetFilter: expr(has(udp))}]"
+config *.switch5GC.bridging.streamCoder.encoder.mapping "[{stream: \"PLC10\", pcp: 1}]"
+config *.switchCell1.bridging.streamIdentifier.identifier.mapping "[{stream: \"Sensor10\", packetFilter: expr(has(udp))}]"
+config *.switchCell1.bridging.streamCoder.encoder.mapping "[{stream: \"Sensor10\", pcp: 1}]"
+config network TestGptpQoS2
+config sim-time-limit 100s
+config **.TSNAppsTableFile "xmldoc(\"config/app.xml\")"
+config *.histogramContainer.histograms "{Uplink: \"../../../deterministic6g_data/PD-Wireless-5G-1/s1-UL_wall.xml\", Downlink: \"../../../deterministic6g_data/PD-Wireless-5G-1/s10-DL_wall.xml\", D2D: \"../../../deterministic6g_data/PD-Wireless-5G-1/testeD2D.xml\"}"
+config *.visualizer.typename IntegratedMultiCanvasVisualizer
+config *.visualizer.infoVisualizer[*].displayInfos true
+
+vector 0 TestGptpQoS2.switch5GC.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 1 TestGptpQoS2.switch5GC.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 2 TestGptpQoS2.switch5GC.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 3 TestGptpQoS2.switch5GC.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 4 TestGptpQoS2.switch5GC.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 5 TestGptpQoS2.switch5GC.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 6 TestGptpQoS2.switch5GC.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 7 TestGptpQoS2.switchCell1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 8 TestGptpQoS2.switchCell1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 9 TestGptpQoS2.switchCell1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 10 TestGptpQoS2.switchCell1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 11 TestGptpQoS2.switchCell1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 12 TestGptpQoS2.switchCell1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 13 TestGptpQoS2.switchCell1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 14 TestGptpQoS2.switchCell2.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 15 TestGptpQoS2.switchCell2.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 16 TestGptpQoS2.switchCell2.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 17 TestGptpQoS2.switchCell2.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 18 TestGptpQoS2.switchCell2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 19 TestGptpQoS2.switchCell2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 20 TestGptpQoS2.switchCell2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 21 TestGptpQoS2.FGS.dstt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 22 TestGptpQoS2.FGS.dstt[0].eth[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 23 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 24 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 25 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 26 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 27 TestGptpQoS2.FGS.dstt[0].tt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 28 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 29 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 30 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 31 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 32 TestGptpQoS2.FGS.dstt[0].tt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 33 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 34 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 35 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 36 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 37 TestGptpQoS2.FGS.dstt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 38 TestGptpQoS2.FGS.dstt[1].eth[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 39 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 40 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 41 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 42 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 43 TestGptpQoS2.FGS.dstt[1].tt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 44 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 45 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 46 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 47 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 48 TestGptpQoS2.FGS.dstt[1].tt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 49 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 50 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 51 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 52 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 53 TestGptpQoS2.FGS.nwtt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 54 TestGptpQoS2.FGS.nwtt[0].eth[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 55 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 56 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 57 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 58 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 59 TestGptpQoS2.FGS.nwtt[0].tt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 60 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 61 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 62 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 63 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 64 TestGptpQoS2.FGS.nwtt[0].tt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 65 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 66 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 67 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 68 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 69 TestGptpQoS2.switch5GC.clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 70 TestGptpQoS2.switchCell1.clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 71 TestGptpQoS2.switchCell2.clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 72 TestGptpQoS2.switch5GC.app[0].source packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+vector 73 TestGptpQoS2.switchCell1.app[0].source packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+vector 74 TestGptpQoS2.switch5GC.bridging.streamIdentifier.identifier incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 75 TestGptpQoS2.switch5GC.bridging.streamIdentifier.identifier outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 76 TestGptpQoS2.switch5GC.bridging.streamCoder.encoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 77 TestGptpQoS2.switch5GC.bridging.streamCoder.encoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 78 TestGptpQoS2.switch5GC.ethernet.macHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 79 TestGptpQoS2.switch5GC.ethernet.macHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 80 TestGptpQoS2.switch5GC.ethernet.paddingInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 81 TestGptpQoS2.switch5GC.ethernet.paddingInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 82 TestGptpQoS2.switch5GC.ethernet.fcsInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 83 TestGptpQoS2.switch5GC.ethernet.fcsInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 84 TestGptpQoS2.switch5GC.eth[0].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 85 TestGptpQoS2.switchCell1.bridging.streamIdentifier.identifier incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 86 TestGptpQoS2.switchCell1.bridging.streamIdentifier.identifier outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 87 TestGptpQoS2.switchCell1.bridging.streamCoder.encoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 88 TestGptpQoS2.switchCell1.bridging.streamCoder.encoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 89 TestGptpQoS2.switchCell1.ethernet.macHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 90 TestGptpQoS2.switchCell1.ethernet.macHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 91 TestGptpQoS2.switchCell1.ethernet.paddingInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 92 TestGptpQoS2.switchCell1.ethernet.paddingInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 93 TestGptpQoS2.switchCell1.ethernet.fcsInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 94 TestGptpQoS2.switchCell1.ethernet.fcsInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 95 TestGptpQoS2.switchCell1.eth[0].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 96 TestGptpQoS2.FGS.dstt[1].bridging.streamCoder.encoder incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 97 TestGptpQoS2.FGS.dstt[1].bridging.streamCoder.encoder outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 98 TestGptpQoS2.switch5GC.app[0].io packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 99 TestGptpQoS2.switchCell1.app[0].io packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 100 TestGptpQoS2.switch5GC.eth[0].macLayer.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 101 TestGptpQoS2.switch5GC.eth[0].macLayer.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 102 TestGptpQoS2.switch5GC.eth[0].macLayer.server incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "incoming packet lengths"
+attr unit b
+vector 103 TestGptpQoS2.switch5GC.eth[0].macLayer.server outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "outgoing packet lengths"
+attr unit b
+vector 104 TestGptpQoS2.switch5GC.eth[0].macLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 105 TestGptpQoS2.switch5GC.eth[0].macLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 106 TestGptpQoS2.switch5GC.eth[0].phyLayer.phyHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 107 TestGptpQoS2.switch5GC.eth[0].phyLayer.phyHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 108 TestGptpQoS2.switch5GC.eth[0].phyLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 109 TestGptpQoS2.switch5GC.eth[0].phyLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 110 TestGptpQoS2.switchCell1.eth[0].macLayer.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 111 TestGptpQoS2.switchCell1.eth[0].macLayer.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 112 TestGptpQoS2.switchCell1.eth[0].macLayer.server incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "incoming packet lengths"
+attr unit b
+vector 113 TestGptpQoS2.switchCell1.eth[0].macLayer.server outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "outgoing packet lengths"
+attr unit b
+vector 114 TestGptpQoS2.switchCell1.eth[0].macLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 115 TestGptpQoS2.switchCell1.eth[0].macLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 116 TestGptpQoS2.switchCell1.eth[0].phyLayer.phyHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 117 TestGptpQoS2.switchCell1.eth[0].phyLayer.phyHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 118 TestGptpQoS2.switchCell1.eth[0].phyLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 119 TestGptpQoS2.switchCell1.eth[0].phyLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 120 TestGptpQoS2.FGS.dstt[1].ethernet.macHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 121 TestGptpQoS2.FGS.dstt[1].ethernet.macHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 122 TestGptpQoS2.FGS.dstt[1].ethernet.paddingInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 123 TestGptpQoS2.FGS.dstt[1].ethernet.paddingInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 124 TestGptpQoS2.FGS.dstt[1].ethernet.fcsInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 125 TestGptpQoS2.FGS.dstt[1].ethernet.fcsInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 126 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 127 TestGptpQoS2.switch5GC.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 128 TestGptpQoS2.switchCell1.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 129 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 130 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 131 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.server incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "incoming packet lengths"
+attr unit b
+vector 132 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.server outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "outgoing packet lengths"
+attr unit b
+vector 133 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 134 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 135 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.phyHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 136 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.phyHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 137 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.outboundEmitter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 138 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.outboundEmitter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 139 TestGptpQoS2.switch5GC.ieee8021q.qTagHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 140 TestGptpQoS2.switch5GC.ieee8021q.qTagHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+vector 141 TestGptpQoS2.switchCell1.ieee8021q.qTagHeaderInserter incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedIn, packetPulledIn))"
+attr title "incoming packet lengths"
+attr unit b
+vector 142 TestGptpQoS2.switchCell1.ieee8021q.qTagHeaderInserter outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source "packetLength(merge(packetPushedOut, packetPulledOut))"
+attr title "outgoing packet lengths"
+attr unit b
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	27	0	1
+0	32	0	0
+0	40	0	1
+1	0	0	0
+1	0	0	0
+1	0	0	0
+1	0	0	0
+1	0	0	0
+1	27	0	576
+1	32	0	0
+1	40	0	1424
+2	0	0	0
+2	0	0	0
+3	0	0	0
+3	0	0	0
+3	32	0	1
+4	0	0	0
+5	0	0	0
+6	0	0	0
+7	0	0	0
+7	0	0	0
+7	0	0	0
+7	0	0	0
+7	0	0	0
+7	28	0	1
+7	33	0	0
+7	41	0	1
+8	0	0	0
+8	0	0	0
+8	0	0	0
+8	0	0	0
+8	0	0	0
+8	28	0	576
+8	33	0	0
+8	41	0	1424
+9	0	0	0
+9	0	0	0
+10	0	0	0
+10	0	0	0
+10	33	0	1
+11	0	0	0
+12	0	0	0
+13	0	0	0
+14	0	0	0
+14	0	0	0
+14	0	0	0
+14	0	0	0
+14	0	0	0
+15	0	0	0
+15	0	0	0
+15	0	0	0
+15	0	0	0
+15	0	0	0
+16	0	0	0
+16	0	0	0
+17	0	0	0
+17	0	0	0
+18	0	0	0
+19	0	0	0
+20	0	0	0
+21	0	0	0
+21	0	0	0
+22	0	0	0
+22	0	0	0
+23	0	0	0
+23	0	0	0
+23	0	0	0
+23	0	0	0
+23	0	0	0
+24	0	0	0
+24	0	0	0
+24	0	0	0
+24	0	0	0
+24	0	0	0
+25	0	0	0
+25	0	0	0
+26	0	0	0
+26	0	0	0
+27	0	0	0
+27	0	0	0
+28	0	0	0
+28	0	0	0
+28	0	0	0
+28	0	0	0
+28	0	0	0
+29	0	0	0
+29	0	0	0
+29	0	0	0
+29	0	0	0
+29	0	0	0
+30	0	0	0
+30	0	0	0
+31	0	0	0
+31	0	0	0
+32	0	0	0
+32	0	0	0
+33	0	0	0
+33	0	0	0
+33	0	0	0
+33	0	0	0
+33	0	0	0
+34	0	0	0
+34	0	0	0
+34	0	0	0
+34	0	0	0
+34	0	0	0
+35	0	0	0
+35	0	0	0
+36	0	0	0
+36	0	0	0
+37	0	0	0
+37	0	0	0
+38	0	0	0
+38	0	0	0
+39	0	0	0
+39	0	0	0
+39	0	0	0
+39	0	0	0
+39	0	0	0
+39	34	0	1
+39	37	0	0
+40	0	0	0
+40	0	0	0
+40	0	0	0
+40	0	0	0
+40	0	0	0
+40	34	0	576
+40	37	0	0
+41	0	0	0
+41	0	0	0
+42	0	0	0
+42	0	0	0
+42	37	0	1
+43	0	0	0
+43	0	0	0
+44	0	0	0
+44	0	0	0
+44	0	0	0
+44	0	0	0
+44	0	0	0
+45	0	0	0
+45	0	0	0
+45	0	0	0
+45	0	0	0
+45	0	0	0
+46	0	0	0
+46	0	0	0
+47	0	0	0
+47	0	0	0
+48	0	0	0
+48	0	0	0
+49	0	0	0
+49	0	0	0
+49	0	0	0
+49	0	0	0
+49	0	0	0
+50	0	0	0
+50	0	0	0
+50	0	0	0
+50	0	0	0
+50	0	0	0
+51	0	0	0
+51	0	0	0
+52	0	0	0
+52	0	0	0
+53	0	0	0
+53	0	0	0
+54	0	0	0
+54	0	0	0
+55	0	0	0
+55	0	0	0
+55	0	0	0
+55	0	0	0
+55	0	0	0
+56	0	0	0
+56	0	0	0
+56	0	0	0
+56	0	0	0
+56	0	0	0
+57	0	0	0
+57	0	0	0
+58	0	0	0
+58	0	0	0
+59	0	0	0
+59	0	0	0
+60	0	0	0
+60	0	0	0
+60	0	0	0
+60	0	0	0
+60	0	0	0
+61	0	0	0
+61	0	0	0
+61	0	0	0
+61	0	0	0
+61	0	0	0
+62	0	0	0
+62	0	0	0
+63	0	0	0
+63	0	0	0
+64	0	0	0
+64	0	0	0
+65	0	0	0
+65	0	0	0
+65	0	0	0
+65	0	0	0
+65	0	0	0
+66	0	0	0
+66	0	0	0
+66	0	0	0
+66	0	0	0
+66	0	0	0
+67	0	0	0
+67	0	0	0
+68	0	0	0
+68	0	0	0
+69	0	0	0
+70	0	0	0
+71	0	0	0
+72	5	0	1024
+73	7	0	1024
+74	27	0	432
+74	40	0	1248
+75	27	0	432
+75	40	0	1248
+76	27	0	432
+76	40	0	1248
+77	27	0	432
+77	40	0	1248
+78	27	0	432
+78	40	0	1280
+79	27	0	544
+79	40	0	1392
+80	27	0	544
+80	40	0	1392
+81	27	0	544
+81	40	0	1392
+82	27	0	544
+82	40	0	1392
+83	27	0	576
+83	40	0	1424
+84	27	0	576
+84	40	0	1424
+85	28	0	432
+85	41	0	1248
+86	28	0	432
+86	41	0	1248
+87	28	0	432
+87	41	0	1248
+88	28	0	432
+88	41	0	1248
+89	28	0	432
+89	41	0	1280
+90	28	0	544
+90	41	0	1392
+91	28	0	544
+91	41	0	1392
+92	28	0	544
+92	41	0	1392
+93	28	0	544
+93	41	0	1392
+94	28	0	576
+94	41	0	1424
+95	28	0	576
+95	41	0	1424
+96	29	0	432
+97	29	0	432
+98	30	0	128
+99	31	0	128
+100	32	0	0
+101	32	0	576
+102	32	0	576
+103	32	0	576
+104	32	0	576
+105	32	0	576
+106	32	0	576
+107	32	0	640
+108	32	0	640
+109	32	0	640
+110	33	0	0
+111	33	0	576
+112	33	0	576
+113	33	0	576
+114	33	0	576
+115	33	0	576
+116	33	0	576
+117	33	0	640
+118	33	0	640
+119	33	0	640
+120	34	0	432
+121	34	0	544
+122	34	0	544
+123	34	0	544
+124	34	0	544
+125	34	0	576
+126	34	0	576
+127	35	0	136
+128	36	0	136
+129	37	0	0
+130	37	0	576
+131	37	0	576
+132	37	0	576
+133	37	0	576
+134	37	0	576
+135	37	0	576
+136	37	0	640
+137	37	0	640
+138	37	0	640
+139	40	0	1248
+140	40	0	1280
+141	41	0	1248
+142	41	0	1280
+vector 143 TestGptpQoS2.switch5GC.ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 144 TestGptpQoS2.switch5GC.ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 145 TestGptpQoS2.switch5GC.ieee8021q.qTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 146 TestGptpQoS2.switch5GC.eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 147 TestGptpQoS2.switch5GC.eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 148 TestGptpQoS2.switch5GC.eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 149 TestGptpQoS2.switch5GC.eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 150 TestGptpQoS2.switch5GC.eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 151 TestGptpQoS2.switch5GC.eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 152 TestGptpQoS2.switch5GC.eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 153 TestGptpQoS2.switch5GC.eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 154 TestGptpQoS2.switch5GC.app[0].source dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 155 TestGptpQoS2.switch5GC.app[1].sink dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 156 TestGptpQoS2.switch5GC.app[1].sink droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 157 TestGptpQoS2.switchCell1.ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 158 TestGptpQoS2.switchCell1.ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 159 TestGptpQoS2.switchCell1.ieee8021q.qTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 160 TestGptpQoS2.switchCell1.eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 161 TestGptpQoS2.switchCell1.eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 162 TestGptpQoS2.switchCell1.eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 163 TestGptpQoS2.switchCell1.eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 164 TestGptpQoS2.switchCell1.eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 165 TestGptpQoS2.switchCell1.eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 166 TestGptpQoS2.switchCell1.eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 167 TestGptpQoS2.switchCell1.eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 168 TestGptpQoS2.switchCell1.app[0].source dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 169 TestGptpQoS2.switchCell1.app[1].sink dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 170 TestGptpQoS2.switchCell1.app[1].sink droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 171 TestGptpQoS2.switchCell2.ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 172 TestGptpQoS2.switchCell2.ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 173 TestGptpQoS2.switchCell2.ieee8021q.qTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 174 TestGptpQoS2.switchCell2.eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 175 TestGptpQoS2.switchCell2.eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 176 TestGptpQoS2.switchCell2.eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 177 TestGptpQoS2.switchCell2.eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 178 TestGptpQoS2.switchCell2.eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 179 TestGptpQoS2.switchCell2.eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 180 TestGptpQoS2.switchCell2.eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 181 TestGptpQoS2.switchCell2.eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 182 TestGptpQoS2.switchCell2.app[0].source dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 183 TestGptpQoS2.switchCell2.app[1].sink dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 184 TestGptpQoS2.switchCell2.app[1].sink droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 185 TestGptpQoS2.FGS.dstt[0].gptp.classifier dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 186 TestGptpQoS2.FGS.dstt[0].ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 187 TestGptpQoS2.FGS.dstt[0].ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 188 TestGptpQoS2.FGS.dstt[0].ieee8021q.qTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 189 TestGptpQoS2.FGS.dstt[0].ieee8021r.rTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 190 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 191 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 192 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 193 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 194 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 195 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 196 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 197 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 198 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 199 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 200 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 201 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 202 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 203 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 204 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 205 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 206 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 207 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 208 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 209 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 210 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 211 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 212 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 213 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 214 TestGptpQoS2.FGS.dstt[1].gptp.classifier dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 215 TestGptpQoS2.FGS.dstt[1].ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 216 TestGptpQoS2.FGS.dstt[1].ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 217 TestGptpQoS2.FGS.dstt[1].ieee8021q.qTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 218 TestGptpQoS2.FGS.dstt[1].ieee8021r.rTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 219 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 220 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 221 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 222 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 223 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 224 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 225 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 226 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 227 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 228 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 229 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 230 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 231 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 232 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 233 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 234 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 235 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 236 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 237 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 238 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 239 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 240 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 241 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 242 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 243 TestGptpQoS2.FGS.nwtt[0].gptp.classifier dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+vector 244 TestGptpQoS2.FGS.nwtt[0].ethernet.macHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 245 TestGptpQoS2.FGS.nwtt[0].ethernet.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 246 TestGptpQoS2.FGS.nwtt[0].ieee8021q.qTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 247 TestGptpQoS2.FGS.nwtt[0].ieee8021r.rTagHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 248 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 249 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 250 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 251 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 252 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 253 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 254 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 255 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 256 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 257 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 258 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 259 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 260 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 261 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 262 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 263 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+vector 264 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 265 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 266 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.server incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "incoming datarate"
+attr unit bps
+vector 267 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.server outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "outgoing datarate"
+attr unit bps
+vector 268 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.fcsChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 269 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.transmitter throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(transmissionEnded)
+attr title throughput
+attr unit bps
+vector 270 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.phyHeaderChecker droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+vector 271 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.receiver throughput:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(receptionEnded)
+attr title throughput
+attr unit bps
+21	43	0.000000047215	4.7215e-08
+21	43	0.000000047215	4.7215e-08
+22	43	0.000000047215	4.7215e-08
+22	43	0.000000047215	4.7215e-08
+27	43	0.000000047215	4.7215e-08
+27	43	0.000000047215	4.7215e-08
+32	43	0.000000047215	4.7215e-08
+32	43	0.000000047215	4.7215e-08
+37	43	0.000000047215	4.7215e-08
+37	43	0.000000047215	4.7215e-08
+38	43	0.000000047215	4.7215e-08
+38	43	0.000000047215	4.7215e-08
+43	43	0.000000047215	4.7215e-08
+43	43	0.000000047215	4.7215e-08
+48	43	0.000000047215	4.7215e-08
+48	43	0.000000047215	4.7215e-08
+53	43	0.000000047215	4.7215e-08
+53	43	0.000000047215	4.7215e-08
+54	43	0.000000047215	4.7215e-08
+54	43	0.000000047215	4.7215e-08
+59	43	0.000000047215	4.7215e-08
+59	43	0.000000047215	4.7215e-08
+64	43	0.000000047215	4.7215e-08
+64	43	0.000000047215	4.7215e-08
+69	43	0.000000047215	4.7219e-08
+70	43	0.000000047215	4.7219e-08
+71	43	0.000000047215	4.7215e-08
+143	43	0.000000047215	0
+144	43	0.000000047215	0
+145	43	0.000000047215	0
+146	43	0.000000047215	12199512866.674
+147	43	0.000000047215	42359419675.95
+148	43	0.000000047215	12199512866.674
+149	43	0.000000047215	12199512866.674
+150	43	0.000000047215	0
+151	43	0.000000047215	0
+152	43	0.000000047215	0
+153	43	0.000000047215	0
+154	43	0.000000047215	21688022874.087
+155	43	0.000000047215	0
+156	43	0.000000047215	0
+157	43	0.000000047215	0
+158	43	0.000000047215	0
+159	43	0.000000047215	0
+160	43	0.000000047215	12199512866.674
+161	43	0.000000047215	42359419675.95
+162	43	0.000000047215	12199512866.674
+163	43	0.000000047215	12199512866.674
+164	43	0.000000047215	0
+165	43	0.000000047215	0
+166	43	0.000000047215	0
+167	43	0.000000047215	0
+168	43	0.000000047215	21688022874.087
+169	43	0.000000047215	0
+170	43	0.000000047215	0
+171	43	0.000000047215	0
+172	43	0.000000047215	0
+173	43	0.000000047215	0
+174	43	0.000000047215	0
+175	43	0.000000047215	0
+176	43	0.000000047215	0
+177	43	0.000000047215	0
+178	43	0.000000047215	0
+179	43	0.000000047215	0
+180	43	0.000000047215	0
+181	43	0.000000047215	0
+182	43	0.000000047215	0
+183	43	0.000000047215	0
+184	43	0.000000047215	0
+185	43	0.000000047215	0
+186	43	0.000000047215	0
+187	43	0.000000047215	0
+188	43	0.000000047215	0
+189	43	0.000000047215	0
+190	43	0.000000047215	0
+191	43	0.000000047215	0
+192	43	0.000000047215	0
+193	43	0.000000047215	0
+194	43	0.000000047215	0
+195	43	0.000000047215	0
+196	43	0.000000047215	0
+197	43	0.000000047215	0
+198	43	0.000000047215	0
+199	43	0.000000047215	0
+200	43	0.000000047215	0
+201	43	0.000000047215	0
+202	43	0.000000047215	0
+203	43	0.000000047215	0
+204	43	0.000000047215	0
+205	43	0.000000047215	0
+206	43	0.000000047215	0
+207	43	0.000000047215	0
+208	43	0.000000047215	0
+209	43	0.000000047215	0
+210	43	0.000000047215	0
+211	43	0.000000047215	0
+212	43	0.000000047215	0
+213	43	0.000000047215	0
+214	43	0.000000047215	0
+215	43	0.000000047215	0
+216	43	0.000000047215	0
+217	43	0.000000047215	0
+218	43	0.000000047215	0
+219	43	0.000000047215	12199512866.674
+220	43	0.000000047215	12199512866.674
+221	43	0.000000047215	12199512866.674
+222	43	0.000000047215	12199512866.674
+223	43	0.000000047215	0
+224	43	0.000000047215	0
+225	43	0.000000047215	0
+226	43	0.000000047215	0
+227	43	0.000000047215	0
+228	43	0.000000047215	0
+229	43	0.000000047215	0
+230	43	0.000000047215	0
+231	43	0.000000047215	0
+232	43	0.000000047215	0
+233	43	0.000000047215	0
+234	43	0.000000047215	0
+235	43	0.000000047215	0
+236	43	0.000000047215	0
+237	43	0.000000047215	0
+238	43	0.000000047215	0
+239	43	0.000000047215	0
+240	43	0.000000047215	0
+241	43	0.000000047215	0
+242	43	0.000000047215	0
+243	43	0.000000047215	0
+244	43	0.000000047215	0
+245	43	0.000000047215	0
+246	43	0.000000047215	0
+247	43	0.000000047215	0
+248	43	0.000000047215	0
+249	43	0.000000047215	0
+250	43	0.000000047215	0
+251	43	0.000000047215	0
+252	43	0.000000047215	0
+253	43	0.000000047215	0
+254	43	0.000000047215	0
+255	43	0.000000047215	0
+256	43	0.000000047215	0
+257	43	0.000000047215	0
+258	43	0.000000047215	0
+259	43	0.000000047215	0
+260	43	0.000000047215	0
+261	43	0.000000047215	0
+262	43	0.000000047215	0
+263	43	0.000000047215	0
+264	43	0.000000047215	0
+265	43	0.000000047215	0
+266	43	0.000000047215	0
+267	43	0.000000047215	0
+268	43	0.000000047215	0
+269	43	0.000000047215	0
+270	43	0.000000047215	0
+271	43	0.000000047215	0
+

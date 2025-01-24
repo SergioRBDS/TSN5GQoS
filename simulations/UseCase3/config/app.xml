@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8'?>
+<config>
+    <app>
+        <param name="source">Sensor</param>
+        <param name="destination">PLC</param>
+        <param name="packetLength">64B</param>
+        <param name="productionInterval">20ms</param>
+        <param name="pcp">1</param>
+        <param name="vlan">30</param>
+        <param name="latency">20ms</param>
+        <param name="destPort">1011</param>
+        <param name="displayName">NovaPeca</param>
+    </app>
+    <app>
+        <param name="source">Camera</param>
+        <param name="destination">PLC</param>
+        <param name="packetLength">1446B</param>
+        <param name="productionInterval">15ms</param>
+        <param name="pcp">3</param>
+        <param name="vlan">54</param>
+        <param name="latency">15ms</param>
+        <param name="destPort">1012</param>
+        <param name="displayName">StatusPeca</param>
+    </app>
+    <app>
+        <param name="source">Robo</param>
+        <param name="destination">PLC</param>
+        <param name="packetLength">128B</param>
+        <param name="productionInterval">5ms</param>
+        <param name="pcp">4</param>
+        <param name="vlan">30</param>
+        <param name="latency">5ms</param>
+        <param name="destPort">1022</param>
+        <param name="displayName">S3</param>
+    </app>
+    <app>
+        <param name="source">PLC</param>
+        <param name="destination">Robo</param>
+        <param name="packetLength">200B</param>
+        <param name="productionInterval">5ms</param>
+        <param name="pcp">6</param>
+        <param name="vlan">30</param>
+        <param name="destPort">1013</param>
+        <param name="deadline">5ms</param>
+        <param name="displayName">ToRoboS1</param>
+    </app>
+
+    <app>
+        <param name="source">PLC</param>
+        <param name="destination">Esteira</param>
+        <param name="packetLength">50B</param>
+        <param name="productionInterval">5ms</param>
+        <param name="pcp">5</param>
+        <param name="vlan">30</param>
+        <param name="destPort">1091</param>
+        <param name="deadline">5ms</param>
+        <param name="displayName">ToEsteiraS1</param>
+    </app>
+    <app>
+        <param name="source">Esteira</param>
+        <param name="destination">PLC</param>
+        <param name="packetLength">50B</param>
+        <param name="productionInterval">5ms</param>
+        <param name="pcp">0</param>
+        <param name="vlan">30</param>
+        <param name="destPort">1081</param>
+        <param name="displayName">ToPLC</param>
+    </app>
+    <app>
+        <param name="source">gPTP</param>
+        <param name="destination">gPTP</param>
+        <param name="packetLength">50B</param>
+        <param name="productionInterval">125ms</param>
+        <param name="pcp">7</param>
+        <param name="vlan">30</param>
+        <param name="destPort">1000</param>
+        <param name="deadline">1ms</param>
+        <param name="displayName">gPTP</param>
+    </app>
+</config>

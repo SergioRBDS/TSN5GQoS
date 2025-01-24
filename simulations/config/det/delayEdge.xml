@@ -1,0 +1,3 @@
+<delays>
+<uplink device="talker">rngProvider("histogramContainer","Uplink")</uplink>
+</delays>

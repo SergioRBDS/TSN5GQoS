@@ -1,0 +1,2319 @@
+version 3
+run AppsDL-0-20241203-17:24:30-17882
+attr configname AppsDL
+attr datetime 20241203-17:24:30
+attr datetimef 20241203-172430
+attr experiment AppsDL
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network TestGptpQoS2
+attr processid 17882
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../../inet4.5.4/images
+config extends "DL, Apps"
+config *.switch5GC.hasEgressTrafficShaping true
+config *.switchCell1.hasEgressTrafficShaping true
+config *.FGS.**.hasEgressTrafficShaping true
+config *.**.hasTimeSynchronization true
+config *.switch5GC.gptp.gptpNodeType "\"MASTER_NODE\""
+config *.switch5GC.gptp.masterPorts "[\"eth0\"]"
+config *.switch5GC.gptp.slavePort "\"\""
+config *.switchCell1.gptp.slavePort "\"eth0\""
+config *.switchCell1.gptp.masterPorts []
+config *.switchCell2.gptp.slavePort "\"eth0\""
+config *.switchCell2.gptp.masterPorts []
+config *.FGS.nwtt[*].gptp.domain[*].slavePort "\"eth0\""
+config *.FGS.nwtt[*].gptp.domain[*].masterPorts "[\"tt0\",\"tt1\"]"
+config *.FGS.dstt[*].gptp.domain[*].slavePort "\"tt0\""
+config *.FGS.dstt[*].gptp.domain[*].masterPorts "[\"eth0\"]"
+config **.referenceClock "\"switch5GC.clock\""
+config *.visualizer.dataLinkVisualizer[0].displayLinks true
+config *.visualizer.dataLinkVisualizer[0].activityLevel "\"protocol\""
+config *.visualizer.dataLinkVisualizer[0].packetFilter "\"GptpSync\""
+config *.visualizer.dataLinkVisualizer[0].lineColor "\"blue2\""
+config *.visualizer.numInfoVisualizers 3
+config *.visualizer.infoVisualizer[0].modules "\"*.switch5GC.clock\""
+config *.visualizer.infoVisualizer[1].modules "\"*.switchCell1.clock\""
+config *.visualizer.infoVisualizer[1].placementHint "\"topLeft\""
+config *.visualizer.infoVisualizer[2].modules "\"*.switchCell2*.clock\""
+config *.visualizer.infoVisualizer[2].placementHint "\"topRight\""
+config *.switch5GC.clock.displayStringTextFormat "\"time: %T\""
+config *.switchCell1.clock.displayStringTextFormat "\"diff: %d\""
+config *.switchCell2.clock.displayStringTextFormat "\"diff: %d\""
+config *.FGS.**.clock.typename IdealClock
+config **.clock.oscillator.typename ConstantDriftOscillator
+config *.switch5GC.clock.oscillator.driftRate 5ppm
+config **.oscillator.driftRate 100ppm
+config *.switch5GC.numApps 2
+config *.switch5GC.hasOutgoingStreams true
+config *.switch5GC.hasIncomingStreams true
+config *.switch5GC.app[0].typename UdpSourceApp
+config *.switch5GC.app[0].io.destAddress "\"switchCell1\""
+config *.switch5GC.app[0].io.destPort 2000
+config *.switch5GC.app[0].source.packetLength 128B
+config *.switch5GC.app[0].source.productionInterval 50ms
+config *.switch5GC.app[0].source.initialProductionOffset 10ms
+config *.switch5GC.app[1].typename UdpSinkApp
+config *.switch5GC.app[1].io.localPort 2001
+config *.switchCell1.numApps 2
+config *.switchCell1.hasOutgoingStreams true
+config *.switchCell1.hasIncomingStreams true
+config *.switchCell1.app[0].typename UdpSourceApp
+config *.switchCell1.app[0].io.destAddress "\"switch5GC\""
+config *.switchCell1.app[0].io.destPort 2001
+config *.switchCell1.app[0].source.packetLength 128B
+config *.switchCell1.app[0].source.productionInterval 10ms
+config *.switchCell1.app[0].source.initialProductionOffset 10ms
+config *.switchCell1.app[1].typename UdpSinkApp
+config *.switchCell1.app[1].io.localPort 2000
+config *.switchCell2.numApps 2
+config *.switchCell2.hasOutgoingStreams true
+config *.switchCell2.hasIncomingStreams true
+config *.switchCell2.app[0].typename UdpSourceApp
+config *.switchCell2.app[0].io.destAddress "\"switch5GC\""
+config *.switchCell2.app[0].io.destPort 2001
+config *.switchCell2.app[0].source.packetLength 128B
+config *.switchCell2.app[0].source.productionInterval 1000s
+config *.switchCell2.app[0].source.initialProductionOffset 10ms
+config *.switchCell2.app[1].typename UdpSinkApp
+config *.switchCell2.app[1].io.localPort 2000
+config *.switch5GC.bridging.streamIdentifier.identifier.mapping "[{stream: \"PLC10\", packetFilter: expr(has(udp))}]"
+config *.switch5GC.bridging.streamCoder.encoder.mapping "[{stream: \"PLC10\", pcp: 1}]"
+config *.switchCell1.bridging.streamIdentifier.identifier.mapping "[{stream: \"Sensor10\", packetFilter: expr(has(udp))}]"
+config *.switchCell1.bridging.streamCoder.encoder.mapping "[{stream: \"Sensor10\", pcp: 1}]"
+config network TestGptpQoS2
+config sim-time-limit 100s
+config **.TSNAppsTableFile "xmldoc(\"config/app.xml\")"
+config *.histogramContainer.histograms "{Uplink: \"../../../deterministic6g_data/PD-Wireless-5G-1/s1-UL_wall.xml\", Downlink: \"../../../deterministic6g_data/PD-Wireless-5G-1/s10-DL_wall.xml\", D2D: \"../../../deterministic6g_data/PD-Wireless-5G-1/testeD2D.xml\"}"
+config *.visualizer.typename IntegratedMultiCanvasVisualizer
+config *.visualizer.infoVisualizer[*].displayInfos true
+
+vector 0 TestGptpQoS2.switch5GC.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(localSignal(packetPushEnded)) + count(localSignal(packetPushStarted)) - count(localSignal(packetPulled)) - count(localSignal(packetRemoved)) - count(localSignal(packetDropped))))"
+attr title "queue length"
+attr unit pk
+vector 1 TestGptpQoS2.switch5GC.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(localSignal(packetPushEnded)) + sum(packetLength(localSignal(packetPushStarted))) - sum(packetLength(localSignal(packetPulled))) - sum(packetLength(localSignal(packetRemoved))) - sum(packetLength(localSignal(packetDropped)))))"
+attr title "queue bit length"
+attr unit b
+vector 2 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[0] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 3 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[0] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 4 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[1] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 5 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[1] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 6 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[2] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 7 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[2] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 8 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[3] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 9 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[3] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 10 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[4] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 11 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[4] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 12 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[5] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 13 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[5] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 14 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[6] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 15 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[6] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 16 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[7] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 17 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.queue[7] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 18 TestGptpQoS2.switch5GC.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 19 TestGptpQoS2.switch5GC.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 20 TestGptpQoS2.switch5GC.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 21 TestGptpQoS2.switch5GC.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 22 TestGptpQoS2.switch5GC.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 23 TestGptpQoS2.switchCell1.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(localSignal(packetPushEnded)) + count(localSignal(packetPushStarted)) - count(localSignal(packetPulled)) - count(localSignal(packetRemoved)) - count(localSignal(packetDropped))))"
+attr title "queue length"
+attr unit pk
+vector 24 TestGptpQoS2.switchCell1.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(localSignal(packetPushEnded)) + sum(packetLength(localSignal(packetPushStarted))) - sum(packetLength(localSignal(packetPulled))) - sum(packetLength(localSignal(packetRemoved))) - sum(packetLength(localSignal(packetDropped)))))"
+attr title "queue bit length"
+attr unit b
+vector 25 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[0] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 26 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[0] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 27 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[1] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 28 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[1] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 29 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[2] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 30 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[2] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 31 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[3] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 32 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[3] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 33 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[4] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 34 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[4] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 35 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[5] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 36 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[5] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 37 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[6] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 38 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[6] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 39 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[7] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 40 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.queue[7] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 41 TestGptpQoS2.switchCell1.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 42 TestGptpQoS2.switchCell1.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 43 TestGptpQoS2.switchCell1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 44 TestGptpQoS2.switchCell1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 45 TestGptpQoS2.switchCell1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 46 TestGptpQoS2.switchCell2.eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 47 TestGptpQoS2.switchCell2.eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 48 TestGptpQoS2.switchCell2.eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 49 TestGptpQoS2.switchCell2.eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 50 TestGptpQoS2.switchCell2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 51 TestGptpQoS2.switchCell2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 52 TestGptpQoS2.switchCell2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 53 TestGptpQoS2.FGS.dstt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 54 TestGptpQoS2.FGS.dstt[0].eth[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 55 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(localSignal(packetPushEnded)) + count(localSignal(packetPushStarted)) - count(localSignal(packetPulled)) - count(localSignal(packetRemoved)) - count(localSignal(packetDropped))))"
+attr title "queue length"
+attr unit pk
+vector 56 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(localSignal(packetPushEnded)) + sum(packetLength(localSignal(packetPushStarted))) - sum(packetLength(localSignal(packetPulled))) - sum(packetLength(localSignal(packetRemoved))) - sum(packetLength(localSignal(packetDropped)))))"
+attr title "queue bit length"
+attr unit b
+vector 57 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[0] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 58 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[0] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 59 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[1] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 60 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[1] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 61 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[2] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 62 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[2] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 63 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[3] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 64 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[3] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 65 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[4] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 66 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[4] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 67 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[5] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 68 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[5] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 69 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[6] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 70 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[6] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 71 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[7] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 72 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.queue[7] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 73 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 74 TestGptpQoS2.FGS.dstt[0].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 75 TestGptpQoS2.FGS.dstt[0].tt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 76 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 77 TestGptpQoS2.FGS.dstt[0].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 78 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 79 TestGptpQoS2.FGS.dstt[0].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 80 TestGptpQoS2.FGS.dstt[0].tt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 81 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 82 TestGptpQoS2.FGS.dstt[0].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 83 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 84 TestGptpQoS2.FGS.dstt[0].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 85 TestGptpQoS2.FGS.dstt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 86 TestGptpQoS2.FGS.dstt[1].eth[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 87 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(localSignal(packetPushEnded)) + count(localSignal(packetPushStarted)) - count(localSignal(packetPulled)) - count(localSignal(packetRemoved)) - count(localSignal(packetDropped))))"
+attr title "queue length"
+attr unit pk
+vector 88 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(localSignal(packetPushEnded)) + sum(packetLength(localSignal(packetPushStarted))) - sum(packetLength(localSignal(packetPulled))) - sum(packetLength(localSignal(packetRemoved))) - sum(packetLength(localSignal(packetDropped)))))"
+attr title "queue bit length"
+attr unit b
+vector 89 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[0] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 90 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[0] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 91 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[1] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 92 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[1] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 93 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[2] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 94 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[2] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 95 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[3] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 96 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[3] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 97 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[4] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 98 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[4] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 99 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[5] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 100 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[5] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 101 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[6] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 102 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[6] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 103 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[7] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 104 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.queue[7] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 105 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 106 TestGptpQoS2.FGS.dstt[1].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 107 TestGptpQoS2.FGS.dstt[1].tt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 108 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 109 TestGptpQoS2.FGS.dstt[1].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 110 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 111 TestGptpQoS2.FGS.dstt[1].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 112 TestGptpQoS2.FGS.dstt[1].tt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 113 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 114 TestGptpQoS2.FGS.dstt[1].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 115 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 116 TestGptpQoS2.FGS.dstt[1].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 117 TestGptpQoS2.FGS.nwtt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 118 TestGptpQoS2.FGS.nwtt[0].eth[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 119 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(localSignal(packetPushEnded)) + count(localSignal(packetPushStarted)) - count(localSignal(packetPulled)) - count(localSignal(packetRemoved)) - count(localSignal(packetDropped))))"
+attr title "queue length"
+attr unit pk
+vector 120 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(localSignal(packetPushEnded)) + sum(packetLength(localSignal(packetPushStarted))) - sum(packetLength(localSignal(packetPulled))) - sum(packetLength(localSignal(packetRemoved))) - sum(packetLength(localSignal(packetDropped)))))"
+attr title "queue bit length"
+attr unit b
+vector 121 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[0] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 122 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[0] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 123 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[1] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 124 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[1] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 125 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[2] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 126 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[2] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 127 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[3] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 128 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[3] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 129 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[4] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 130 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[4] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 131 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[5] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 132 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[5] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 133 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[6] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 134 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[6] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 135 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[7] queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 136 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.queue[7] queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 137 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 138 TestGptpQoS2.FGS.nwtt[0].eth[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 139 TestGptpQoS2.FGS.nwtt[0].tt[0].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 140 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 141 TestGptpQoS2.FGS.nwtt[0].tt[0].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 142 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 143 TestGptpQoS2.FGS.nwtt[0].tt[0].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 144 TestGptpQoS2.FGS.nwtt[0].tt[1].clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 145 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 146 TestGptpQoS2.FGS.nwtt[0].tt[1].macLayer.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 147 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.interFrameGapInserter interpacketGap:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(interpacketGapStarted) - count(interpacketGapEnded)"
+attr title "interpacket gap state"
+attr type int
+vector 148 TestGptpQoS2.FGS.nwtt[0].tt[1].phyLayer.transmitter transmitting:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "count(transmissionStarted) - count(transmissionEnded)"
+attr title "transmitting state"
+attr type int
+vector 149 TestGptpQoS2.switch5GC.clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 150 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[0] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 151 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[0] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 152 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[1] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 153 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[1] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 154 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[2] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 155 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[2] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 156 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[3] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 157 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[3] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 158 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[4] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 159 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[4] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 160 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[5] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 161 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[5] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 162 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[6] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 163 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[6] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 164 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[7] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 165 TestGptpQoS2.switch5GC.eth[0].macLayer.queue.transmissionGate[7] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 166 TestGptpQoS2.switchCell1.clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 167 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[0] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 168 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[0] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 169 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[1] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 170 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[1] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 171 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[2] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 172 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[2] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 173 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[3] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 174 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[3] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 175 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[4] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 176 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[4] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 177 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[5] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 178 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[5] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 179 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[6] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 180 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[6] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 181 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[7] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 182 TestGptpQoS2.switchCell1.eth[0].macLayer.queue.transmissionGate[7] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 183 TestGptpQoS2.switchCell2.clock timeChanged:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr title "Clock time"
+vector 184 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[0] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 185 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[0] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 186 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[1] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 187 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[1] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 188 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[2] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 189 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[2] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 190 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[3] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 191 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[3] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 192 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[4] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 193 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[4] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 194 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[5] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 195 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[5] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 196 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[6] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 197 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[6] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 198 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[7] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 199 TestGptpQoS2.FGS.dstt[0].eth[0].macLayer.queue.transmissionGate[7] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 200 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[0] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 201 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[0] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 202 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[1] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 203 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[1] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 204 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[2] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 205 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[2] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 206 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[3] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 207 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[3] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 208 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[4] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 209 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[4] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 210 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[5] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 211 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[5] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 212 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[6] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 213 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[6] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 214 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[7] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 215 TestGptpQoS2.FGS.dstt[1].eth[0].macLayer.queue.transmissionGate[7] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 216 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[0] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 217 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[0] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 218 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[1] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 219 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[1] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 220 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[2] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 221 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[2] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 222 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[3] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 223 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[3] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 224 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[4] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 225 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[4] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 226 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[5] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 227 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[5] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 228 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[6] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 229 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[6] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+vector 230 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[7] gateState:vector ETV
+attr enum CLOSED,OPEN
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source gateStateChanged
+attr title "gate state"
+attr type enum
+vector 231 TestGptpQoS2.FGS.nwtt[0].eth[0].macLayer.queue.transmissionGate[7] guardBandState:vector ETV
+attr enum ON,OFF
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source guardBandStateChanged
+attr title "guard band state"
+attr type enum
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+1	0	0	0
+1	0	0	0
+1	0	0	0
+1	0	0	0
+1	0	0	0
+2	0	0	0
+2	0	0	0
+2	0	0	0
+2	0	0	0
+2	0	0	0
+3	0	0	0
+3	0	0	0
+3	0	0	0
+3	0	0	0
+3	0	0	0
+4	0	0	0
+4	0	0	0
+4	0	0	0
+4	0	0	0
+4	0	0	0
+5	0	0	0
+5	0	0	0
+5	0	0	0
+5	0	0	0
+5	0	0	0
+6	0	0	0
+6	0	0	0
+6	0	0	0
+6	0	0	0
+6	0	0	0
+7	0	0	0
+7	0	0	0
+7	0	0	0
+7	0	0	0
+7	0	0	0
+8	0	0	0
+8	0	0	0
+8	0	0	0
+8	0	0	0
+8	0	0	0
+9	0	0	0
+9	0	0	0
+9	0	0	0
+9	0	0	0
+9	0	0	0
+10	0	0	0
+10	0	0	0
+10	0	0	0
+10	0	0	0
+10	0	0	0
+11	0	0	0
+11	0	0	0
+11	0	0	0
+11	0	0	0
+11	0	0	0
+12	0	0	0
+12	0	0	0
+12	0	0	0
+12	0	0	0
+12	0	0	0
+13	0	0	0
+13	0	0	0
+13	0	0	0
+13	0	0	0
+13	0	0	0
+14	0	0	0
+14	0	0	0
+14	0	0	0
+14	0	0	0
+14	0	0	0
+15	0	0	0
+15	0	0	0
+15	0	0	0
+15	0	0	0
+15	0	0	0
+16	0	0	0
+16	0	0	0
+16	0	0	0
+16	0	0	0
+16	0	0	0
+17	0	0	0
+17	0	0	0
+17	0	0	0
+17	0	0	0
+17	0	0	0
+18	0	0	0
+18	0	0	0
+19	0	0	0
+19	0	0	0
+20	0	0	0
+21	0	0	0
+22	0	0	0
+23	0	0	0
+23	0	0	0
+23	0	0	0
+23	0	0	0
+23	0	0	0
+24	0	0	0
+24	0	0	0
+24	0	0	0
+24	0	0	0
+24	0	0	0
+25	0	0	0
+25	0	0	0
+25	0	0	0
+25	0	0	0
+25	0	0	0
+26	0	0	0
+26	0	0	0
+26	0	0	0
+26	0	0	0
+26	0	0	0
+27	0	0	0
+27	0	0	0
+27	0	0	0
+27	0	0	0
+27	0	0	0
+28	0	0	0
+28	0	0	0
+28	0	0	0
+28	0	0	0
+28	0	0	0
+29	0	0	0
+29	0	0	0
+29	0	0	0
+29	0	0	0
+29	0	0	0
+30	0	0	0
+30	0	0	0
+30	0	0	0
+30	0	0	0
+30	0	0	0
+31	0	0	0
+31	0	0	0
+31	0	0	0
+31	0	0	0
+31	0	0	0
+32	0	0	0
+32	0	0	0
+32	0	0	0
+32	0	0	0
+32	0	0	0
+33	0	0	0
+33	0	0	0
+33	0	0	0
+33	0	0	0
+33	0	0	0
+34	0	0	0
+34	0	0	0
+34	0	0	0
+34	0	0	0
+34	0	0	0
+35	0	0	0
+35	0	0	0
+35	0	0	0
+35	0	0	0
+35	0	0	0
+36	0	0	0
+36	0	0	0
+36	0	0	0
+36	0	0	0
+36	0	0	0
+37	0	0	0
+37	0	0	0
+37	0	0	0
+37	0	0	0
+37	0	0	0
+38	0	0	0
+38	0	0	0
+38	0	0	0
+38	0	0	0
+38	0	0	0
+39	0	0	0
+39	0	0	0
+39	0	0	0
+39	0	0	0
+39	0	0	0
+40	0	0	0
+40	0	0	0
+40	0	0	0
+40	0	0	0
+40	0	0	0
+41	0	0	0
+41	0	0	0
+42	0	0	0
+42	0	0	0
+43	0	0	0
+44	0	0	0
+45	0	0	0
+46	0	0	0
+46	0	0	0
+46	0	0	0
+46	0	0	0
+46	0	0	0
+47	0	0	0
+47	0	0	0
+47	0	0	0
+47	0	0	0
+47	0	0	0
+48	0	0	0
+48	0	0	0
+49	0	0	0
+49	0	0	0
+50	0	0	0
+51	0	0	0
+52	0	0	0
+53	0	0	0
+53	0	0	0
+54	0	0	0
+54	0	0	0
+55	0	0	0
+55	0	0	0
+55	0	0	0
+55	0	0	0
+55	0	0	0
+56	0	0	0
+56	0	0	0
+56	0	0	0
+56	0	0	0
+56	0	0	0
+57	0	0	0
+57	0	0	0
+57	0	0	0
+57	0	0	0
+57	0	0	0
+58	0	0	0
+58	0	0	0
+58	0	0	0
+58	0	0	0
+58	0	0	0
+59	0	0	0
+59	0	0	0
+59	0	0	0
+59	0	0	0
+59	0	0	0
+60	0	0	0
+60	0	0	0
+60	0	0	0
+60	0	0	0
+60	0	0	0
+61	0	0	0
+61	0	0	0
+61	0	0	0
+61	0	0	0
+61	0	0	0
+62	0	0	0
+62	0	0	0
+62	0	0	0
+62	0	0	0
+62	0	0	0
+63	0	0	0
+63	0	0	0
+63	0	0	0
+63	0	0	0
+63	0	0	0
+64	0	0	0
+64	0	0	0
+64	0	0	0
+64	0	0	0
+64	0	0	0
+65	0	0	0
+65	0	0	0
+65	0	0	0
+65	0	0	0
+65	0	0	0
+66	0	0	0
+66	0	0	0
+66	0	0	0
+66	0	0	0
+66	0	0	0
+67	0	0	0
+67	0	0	0
+67	0	0	0
+67	0	0	0
+67	0	0	0
+68	0	0	0
+68	0	0	0
+68	0	0	0
+68	0	0	0
+68	0	0	0
+69	0	0	0
+69	0	0	0
+69	0	0	0
+69	0	0	0
+69	0	0	0
+70	0	0	0
+70	0	0	0
+70	0	0	0
+70	0	0	0
+70	0	0	0
+71	0	0	0
+71	0	0	0
+71	0	0	0
+71	0	0	0
+71	0	0	0
+72	0	0	0
+72	0	0	0
+72	0	0	0
+72	0	0	0
+72	0	0	0
+73	0	0	0
+73	0	0	0
+74	0	0	0
+74	0	0	0
+75	0	0	0
+75	0	0	0
+76	0	0	0
+76	0	0	0
+76	0	0	0
+76	0	0	0
+76	0	0	0
+77	0	0	0
+77	0	0	0
+77	0	0	0
+77	0	0	0
+77	0	0	0
+78	0	0	0
+78	0	0	0
+79	0	0	0
+79	0	0	0
+80	0	0	0
+80	0	0	0
+81	0	0	0
+81	0	0	0
+81	0	0	0
+81	0	0	0
+81	0	0	0
+82	0	0	0
+82	0	0	0
+82	0	0	0
+82	0	0	0
+82	0	0	0
+83	0	0	0
+83	0	0	0
+84	0	0	0
+84	0	0	0
+85	0	0	0
+85	0	0	0
+86	0	0	0
+86	0	0	0
+87	0	0	0
+87	0	0	0
+87	0	0	0
+87	0	0	0
+87	0	0	0
+88	0	0	0
+88	0	0	0
+88	0	0	0
+88	0	0	0
+88	0	0	0
+89	0	0	0
+89	0	0	0
+89	0	0	0
+89	0	0	0
+89	0	0	0
+90	0	0	0
+90	0	0	0
+90	0	0	0
+90	0	0	0
+90	0	0	0
+91	0	0	0
+91	0	0	0
+91	0	0	0
+91	0	0	0
+91	0	0	0
+92	0	0	0
+92	0	0	0
+92	0	0	0
+92	0	0	0
+92	0	0	0
+93	0	0	0
+93	0	0	0
+93	0	0	0
+93	0	0	0
+93	0	0	0
+94	0	0	0
+94	0	0	0
+94	0	0	0
+94	0	0	0
+94	0	0	0
+95	0	0	0
+95	0	0	0
+95	0	0	0
+95	0	0	0
+95	0	0	0
+96	0	0	0
+96	0	0	0
+96	0	0	0
+96	0	0	0
+96	0	0	0
+97	0	0	0
+97	0	0	0
+97	0	0	0
+97	0	0	0
+97	0	0	0
+98	0	0	0
+98	0	0	0
+98	0	0	0
+98	0	0	0
+98	0	0	0
+99	0	0	0
+99	0	0	0
+99	0	0	0
+99	0	0	0
+99	0	0	0
+100	0	0	0
+100	0	0	0
+100	0	0	0
+100	0	0	0
+100	0	0	0
+101	0	0	0
+101	0	0	0
+101	0	0	0
+101	0	0	0
+101	0	0	0
+102	0	0	0
+102	0	0	0
+102	0	0	0
+102	0	0	0
+102	0	0	0
+103	0	0	0
+103	0	0	0
+103	0	0	0
+103	0	0	0
+103	0	0	0
+104	0	0	0
+104	0	0	0
+104	0	0	0
+104	0	0	0
+104	0	0	0
+105	0	0	0
+105	0	0	0
+106	0	0	0
+106	0	0	0
+107	0	0	0
+107	0	0	0
+108	0	0	0
+108	0	0	0
+108	0	0	0
+108	0	0	0
+108	0	0	0
+109	0	0	0
+109	0	0	0
+109	0	0	0
+109	0	0	0
+109	0	0	0
+110	0	0	0
+110	0	0	0
+111	0	0	0
+111	0	0	0
+112	0	0	0
+112	0	0	0
+113	0	0	0
+113	0	0	0
+113	0	0	0
+113	0	0	0
+113	0	0	0
+114	0	0	0
+114	0	0	0
+114	0	0	0
+114	0	0	0
+114	0	0	0
+115	0	0	0
+115	0	0	0
+116	0	0	0
+116	0	0	0
+117	0	0	0
+117	0	0	0
+118	0	0	0
+118	0	0	0
+119	0	0	0
+119	0	0	0
+119	0	0	0
+119	0	0	0
+119	0	0	0
+120	0	0	0
+120	0	0	0
+120	0	0	0
+120	0	0	0
+120	0	0	0
+121	0	0	0
+121	0	0	0
+121	0	0	0
+121	0	0	0
+121	0	0	0
+122	0	0	0
+122	0	0	0
+122	0	0	0
+122	0	0	0
+122	0	0	0
+123	0	0	0
+123	0	0	0
+123	0	0	0
+123	0	0	0
+123	0	0	0
+124	0	0	0
+124	0	0	0
+124	0	0	0
+124	0	0	0
+124	0	0	0
+125	0	0	0
+125	0	0	0
+125	0	0	0
+125	0	0	0
+125	0	0	0
+126	0	0	0
+126	0	0	0
+126	0	0	0
+126	0	0	0
+126	0	0	0
+127	0	0	0
+127	0	0	0
+127	0	0	0
+127	0	0	0
+127	0	0	0
+128	0	0	0
+128	0	0	0
+128	0	0	0
+128	0	0	0
+128	0	0	0
+129	0	0	0
+129	0	0	0
+129	0	0	0
+129	0	0	0
+129	0	0	0
+130	0	0	0
+130	0	0	0
+130	0	0	0
+130	0	0	0
+130	0	0	0
+131	0	0	0
+131	0	0	0
+131	0	0	0
+131	0	0	0
+131	0	0	0
+132	0	0	0
+132	0	0	0
+132	0	0	0
+132	0	0	0
+132	0	0	0
+133	0	0	0
+133	0	0	0
+133	0	0	0
+133	0	0	0
+133	0	0	0
+134	0	0	0
+134	0	0	0
+134	0	0	0
+134	0	0	0
+134	0	0	0
+135	0	0	0
+135	0	0	0
+135	0	0	0
+135	0	0	0
+135	0	0	0
+136	0	0	0
+136	0	0	0
+136	0	0	0
+136	0	0	0
+136	0	0	0
+137	0	0	0
+137	0	0	0
+138	0	0	0
+138	0	0	0
+139	0	0	0
+139	0	0	0
+140	0	0	0
+140	0	0	0
+140	0	0	0
+140	0	0	0
+140	0	0	0
+141	0	0	0
+141	0	0	0
+141	0	0	0
+141	0	0	0
+141	0	0	0
+142	0	0	0
+142	0	0	0
+143	0	0	0
+143	0	0	0
+144	0	0	0
+144	0	0	0
+145	0	0	0
+145	0	0	0
+145	0	0	0
+145	0	0	0
+145	0	0	0
+146	0	0	0
+146	0	0	0
+146	0	0	0
+146	0	0	0
+146	0	0	0
+147	0	0	0
+147	0	0	0
+148	0	0	0
+148	0	0	0
+149	0	0	0
+150	0	0	1
+151	0	0	0
+152	0	0	1
+153	0	0	0
+154	0	0	1
+155	0	0	0
+156	0	0	1
+157	0	0	0
+158	0	0	1
+159	0	0	0
+160	0	0	1
+161	0	0	0
+162	0	0	1
+163	0	0	0
+164	0	0	1
+165	0	0	0
+166	0	0	0
+167	0	0	1
+168	0	0	0
+169	0	0	1
+170	0	0	0
+171	0	0	1
+172	0	0	0
+173	0	0	1
+174	0	0	0
+175	0	0	1
+176	0	0	0
+177	0	0	1
+178	0	0	0
+179	0	0	1
+180	0	0	0
+181	0	0	1
+182	0	0	0
+183	0	0	0
+184	0	0	1
+185	0	0	0
+186	0	0	1
+187	0	0	0
+188	0	0	1
+189	0	0	0
+190	0	0	1
+191	0	0	0
+192	0	0	1
+193	0	0	0
+194	0	0	1
+195	0	0	0
+196	0	0	1
+197	0	0	0
+198	0	0	1
+199	0	0	0
+200	0	0	1
+201	0	0	0
+202	0	0	1
+203	0	0	0
+204	0	0	1
+205	0	0	0
+206	0	0	1
+207	0	0	0
+208	0	0	1
+209	0	0	0
+210	0	0	1
+211	0	0	0
+212	0	0	1
+213	0	0	0
+214	0	0	1
+215	0	0	0
+216	0	0	1
+217	0	0	0
+218	0	0	1
+219	0	0	0
+220	0	0	1
+221	0	0	0
+222	0	0	1
+223	0	0	0
+224	0	0	1
+225	0	0	0
+226	0	0	1
+227	0	0	0
+228	0	0	1
+229	0	0	0
+230	0	0	1
+231	0	0	0
+
