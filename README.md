@@ -14,13 +14,13 @@ ___
 
 - OMNeT++ 6.0.2
 - INET - https://github.com/inet-framework 
-- Detcom 2.0
+- Detcom 2.0 - https://github.com/DETERMINISTIC6G/6GDetCom_Simulator
 
 ## Installation
 
 First, make sure to have Omnet++ installed. The instructions can be found at https://github.com/omnetpp/omnetpp.
 
-Download INET, Simu5G, and our model and separate them in a folder to be your workspace. As INET is continuously updated, you can download it for our branch "inet" if needed.
+Download INET, DetCom, and our model and separate them in a folder to be your workspace. As INET is continuously updated, you can download it for our branch "inet" if needed.
 
 Open OMNeT++, select the workspace folder as the workspace of OMNeT++, and import the models (go to files->import, select the folder with the models, and select the models to import)
 
