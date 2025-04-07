@@ -14,7 +14,7 @@ ___
 
 - OMNeT++ 6.0.2
 - INET - https://github.com/inet-framework 
-- Simu5g 1.2.2
+- Detcom 2.0
 
 ## Installation
 
